@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://api.pathstack.io",
+      "url": "https://api.dev.pathstack.io",
       "description": "production environment"
     }
   ],
