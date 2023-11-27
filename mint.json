@@ -124,7 +124,8 @@
             "api-reference/positions/positions",
             "api-reference/positions/positions-by-trip-id"
           ]
-        }
+        },
+        "api-reference/api-status"
       ]
     }
   ],
