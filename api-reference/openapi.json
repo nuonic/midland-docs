@@ -775,7 +775,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/Success_List_"
+                }
               }
             }
           }
@@ -1236,6 +1238,21 @@
           "data"
         ],
         "title": "Success[Event]"
+      },
+      "Success_List_": {
+        "properties": {
+          "data": {
+            "items": {},
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[List]"
       },
       "Success_List_Connection__": {
         "properties": {
