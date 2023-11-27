@@ -765,22 +765,6 @@
           }
         }
       }
-    },
-    "/status": {
-      "get": {
-        "summary": "Api Status",
-        "operationId": "api_status_status_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
