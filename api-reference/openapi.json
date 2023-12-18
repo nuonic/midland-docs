@@ -7,7 +7,7 @@
   "servers": [
     {
       "url": "https://api.pathstack.io",
-      "description": "production environment"
+      "description": "PathStack production environment"
     }
   ],
   "paths": {
@@ -765,6 +765,24 @@
           }
         }
       }
+    },
+    "/status": {
+      "get": {
+        "summary": "Api Status",
+        "operationId": "api_status_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_List_"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1220,6 +1238,21 @@
           "data"
         ],
         "title": "Success[Event]"
+      },
+      "Success_List_": {
+        "properties": {
+          "data": {
+            "items": {},
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[List]"
       },
       "Success_List_Connection__": {
         "properties": {
