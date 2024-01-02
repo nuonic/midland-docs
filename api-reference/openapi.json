@@ -160,7 +160,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_List_Connection__"
+                  "$ref": "#/components/schemas/Success_List_ConnectionNoCredentials__"
                 }
               }
             }
@@ -211,7 +211,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_Connection_"
+                  "$ref": "#/components/schemas/Success_ConnectionNoCredentials_"
                 }
               }
             }
@@ -262,7 +262,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_Connection_"
+                  "$ref": "#/components/schemas/Success_ConnectionNoCredentials_"
                 }
               }
             }
@@ -787,76 +787,6 @@
   },
   "components": {
     "schemas": {
-      "Connection": {
-        "properties": {
-          "integration_name": {
-            "$ref": "#/components/schemas/ProviderEnum"
-          },
-          "credentials": {
-            "type": "object",
-            "title": "Credentials"
-          },
-          "business_name": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Business Name"
-          },
-          "abn": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Abn"
-          },
-          "email": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Email"
-          },
-          "active": {
-            "type": "boolean",
-            "title": "Active"
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Id"
-          },
-          "tenant_id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Tenant Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "integration_name",
-          "credentials",
-          "business_name",
-          "abn",
-          "email",
-          "active",
-          "id",
-          "tenant_id"
-        ],
-        "title": "Connection"
-      },
       "ConnectionBase": {
         "properties": {
           "integration_name": {
@@ -914,6 +844,71 @@
           "active"
         ],
         "title": "ConnectionBase"
+      },
+      "ConnectionNoCredentials": {
+        "properties": {
+          "integration_name": {
+            "$ref": "#/components/schemas/ProviderEnum"
+          },
+          "business_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Name"
+          },
+          "abn": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abn"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "tenant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tenant Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "integration_name",
+          "business_name",
+          "abn",
+          "email",
+          "active",
+          "id",
+          "tenant_id"
+        ],
+        "title": "ConnectionNoCredentials"
       },
       "Device": {
         "properties": {
@@ -1188,12 +1183,12 @@
         ],
         "title": "RefreshToken"
       },
-      "Success_Connection_": {
+      "Success_ConnectionNoCredentials_": {
         "properties": {
           "data": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Connection"
+                "$ref": "#/components/schemas/ConnectionNoCredentials"
               }
             ],
             "description": "Successful response payload"
@@ -1203,7 +1198,7 @@
         "required": [
           "data"
         ],
-        "title": "Success[Connection]"
+        "title": "Success[ConnectionNoCredentials]"
       },
       "Success_Device_": {
         "properties": {
@@ -1254,11 +1249,11 @@
         ],
         "title": "Success[List]"
       },
-      "Success_List_Connection__": {
+      "Success_List_ConnectionNoCredentials__": {
         "properties": {
           "data": {
             "items": {
-              "$ref": "#/components/schemas/Connection"
+              "$ref": "#/components/schemas/ConnectionNoCredentials"
             },
             "type": "array",
             "title": "Data",
@@ -1269,7 +1264,7 @@
         "required": [
           "data"
         ],
-        "title": "Success[List[Connection]]"
+        "title": "Success[List[ConnectionNoCredentials]]"
       },
       "Success_List_Device__": {
         "properties": {
