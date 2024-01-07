@@ -1159,7 +1159,8 @@
           "verizon_connect",
           "volvo",
           "fleetsu",
-          "digital_matter"
+          "digital_matter",
+          "netstar"
         ],
         "title": "ProviderEnum"
       },
