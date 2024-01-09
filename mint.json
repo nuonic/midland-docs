@@ -7,12 +7,12 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#1B93F3",
+    "light": "#1B75F3",
+    "dark": "#1B93F3",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#1B93F3",
+      "to": "#1B75F3"
     }
   },
   "topbarLinks": [
@@ -29,13 +29,6 @@
     {
       "name": "API Reference",
       "url": "api-reference"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "PathStack",
-      "icon": "link",
-      "url": "https://pathstack.io"
     }
   ],
   "navigation": [
