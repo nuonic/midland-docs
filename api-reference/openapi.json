@@ -200,7 +200,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ConnectionBase"
+                "$ref": "#/components/schemas/ConnectionInput"
               }
             }
           }
@@ -787,7 +787,7 @@
   },
   "components": {
     "schemas": {
-      "ConnectionBase": {
+      "ConnectionInput": {
         "properties": {
           "integration_name": {
             "$ref": "#/components/schemas/ProviderEnum"
@@ -843,7 +843,7 @@
           "email",
           "active"
         ],
-        "title": "ConnectionBase"
+        "title": "ConnectionInput"
       },
       "ConnectionNoCredentials": {
         "properties": {
