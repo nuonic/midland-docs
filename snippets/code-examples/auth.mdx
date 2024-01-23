@@ -1,0 +1,115 @@
+<CodeGroup>
+```python Python
+import requests
+
+url = "https://api.pathstack.io/token"
+
+payload = {
+"username": "username",
+"password": "password"
+}
+headers = {"Content-Type": "application/json"}
+
+response = requests.request("POST", url, json=payload, headers=headers)
+
+access_token = response.json()['AuthenticationResult']['AccessToken']
+refresh_token = response.json()['AuthenticationResult']['RefreshToken']
+```
+
+```javascript JavaScript
+const options = {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: '{"username":"<username>","password":"<password>"}'
+};
+
+fetch('https://api.pathstack.io/token', options)
+  .then(response => response.json())
+  .then(response => {
+    const access_token = response['AuthenticationResult']['AccessToken'];
+    const refresh_token = response['AuthenticationResult']['RefreshToken'];
+  })
+  .catch(err => console.error(err));
+```
+
+```java Java
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.io.OutputStream;
+import java.util.Scanner;
+import org.json.JSONObject;
+
+public class TokenRequest {
+    public static void main(String[] args) {
+        String url = "https://api.pathstack.io/token";
+        String payload = "{ \"username\": \"username\", \"password\": \"password\" }";
+
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setDoOutput(true);
+
+        try (OutputStream os = connection.getOutputStream()) {
+            os.write(payload.getBytes());
+        }
+
+        try (Scanner scanner = new Scanner(connection.getInputStream())) {
+            String responseBody = scanner.useDelimiter("\\A").next();
+            JSONObject jsonResponse = new JSONObject(responseBody);
+            String access_token = jsonResponse.getJSONObject("AuthenticationResult").getString("AccessToken");
+            String refresh_token = jsonResponse.getJSONObject("AuthenticationResult").getString("RefreshToken");
+        }
+
+        connection.disconnect();
+    }
+}
+```
+
+```dotnet .NET
+using System;
+using System.IO;
+using System.Net;
+using System.Text;
+using Newtonsoft.Json.Linq;
+
+class TokenRequest
+{
+    static void Main()
+    {
+        string url = "https://api.pathstack.io/token";
+        string payload = "{ \"username\": \"username\", \"password\": \"password\" }";
+
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        request.Method = "POST";
+        request.ContentType = "application/json";
+        request.ContentLength = payload.Length;
+
+        using (Stream requestStream = request.GetRequestStream())
+        using (StreamWriter writer = new StreamWriter(requestStream))
+        {
+            writer.Write(payload);
+        }
+
+        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        using (Stream responseStream = response.GetResponseStream())
+        using (StreamReader reader = new StreamReader(responseStream))
+        {
+            string responseBody = reader.ReadToEnd();
+            JObject jsonResponse = JObject.Parse(responseBody);
+            string access_token = jsonResponse["AuthenticationResult"]["AccessToken"].ToString();
+            string refresh_token = jsonResponse["AuthenticationResult"]["RefreshToken"].ToString();
+        }
+    }
+}
+```
+
+```bash cURL
+curl --request POST \
+  --url https://api.pathstack.io/token \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "username": "username",
+  "password": "password"
+}'
+```
+</CodeGroup>

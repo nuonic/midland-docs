@@ -1,0 +1,97 @@
+<CodeGroup>
+```python Python
+import requests
+
+url = "https://api.pathstack.io/connection"
+
+querystring = {"telematics_provider":"verizon_connect"}
+
+headers = {"Authorization": "Bearer <access-token>"}
+
+response = requests.request("GET", url, headers=headers, params=querystring)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const options = {method: 'GET', headers: {Authorization: 'Bearer <access-token>'}};
+
+fetch('https://api.pathstack.io/connection?telematics_provider=verizon_connect', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
+```
+
+```java Java
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+import org.json.JSONObject;
+
+public class ConnectionRequest {
+    public static void main(String[] args) {
+        String url = "https://api.pathstack.io/connection";
+        String telematicsProvider = "verizon_connect";
+
+        String fullUrl = url + "?telematics_provider=" + telematicsProvider;
+
+        HttpURLConnection connection = (HttpURLConnection) new URL(fullUrl).openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Authorization", "Bearer <access-token>");
+
+        try (Scanner scanner = new Scanner(connection.getInputStream())) {
+            String responseBody = scanner.useDelimiter("\\A").next();
+            JSONObject jsonResponse = new JSONObject(responseBody);
+
+            // Access and use the parsed JSON data as needed
+            // Example: String value = jsonResponse.getString("key");
+
+            System.out.println(jsonResponse);
+        }
+
+        connection.disconnect();
+    }
+}
+```
+
+```dotnet .NET
+using System;
+using System.IO;
+using System.Net;
+using Newtonsoft.Json.Linq;
+
+class ConnectionRequest
+{
+    static void Main()
+    {
+        string url = "https://api.pathstack.io/connection";
+        string telematicsProvider = "verizon_connect";
+
+        string fullUrl = $"{url}?telematics_provider={telematicsProvider}";
+
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(fullUrl);
+        request.Method = "GET";
+        request.Headers.Add("Authorization", "Bearer <access-token>");
+
+        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        using (Stream responseStream = response.GetResponseStream())
+        using (StreamReader reader = new StreamReader(responseStream))
+        {
+            string responseBody = reader.ReadToEnd();
+            JObject jsonResponse = JObject.Parse(responseBody);
+
+            // Access and use the parsed JSON data as needed
+            // Example: string value = jsonResponse["key"].ToString();
+
+            Console.WriteLine(jsonResponse);
+        }
+    }
+}
+```
+
+```bash cURL
+curl --request GET \
+  --url 'https://api.pathstack.io/connection?telematics_provider=verizon_connect' \
+  --header 'Authorization: Bearer <access-token>'
+```
+</CodeGroup>

@@ -1,72 +1,29 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.1.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
-    "version": "1.0.0"
+    "title": "FastAPI",
+    "version": "0.1.0"
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
+      "url": "https://api.pathstack.io",
+      "description": "PathStack production environment"
     }
   ],
   "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/realtime/device": {
       "post": {
-        "description": "Creates a new plant in the store",
+        "tags": [
+          "realtime"
+        ],
+        "summary": "Get Positions",
+        "description": "Gets the most recent position of the devices specified by devices",
+        "operationId": "get_positions_realtime_device_post",
         "requestBody": {
-          "description": "Plant to add to the store",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/DeviceList"
               }
             }
           },
@@ -74,21 +31,112 @@
         },
         "responses": {
           "200": {
-            "description": "plant response",
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/realtime/connect": {
+      "get": {
+        "tags": [
+          "realtime"
+        ],
+        "summary": "Get Connect",
+        "description": "Get an authenticated url for a websocket connection",
+        "operationId": "get_connect_realtime_connect_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/realtime/status": {
+      "get": {
+        "tags": [
+          "realtime"
+        ],
+        "summary": "Get Status",
+        "description": "Returns internal status of the realtime controller - used for diagnostics only",
+        "operationId": "get_status_realtime_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/token": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login",
+        "description": "This endpoint takes a username/email and password and returns an access token and refresh token.\n\nThe access token can be used for subsequent calls.",
+        "operationId": "login_token_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsernamePassword"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Login Token Post"
                 }
               }
             }
           },
-          "400": {
-            "description": "unexpected error",
+          "422": {
+            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -96,32 +144,794 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
+    "/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
         ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
+        "summary": "Refresh",
+        "description": "This endpoint takes the internal username (UUID) which can be found in the sub parameter of the access token, and\na refresh token and returns an access token and refresh token.\n\nThe access token can be used for subsequent calls.",
+        "operationId": "refresh_refresh_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshToken"
+              }
+            }
           },
-          "400": {
-            "description": "unexpected error",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "object",
+                  "title": "Response Refresh Refresh Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tenancy": {
+      "get": {
+        "tags": [
+          "Tenancies"
+        ],
+        "summary": "Tenancies",
+        "description": "This endpoint returns all Tenancies.",
+        "operationId": "tenancies_tenancy_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_List_Tenancy__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/connection": {
+      "get": {
+        "tags": [
+          "Connections"
+        ],
+        "summary": "Connections",
+        "description": "Return the connections for the tenant.\nIf telematics_provider is provided, it filters to only include connections with that provider.",
+        "operationId": "connections_connection_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "telematics_provider",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/ProviderEnum"
+                }
+              ],
+              "title": "Telematics Provider",
+              "description": "Name of the telematics, use this if you want to filter the results to a certain telematics provider"
+            },
+            "description": "Name of the telematics, use this if you want to filter the results to a certain telematics provider"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_List_ConnectionNoCredentials__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Connections"
+        ],
+        "summary": "Create Connection",
+        "description": "Create a new connection for a given tenant id. Returns with the connection details\nList of allowed values for integration_name can be found under Provider Enum",
+        "operationId": "create_connection_connection_post",
+        "parameters": [
+          {
+            "name": "tenant_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Tenant Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConnectionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_ConnectionNoCredentials_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/connection/{connection_id}": {
+      "get": {
+        "tags": [
+          "Connections"
+        ],
+        "summary": "Connection By Id",
+        "description": "Return a connection for a tenant by ID.",
+        "operationId": "connection_by_id_connection__connection_id__get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "connection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Connection ID",
+              "description": "ID of the connection to be requested"
+            },
+            "description": "ID of the connection to be requested"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_ConnectionNoCredentials_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/device": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Devices",
+        "description": "This endpoint returns all the devices that an account has access to.\nThere are certain enhancements that can be done to the response by tweaking the request query parameters",
+        "operationId": "devices_device_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "telematics_provider",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/ProviderEnum"
+                }
+              ],
+              "title": "Telematics Provider",
+              "description": "Name of the telematics, use this if you want to filter the results to a certain telematics provider"
+            },
+            "description": "Name of the telematics, use this if you want to filter the results to a certain telematics provider"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "title": "Page number",
+              "description": "Page number for pagination (zero-indexed)",
+              "default": 0
+            },
+            "description": "Page number for pagination (zero-indexed)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedSuccess_List_Device__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/device/{device_id}": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Device By Id",
+        "description": "This endpoint returns a vehicle that an account has access to using the midland vehicle id.\nThere are certain enhancements that can be done to the response by tweaking the request query parameters",
+        "operationId": "device_by_id_device__device_id__get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Vehicle id",
+              "description": "Device ID of the device to be requested"
+            },
+            "description": "Device ID of the device to be requested"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_Device_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/event": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Events",
+        "description": "Return a list of events.",
+        "operationId": "events_event_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "event_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/EventTypeEnum"
+                }
+              ],
+              "title": "Event type",
+              "description": "The event type for events to be matched"
+            },
+            "description": "The event type for events to be matched"
+          },
+          {
+            "name": "start_time_utc",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Start time",
+              "description": "Start time from when the data will be returned"
+            },
+            "description": "Start time from when the data will be returned"
+          },
+          {
+            "name": "end_time_utc",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "End time",
+              "description": "End time from when the data will be returned"
+            },
+            "description": "End time from when the data will be returned"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "title": "Page number",
+              "description": "Page number for pagination (zero-indexed)",
+              "default": 0
+            },
+            "description": "Page number for pagination (zero-indexed)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedSuccess_List_Event__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/event/{event_id}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Event By Id",
+        "description": "Fetch an event by ID.",
+        "operationId": "event_by_id_event__event_id__get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Event id",
+              "description": "Id of the Event to be returned"
+            },
+            "description": "Id of the Event to be returned"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_Event_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trip": {
+      "get": {
+        "tags": [
+          "Trips"
+        ],
+        "summary": "Trips",
+        "description": "Get Trip information for a specified period of time. If the start_time_utc or end_time_utc is not given, return\nthe last 100 trips.",
+        "operationId": "trips_trip_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Device id",
+              "description": "Device id of the trip to be requested"
+            },
+            "description": "Device id of the trip to be requested"
+          },
+          {
+            "name": "start_time_utc",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Start time",
+              "description": "Start time from when the data will be returned"
+            },
+            "description": "Start time from when the data will be returned"
+          },
+          {
+            "name": "end_time_utc",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "End time",
+              "description": "End time from when the data will be returned"
+            },
+            "description": "End time from when the data will be returned"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "title": "Page number",
+              "description": "Page number for pagination (zero-indexed)",
+              "default": 0
+            },
+            "description": "Page number for pagination (zero-indexed)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedSuccess_List_Trip__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trip/{trip_id}": {
+      "get": {
+        "tags": [
+          "Trips"
+        ],
+        "summary": "Trip By Id",
+        "description": "Get Trip information for a specified period of time for a given Device. If the start_time_utc or end_time_utc is not\ngiven, return the last 100 trips for that Device.",
+        "operationId": "trip_by_id_trip__trip_id__get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "trip_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Trip id",
+              "description": "Id of the trip to be requested"
+            },
+            "description": "Id of the trip to be requested"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_Trip_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/position": {
+      "get": {
+        "tags": [
+          "Positions"
+        ],
+        "summary": "Positions",
+        "description": "This endpoint returns the historical point information for a given Device between start_time_utc and end_time_utc.\nIf start_time_utc or end_time_utc are not given, return the latest 1000 positions for a device.",
+        "operationId": "positions_position_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Vehicle id",
+              "description": "Vehicle id of the vehicle to be requested"
+            },
+            "description": "Vehicle id of the vehicle to be requested"
+          },
+          {
+            "name": "start_time_utc",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Start time",
+              "description": "Start time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
+            },
+            "description": "Start time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
+          },
+          {
+            "name": "end_time_utc",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "End time",
+              "description": "End time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
+            },
+            "description": "End time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "title": "Page number",
+              "description": "Page number for pagination (zero-indexed)",
+              "default": 0
+            },
+            "description": "Page number for pagination (zero-indexed)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedSuccess_List_Point__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/position/trip/{trip_id}": {
+      "get": {
+        "tags": [
+          "Positions"
+        ],
+        "summary": "Positions By Trip Id",
+        "description": "This endpoint returns the historical point information for a given Device between start_time_utc and end_time_utc.\nIf start_time_utc or end_time_utc are not given, return the latest 1000 positions for a device.",
+        "operationId": "positions_by_trip_id_position_trip__trip_id__get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "trip_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Trip ID",
+              "description": "Trip id of the positions to be requested"
+            },
+            "description": "Trip id of the positions to be requested"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "title": "Page number",
+              "description": "Page number for pagination (zero-indexed)",
+              "default": 0
+            },
+            "description": "Page number for pagination (zero-indexed)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedSuccess_List_Point__"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "summary": "Api Status",
+        "operationId": "api_status_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_List_"
                 }
               }
             }
@@ -132,61 +942,906 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "ConnectionInput": {
+        "properties": {
+          "integration_name": {
+            "$ref": "#/components/schemas/ProviderEnum"
+          },
+          "credentials": {
+            "type": "object",
+            "title": "Credentials"
+          },
+          "business_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Name"
+          },
+          "abn": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abn"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          }
+        },
         "type": "object",
+        "required": [
+          "integration_name",
+          "credentials",
+          "business_name",
+          "abn",
+          "email",
+          "active"
+        ],
+        "title": "ConnectionInput"
+      },
+      "ConnectionNoCredentials": {
+        "properties": {
+          "integration_name": {
+            "$ref": "#/components/schemas/ProviderEnum"
+          },
+          "business_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Name"
+          },
+          "abn": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abn"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "tenant_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Tenant Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "integration_name",
+          "business_name",
+          "abn",
+          "email",
+          "active",
+          "id",
+          "tenant_id"
+        ],
+        "title": "ConnectionNoCredentials"
+      },
+      "Device": {
+        "properties": {
+          "system_device_id": {
+            "type": "string",
+            "title": "System Device Id"
+          },
+          "registration": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registration"
+          },
+          "make": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Make"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Year"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Connection Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "system_device_id",
+          "registration",
+          "make",
+          "model",
+          "year",
+          "active",
+          "id",
+          "connection_id"
+        ],
+        "title": "Device"
+      },
+      "DeviceList": {
+        "properties": {
+          "device_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid4"
+            },
+            "type": "array",
+            "title": "Device Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "device_ids"
+        ],
+        "title": "DeviceList"
+      },
+      "Event": {
+        "properties": {
+          "event_type": {
+            "type": "string",
+            "title": "Event Type"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Time"
+          },
+          "event_metadata": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Metadata"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "device_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Device Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "event_type",
+          "time",
+          "event_metadata",
+          "id",
+          "device_id"
+        ],
+        "title": "Event"
+      },
+      "EventTypeEnum": {
+        "type": "string",
+        "enum": [
+          "ignition_on",
+          "ignition_off"
+        ],
+        "title": "EventTypeEnum"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "PaginatedSuccess_List_Device__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Device"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "links"
+        ],
+        "title": "PaginatedSuccess[List[Device]]"
+      },
+      "PaginatedSuccess_List_Event__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "links"
+        ],
+        "title": "PaginatedSuccess[List[Event]]"
+      },
+      "PaginatedSuccess_List_Point__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Point"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "links"
+        ],
+        "title": "PaginatedSuccess[List[Point]]"
+      },
+      "PaginatedSuccess_List_Trip__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Trip"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "links"
+        ],
+        "title": "PaginatedSuccess[List[Trip]]"
+      },
+      "PaginationLinks": {
+        "properties": {
+          "previous": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous"
+          },
+          "current": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current"
+          },
+          "next": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next"
+          }
+        },
+        "type": "object",
+        "title": "PaginationLinks"
+      },
+      "Point": {
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Time"
+          },
+          "speed_kilometres_per_hour": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speed Kilometres Per Hour"
+          },
+          "hdop": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hdop"
+          },
+          "vdop": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vdop"
+          },
+          "number_of_satellites": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Number Of Satellites"
+          },
+          "heading": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Heading"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "trip_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trip Id"
+          },
+          "device_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Device Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "latitude",
+          "longitude",
+          "time",
+          "speed_kilometres_per_hour",
+          "hdop",
+          "vdop",
+          "number_of_satellites",
+          "heading",
+          "id",
+          "trip_id",
+          "device_id"
+        ],
+        "title": "Point"
+      },
+      "ProviderEnum": {
+        "type": "string",
+        "enum": [
+          "mtdata",
+          "geotab",
+          "navman",
+          "mixtelematics",
+          "radius",
+          "verizon_connect",
+          "volvo",
+          "fleetsu",
+          "digital_matter",
+          "netstar",
+          "webfleet"
+        ],
+        "title": "ProviderEnum"
+      },
+      "RefreshToken": {
+        "properties": {
+          "sub": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Sub",
+            "description": "The username (not email) of the client. Can be found in the `sub` parameter in the payload section of the JWT access token."
+          },
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sub",
+          "refresh_token"
+        ],
+        "title": "RefreshToken"
+      },
+      "Success_ConnectionNoCredentials_": {
+        "properties": {
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConnectionNoCredentials"
+              }
+            ],
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[ConnectionNoCredentials]"
+      },
+      "Success_Device_": {
+        "properties": {
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Device"
+              }
+            ],
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[Device]"
+      },
+      "Success_Event_": {
+        "properties": {
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Event"
+              }
+            ],
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[Event]"
+      },
+      "Success_List_": {
+        "properties": {
+          "data": {
+            "items": {},
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[List]"
+      },
+      "Success_List_ConnectionNoCredentials__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ConnectionNoCredentials"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[List[ConnectionNoCredentials]]"
+      },
+      "Success_List_Tenancy__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Tenancy"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[List[Tenancy]]"
+      },
+      "Success_Trip_": {
+        "properties": {
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Trip"
+              }
+            ],
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[Trip]"
+      },
+      "Tenancy": {
         "properties": {
           "name": {
-            "description": "The name of the plant",
-            "type": "string"
+            "type": "string",
+            "title": "Name"
           },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
               }
-            }
-          }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
+            ],
+            "title": "Description"
           },
-          "message": {
-            "type": "string"
+          "logo_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Logo Url"
+          },
+          "toc_link": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Toc Link"
+          },
+          "privacy_link": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Privacy Link"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
           }
-        }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "logo_url",
+          "toc_link",
+          "privacy_link",
+          "id"
+        ],
+        "title": "Tenancy"
+      },
+      "Trip": {
+        "properties": {
+          "start_latitude": {
+            "type": "number",
+            "title": "Start Latitude"
+          },
+          "start_longitude": {
+            "type": "number",
+            "title": "Start Longitude"
+          },
+          "end_latitude": {
+            "type": "number",
+            "title": "End Latitude"
+          },
+          "end_longitude": {
+            "type": "number",
+            "title": "End Longitude"
+          },
+          "system_trip_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "System Trip Id"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Start Time"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "End Time"
+          },
+          "distance_metres": {
+            "type": "number",
+            "title": "Distance Metres"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "title": "Duration Seconds"
+          },
+          "driving_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Driving Seconds"
+          },
+          "idling_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Idling Seconds"
+          },
+          "auxiliary_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Auxiliary Seconds"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "device_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Device Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "start_latitude",
+          "start_longitude",
+          "end_latitude",
+          "end_longitude",
+          "system_trip_id",
+          "start_time",
+          "end_time",
+          "distance_metres",
+          "duration_seconds",
+          "driving_seconds",
+          "idling_seconds",
+          "auxiliary_seconds",
+          "id",
+          "device_id"
+        ],
+        "title": "Trip"
+      },
+      "UsernamePassword": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "Username",
+            "description": "The username / email of the user"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "UsernamePassword"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
       }
     },
     "securitySchemes": {
-      "bearerAuth": {
+      "JWTBearer": {
         "type": "http",
         "scheme": "bearer"
       }

@@ -1,0 +1,70 @@
+---
+title: Authentication
+---
+
+import AuthSnippet from '/snippets/code-examples/auth.mdx';
+import RefreshSnippet from '/snippets/code-examples/refresh.mdx';
+
+To use the PathStack API, you must pass a [JWT](https://jwt.io/) access token in the header of each request. This is
+for security to ensure no one else can access your data.
+
+## Generating an access token
+
+To get an access token, you need to make a call to the `/token` endpoint and pass your username and password.
+
+<Note>
+  Access tokens expire 30 minutes after they are generated. Once an access token has expired you will no longer be able
+  to use it and any API calls you try to make will return a **401** error response with a message that the token has
+  expired. You will then either have to generate a new token with the `/token` endpoint, or you can use the **Refresh
+  Token** from the original `/token` call to get a new **Access Token**.
+</Note>
+
+<AuthSnippet />
+
+This will return a response that looks something like this:
+
+```json
+{
+  "ChallengeParameters": {},
+  "AuthenticationResult": {
+    "AccessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+    "ExpiresIn": 3600,
+    "TokenType": "Bearer",
+    "RefreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTUxNjIzOTAyMn0.s44AZWrSQEtuU7iw7PToz1KizteiHcBOsSNxsPVS2eo",
+    "IdToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZSIsIm5hbWUiOiJmZWZlZmYgRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.t2pF-KZ6eLthf9r4hjz1Ar343fwMA8P63sumVzwK-Sw"
+  },
+  "ResponseMetadata": {
+    "RequestId": "41d6256d-b92f-4637-973e-802879e63a31",
+    "HTTPStatusCode": 200,
+    "HTTPHeaders": {
+      "date": "Fri, 12 Jan 2024 08:25:26 GMT",
+      "content-type": "application/x-amz-json-1.1",
+      "content-length": "4217",
+      "connection": "keep-alive",
+      "x-amzn-requestid": "41d6256d-b92f-4637-973e-802879e63a31"
+    },
+    "RetryAttempts": 0
+  }
+}
+```
+
+Now that you have an **Access Token**, you can begin [making requests to the PathStack API](/content/request-data).
+
+## Using a refresh token
+
+Access tokens only last for **1 hour**, and after they expire all your calls will return a **401: JWT has expired** response.
+To get a new token, you can either authenticate again with your username and password, or you call the `/refresh` endpoint.
+The latter option is often preferable since you will not need to store your username and password for later use.
+
+To use the `/refresh` endpoint, you first need to decode the AccessToken you have been using for requests.
+You can do this with the following code in Python:
+
+```python
+from jose import jwt
+
+sub = jwt.get_unverified_claims(token)["sub"]
+```
+
+Now, with the `sub` and the `RefreshToken`, you can call the `/refresh` endpoint to get new access and refresh token.
+
+<RefreshSnippet />

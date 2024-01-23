@@ -1,0 +1,128 @@
+<CodeGroup>
+```python Python
+import requests
+
+url = "https://api.pathstack.io/refresh"
+
+payload = {
+    "sub": "<your-sub>",
+    "refresh_token": "<your-refresh-token>"
+}
+headers = {"Content-Type": "application/json"}
+
+response = requests.request("POST", url, json=payload, headers=headers)
+
+access_token = response.json()['AuthenticationResult']['AccessToken']
+refresh_token = response.json()['AuthenticationResult']['RefreshToken']
+```
+
+```javascript JavaScript
+const options = {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: '{"sub":"<your-sub>","refresh_token":"<your-refresh-token>"}'
+};
+
+fetch('https://api.pathstack.io/refresh', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
+```
+
+```java Java
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
+import org.json.JSONObject;
+
+public class RefreshTokenRequest {
+    public static void main(String[] args) {
+        String url = "https://api.pathstack.io/refresh";
+        String sub = "<your-sub>";
+        String refreshToken = "<your-refresh-token>";
+
+        String payload = "{ \"sub\": \"" + sub + "\", \"refresh_token\": \"" + refreshToken + "\" }";
+        byte[] postData = payload.getBytes(StandardCharsets.UTF_8);
+
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setDoOutput(true);
+
+        try (OutputStream os = connection.getOutputStream()) {
+            os.write(postData);
+        }
+
+        try (Scanner scanner = new Scanner(connection.getInputStream())) {
+            String responseBody = scanner.useDelimiter("\\A").next();
+            JSONObject jsonResponse = new JSONObject(responseBody);
+
+            String access_token = jsonResponse.getJSONObject("AuthenticationResult").getString("AccessToken");
+            String refresh_token = jsonResponse.getJSONObject("AuthenticationResult").getString("RefreshToken");
+
+            System.out.println("Access Token: " + access_token);
+            System.out.println("Refresh Token: " + refresh_token);
+        }
+
+        connection.disconnect();
+    }
+}
+```
+
+```dotnet .NET
+using System;
+using System.IO;
+using System.Net;
+using System.Text;
+using Newtonsoft.Json.Linq;
+
+class RefreshTokenRequest
+{
+    static void Main()
+    {
+        string url = "https://api.pathstack.io/refresh";
+        string sub = "<your-sub>";
+        string refreshToken = "<your-refresh-token>";
+
+        string payload = $"{{ \"sub\": \"{sub}\", \"refresh_token\": \"{refreshToken}\" }}";
+        byte[] postData = Encoding.UTF8.GetBytes(payload);
+
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        request.Method = "POST";
+        request.ContentType = "application/json";
+        request.ContentLength = postData.Length;
+
+        using (Stream requestStream = request.GetRequestStream())
+        {
+            requestStream.Write(postData, 0, postData.Length);
+        }
+
+        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        using (Stream responseStream = response.GetResponseStream())
+        using (StreamReader reader = new StreamReader(responseStream))
+        {
+            string responseBody = reader.ReadToEnd();
+            JObject jsonResponse = JObject.Parse(responseBody);
+
+            string access_token = jsonResponse["AuthenticationResult"]["AccessToken"].ToString();
+            string refresh_token = jsonResponse["AuthenticationResult"]["RefreshToken"].ToString();
+
+            Console.WriteLine("Access Token: " + access_token);
+            Console.WriteLine("Refresh Token: " + refresh_token);
+        }
+    }
+}
+```
+
+```bash cURL
+curl --request POST \
+  --url https://api.pathstack.io/refresh \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "sub": "<your-sub>",
+  "refresh_token": "<your-refresh-token>"
+}'
+```
+</CodeGroup>

@@ -1,0 +1,59 @@
+---
+title: 'Get your devices connected'
+description: 'This guide shows the steps for connecting your telematics devices to PathStack so you can start receiving data.'
+---
+import ConnectionSnippet from '/snippets/code-examples/connections.mdx';
+
+<Steps>
+  <Step title="Get an integration link">
+    As part of the onboarding process, you would have received an email with a link to your integration page. This link
+    is used to integrate with our partnered telematics providers. See a full list of supported providers
+    [here](/in-depth/providers).
+
+    This link is used to connect your telematics accounts to PathStack. You can do this yourself, or send this link to
+    your clients. To connect an integration, select the telematics company in the list.
+    <img src="/images/integration-page-1.png" />
+
+  </Step>
+  <Step title="Connect your integration to PathStack">
+    Now that you (or your client) have selected the integration, enter the details for the connection.
+
+    The fields for **Business Name** and **ABN** are for identifying the telematics connection. The other fields are
+    specific to each integration. In this example, you would need to provide the Verizon Connect App ID, and the
+    username and password for accessing the API.
+
+    <Note>All credentials are securely stored in PathStack once a telematics integration has been connected.</Note>
+    <img src="/images/integration-page-2.png" />
+
+  </Step>
+  <Step title="You're connected!">
+    Once you submit the form, PathStack will connect to the telematics provider you have selected and start pulling data
+    in to PathStack. You can find the new connection by calling the `/connection` endpoint.
+
+    <ConnectionSnippet />
+
+    This will return a response that looks something like this:
+
+    ```json
+    {
+      "data": [
+        {
+          "integration_name": "verizon_connect",
+          "business_name": "Bob's Trucking",
+          "abn": "123456789",
+          "email": "owner@bobstrucking.com.au",
+          "active": true,
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "tenant_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        ...
+      ]
+    },
+    ```
+
+    Now that you have a connection, you can start [requesting data](/content/request-data)!
+
+    <Note>It can take up to 30 minutes for data to flow from the telematics provider to PathStack</Note>
+
+  </Step>
+</Steps>

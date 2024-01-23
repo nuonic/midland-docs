@@ -1,51 +1,39 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "PathStack",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/dark.png",
+    "light": "/logo/light.png",
+    "href": "https://pathstack.io"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#2047FA",
+    "light": "#203dfa",
+    "dark": "#2047FA",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#2047FA",
+      "to": "#203dfa"
     }
   },
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:support@pathstack.io"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Sign up",
+    "url": "https://pathstack.io/signup"
   },
   "tabs": [
     {
+      "name": "Telematics Provider Guides",
+      "url": "integration-guides"
+    },
+    {
       "name": "API Reference",
       "url": "api-reference"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
     }
   ],
   "navigation": [
@@ -53,19 +41,45 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
+        "quickstart"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Guides",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "content/get-connected",
+        "content/authentication",
+        "content/request-data"
+      ]
+    },
+    {
+      "group": "",
+      "pages": [
+        "integration-guides/introduction",
+        {
+          "group": "Provider guides",
+          "pages": [
+            "integration-guides/verizon",
+            "integration-guides/digitalmatter",
+            "integration-guides/fleetsu",
+            "integration-guides/geotab",
+            "integration-guides/linxio",
+            "integration-guides/mixtelematics",
+            "integration-guides/mtdata",
+            "integration-guides/navman",
+            "integration-guides/netstar",
+            "integration-guides/radius",
+            "integration-guides/volvo",
+            "integration-guides/webfleet"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "In depth guides",
+      "pages": [
+        "in-depth/providers",
+        "in-depth/events"
       ]
     },
     {
@@ -75,17 +89,73 @@
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Endpoints",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        {
+          "group": "realtime",
+          "pages": [
+            "api-reference/realtime/get-positions",
+            "api-reference/realtime/get-connect",
+            "api-reference/realtime/get-status"
+          ]
+        },
+        {
+          "group": "Auth",
+          "pages": [
+            "api-reference/auth/login",
+            "api-reference/auth/refresh"
+          ]
+        },
+        {
+          "group": "Tenancies",
+          "pages": [
+            "api-reference/tenancies/tenancies"
+          ]
+        },
+        {
+          "group": "Connections",
+          "pages": [
+            "api-reference/connections/connections",
+            "api-reference/connections/create-connection",
+            "api-reference/connections/connection-by-id"
+          ]
+        },
+        {
+          "group": "Devices",
+          "pages": [
+            "api-reference/devices/devices",
+            "api-reference/devices/device-by-id"
+          ]
+        },
+        {
+          "group": "Events",
+          "pages": [
+            "api-reference/events/events",
+            "api-reference/events/event-by-id"
+          ]
+        },
+        {
+          "group": "Trips",
+          "pages": [
+            "api-reference/trips/trips",
+            "api-reference/trips/trip-by-id"
+          ]
+        },
+        {
+          "group": "Positions",
+          "pages": [
+            "api-reference/positions/positions",
+            "api-reference/positions/positions-by-trip-id"
+          ]
+        },
+        "api-reference/api-status"
       ]
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
-  }
+    "linkedin": "https://au.linkedin.com/company/nuonic"
+  },
+  "openapi": [
+    "/api-reference/openapi.yml"
+  ]
 }

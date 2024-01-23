@@ -1,0 +1,132 @@
+---
+title: Start requesting data
+---
+
+import DevicesSnippet from '/snippets/code-examples/devices.mdx';
+import TripsSnippet from '/snippets/code-examples/trips-per-device.mdx';
+import PositionsSnippet from '/snippets/code-examples/positions-per-trip.mdx';
+
+Now that you have connected your devices up the PathStack, it's time to start using it!
+There are many different types of data you can request, but we'll focus on the 3 main types in this guide:
+**Devices, Trips, and Positions**.
+
+## Devices
+
+<Info>
+  Devices are any telematics devices that you have connected through the PathStack portal. They can be anything for
+  Truck GPS trackers to shipping trackers or boat beacons.
+</Info>
+
+Devices are likely to be the first resource that you would like to request. By requesting devices, you can then get
+a list of devices that you have access to, and can use the IDs of these devices to request more refined data such as
+trips.
+
+To get a list of devices, [Authenticate](/content/authentication) and make a call to the `/device`
+endpoint. This will return a list of devices that you have connected. Optionally, you can filter by the telematics
+provider.
+
+<DevicesSnippet />
+
+This will return a response that looks something like this:
+
+```json
+{
+  "data": [
+    {
+      "system_device_id": "1",
+      "registration": "TRUCK1",
+      "make": "Volvo",
+      "model": "FH600",
+      "year": null,
+      "active": true,
+      "id": "38c6d776-b2de-488e-bcd3-be3df6df37ea",
+      "connection_id": "c2708314-1fb4-4955-ab6d-1c6d0735d1d5"
+    },
+    ...
+  ]
+}
+```
+
+Each element in the list is a device, and there are attributes such as make and model. An important attribute is `id`,
+which you can use to get the trips for a particular device, which you will see in the next section.
+
+## Trips
+
+<Info>
+  Trips represent a journey that a device has taken from start to finish, and consist of many **positions**. Trips have
+  a start and end position and time.
+</Info>
+<Note>
+  Not all telematics providers have trip information. For cases where there is no trip information given, PathStack will
+  use algorithms to estimate trips within the positions recieved.
+</Note>
+
+Once you have the list of devices, you can fetch the trips for a device by making a call to `/trip` endpoint. You will
+need to pass in the `device_id` for the device you are requesting trips for. Additionaly, you can filter trips by
+**start time** and **end time** by passing `start_time_utc` and `end_time_utc`.
+
+<TripsSnippet />
+
+This will return a response that looks something like this:
+
+```json
+{
+  "data": [
+    {
+      "start_latitude": -31.92827606201172,
+      "start_longitude": 133.01011657714844,
+      "end_latitude": -32.27043533325195,
+      "end_longitude": 125.48701477050781,
+      "system_trip_id": "1",
+      "start_time": "2024-01-09T23:53:03",
+      "end_time": "2024-01-10T08:14:54",
+      "distance_metres": 752820.000000007,
+      "duration_seconds": 30111,
+      "driving_seconds": 30111,
+      "idling_seconds": 30111,
+      "auxiliary_seconds": null,
+      "id": "cf096434-5169-401c-93ea-647d880b8350",
+      "device_id": "38c6d776-b2de-488e-bcd3-be3df6df37ea"
+    },
+    ...
+  ]
+}
+```
+
+Each element in the list is a trip which the device has taken, and there are additional attributes such as trip duration.
+An important attribute is `id`, which is the unique ID of the trip. This id can be used to request the positions for a
+trip, as you will see in the next section.
+
+## Positions
+
+<Info>
+  A position is a single point in time with a latitude and longitude. They are the building blocks of trips, and a
+  trip may have hundreds or even thousands of positions.
+</Info>
+
+Once you have a list of trips, if you want you can request the positions for each trip, using the
+`/position/trip/{trip_id}` endpoint.
+
+<PositionsSnippet />
+
+This will return a response that looks something like this:
+
+```json
+{
+  "data": [
+    {
+      "latitude": 0,
+      "longitude": 0,
+      "time": "2024-01-11T05:17:13.094Z",
+      "speed_kilometres_per_hour": 0,
+      "hdop": 0,
+      "vdop": 0,
+      "number_of_satellites": 0,
+      "heading": 0,
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "trip_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
+    ...
+  ]
+}
+```
