@@ -11,96 +11,6 @@
     }
   ],
   "paths": {
-    "/realtime/device": {
-      "post": {
-        "tags": [
-          "realtime"
-        ],
-        "summary": "Get Positions",
-        "description": "Gets the most recent position of the devices specified by devices",
-        "operationId": "get_positions_realtime_device_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeviceList"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ]
-      }
-    },
-    "/realtime/connect": {
-      "get": {
-        "tags": [
-          "realtime"
-        ],
-        "summary": "Get Connect",
-        "description": "Get an authenticated url for a websocket connection",
-        "operationId": "get_connect_realtime_connect_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ]
-      }
-    },
-    "/realtime/status": {
-      "get": {
-        "tags": [
-          "realtime"
-        ],
-        "summary": "Get Status",
-        "description": "Returns internal status of the realtime controller - used for diagnostics only",
-        "operationId": "get_status_realtime_status_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
     "/token": {
       "post": {
         "tags": [
@@ -131,12 +41,76 @@
               }
             }
           },
-          "422": {
-            "description": "Validation Error",
+          "403": {
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "title": "Error code",
+                          "example": 403
+                        },
+                        "message": {
+                          "type": "string",
+                          "title": "Error message",
+                          "example": "Login failed due to unrecognized user credentials."
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "title": "Error code",
+                          "example": 422
+                        },
+                        "message": {
+                          "type": "string",
+                          "title": "Error message",
+                          "example": "Field required"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
                 }
               }
             }
@@ -180,6 +154,27 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "tags": [
+          "Status"
+        ],
+        "summary": "Api Status",
+        "operationId": "api_status_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_List_"
                 }
               }
             }
@@ -488,14 +483,14 @@
         }
       }
     },
-    "/event": {
+    "/position": {
       "get": {
         "tags": [
-          "Events"
+          "Positions"
         ],
-        "summary": "Events",
-        "description": "Return a list of events.",
-        "operationId": "events_event_get",
+        "summary": "Positions",
+        "description": "This endpoint returns the historical point information for a given Device between start_time_utc and end_time_utc.\nIf start_time_utc or end_time_utc are not given, return the latest 1000 positions for a device.",
+        "operationId": "positions_position_get",
         "security": [
           {
             "JWTBearer": []
@@ -503,19 +498,16 @@
         ],
         "parameters": [
           {
-            "name": "event_type",
+            "name": "device_id",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/EventTypeEnum"
-                }
-              ],
-              "title": "Event type",
-              "description": "The event type for events to be matched"
+              "type": "string",
+              "format": "uuid",
+              "title": "Vehicle id",
+              "description": "Vehicle id of the vehicle to be requested"
             },
-            "description": "The event type for events to be matched"
+            "description": "Vehicle id of the vehicle to be requested"
           },
           {
             "name": "start_time_utc",
@@ -525,9 +517,9 @@
               "type": "string",
               "format": "date-time",
               "title": "Start time",
-              "description": "Start time from when the data will be returned"
+              "description": "Start time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
             },
-            "description": "Start time from when the data will be returned"
+            "description": "Start time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
           },
           {
             "name": "end_time_utc",
@@ -537,9 +529,9 @@
               "type": "string",
               "format": "date-time",
               "title": "End time",
-              "description": "End time from when the data will be returned"
+              "description": "End time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
             },
-            "description": "End time from when the data will be returned"
+            "description": "End time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
           },
           {
             "name": "page",
@@ -561,7 +553,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_List_Event__"
+                  "$ref": "#/components/schemas/PaginatedSuccess_List_Point__"
                 }
               }
             }
@@ -579,14 +571,14 @@
         }
       }
     },
-    "/event/{event_id}": {
+    "/position/trip/{trip_id}": {
       "get": {
         "tags": [
-          "Events"
+          "Positions"
         ],
-        "summary": "Event By Id",
-        "description": "Fetch an event by ID.",
-        "operationId": "event_by_id_event__event_id__get",
+        "summary": "Positions By Trip Id",
+        "description": "This endpoint returns the historical point information for a given Device between start_time_utc and end_time_utc.\nIf start_time_utc or end_time_utc are not given, return the latest 1000 positions for a device.",
+        "operationId": "positions_by_trip_id_position_trip__trip_id__get",
         "security": [
           {
             "JWTBearer": []
@@ -594,16 +586,29 @@
         ],
         "parameters": [
           {
-            "name": "event_id",
+            "name": "trip_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid",
-              "title": "Event id",
-              "description": "Id of the Event to be returned"
+              "title": "Trip ID",
+              "description": "Trip id of the positions to be requested"
             },
-            "description": "Id of the Event to be returned"
+            "description": "Trip id of the positions to be requested"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "title": "Page number",
+              "description": "Page number for pagination (zero-indexed)",
+              "default": 0
+            },
+            "description": "Page number for pagination (zero-indexed)"
           }
         ],
         "responses": {
@@ -612,7 +617,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_Event_"
+                  "$ref": "#/components/schemas/PaginatedSuccess_List_Point__"
                 }
               }
             }
@@ -769,14 +774,14 @@
         }
       }
     },
-    "/position": {
+    "/event": {
       "get": {
         "tags": [
-          "Positions"
+          "Events"
         ],
-        "summary": "Positions",
-        "description": "This endpoint returns the historical point information for a given Device between start_time_utc and end_time_utc.\nIf start_time_utc or end_time_utc are not given, return the latest 1000 positions for a device.",
-        "operationId": "positions_position_get",
+        "summary": "Events",
+        "description": "Return a list of events.",
+        "operationId": "events_event_get",
         "security": [
           {
             "JWTBearer": []
@@ -784,16 +789,19 @@
         ],
         "parameters": [
           {
-            "name": "device_id",
+            "name": "event_type",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Vehicle id",
-              "description": "Vehicle id of the vehicle to be requested"
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/EventTypeEnum"
+                }
+              ],
+              "title": "Event type",
+              "description": "The event type for events to be matched"
             },
-            "description": "Vehicle id of the vehicle to be requested"
+            "description": "The event type for events to be matched"
           },
           {
             "name": "start_time_utc",
@@ -803,9 +811,9 @@
               "type": "string",
               "format": "date-time",
               "title": "Start time",
-              "description": "Start time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
+              "description": "Start time from when the data will be returned"
             },
-            "description": "Start time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
+            "description": "Start time from when the data will be returned"
           },
           {
             "name": "end_time_utc",
@@ -815,9 +823,9 @@
               "type": "string",
               "format": "date-time",
               "title": "End time",
-              "description": "End time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
+              "description": "End time from when the data will be returned"
             },
-            "description": "End time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
+            "description": "End time from when the data will be returned"
           },
           {
             "name": "page",
@@ -839,7 +847,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_List_Point__"
+                  "$ref": "#/components/schemas/PaginatedSuccess_List_Event__"
                 }
               }
             }
@@ -857,14 +865,14 @@
         }
       }
     },
-    "/position/trip/{trip_id}": {
+    "/event/{event_id}": {
       "get": {
         "tags": [
-          "Positions"
+          "Events"
         ],
-        "summary": "Positions By Trip Id",
-        "description": "This endpoint returns the historical point information for a given Device between start_time_utc and end_time_utc.\nIf start_time_utc or end_time_utc are not given, return the latest 1000 positions for a device.",
-        "operationId": "positions_by_trip_id_position_trip__trip_id__get",
+        "summary": "Event By Id",
+        "description": "Fetch an event by ID.",
+        "operationId": "event_by_id_event__event_id__get",
         "security": [
           {
             "JWTBearer": []
@@ -872,29 +880,16 @@
         ],
         "parameters": [
           {
-            "name": "trip_id",
+            "name": "event_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid",
-              "title": "Trip ID",
-              "description": "Trip id of the positions to be requested"
+              "title": "Event id",
+              "description": "Id of the Event to be returned"
             },
-            "description": "Trip id of the positions to be requested"
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 0,
-              "title": "Page number",
-              "description": "Page number for pagination (zero-indexed)",
-              "default": 0
-            },
-            "description": "Page number for pagination (zero-indexed)"
+            "description": "Id of the Event to be returned"
           }
         ],
         "responses": {
@@ -903,7 +898,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_List_Point__"
+                  "$ref": "#/components/schemas/Success_Event_"
                 }
               }
             }
@@ -921,27 +916,212 @@
         }
       }
     },
-    "/status": {
-      "get": {
-        "summary": "Api Status",
-        "operationId": "api_status_status_get",
+    "/realtime/device": {
+      "post": {
+        "tags": [
+          "Real-time"
+        ],
+        "summary": "Get Positions",
+        "description": "Gets the most recent position of the devices specified by device_ids.",
+        "operationId": "get_positions_realtime_device_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceList"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_List_"
+                  "$ref": "#/components/schemas/Success_list_RealtimeState__"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "title": "Error code",
+                          "example": 400
+                        },
+                        "message": {
+                          "type": "string",
+                          "title": "Error message",
+                          "example": "Unknown device_ids <string>, ..."
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "title": "Error code",
+                          "example": 403
+                        },
+                        "message": {
+                          "type": "string",
+                          "title": "Error message",
+                          "example": "Not authenticated"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "title": "Error code",
+                          "example": 422
+                        },
+                        "message": {
+                          "type": "string",
+                          "title": "Error message",
+                          "example": "Field required"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
                 }
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
+    },
+    "/realtime/connect": {
+      "get": {
+        "tags": [
+          "Real-time"
+        ],
+        "summary": "Get Connect",
+        "description": "Get an authenticated url for a websocket connection.",
+        "operationId": "get_connect_realtime_connect_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_ConnectType_"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "title": "Error code",
+                          "example": 403
+                        },
+                        "message": {
+                          "type": "string",
+                          "title": "Error message",
+                          "example": "Not authenticated"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
+      "ConnectType": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "ConnectType"
+      },
       "ConnectionInput": {
         "properties": {
           "integration_name": {
@@ -1473,6 +1653,75 @@
         ],
         "title": "ProviderEnum"
       },
+      "RealtimePosition": {
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude"
+          },
+          "latitude": {
+            "type": "number",
+            "title": "Latitude"
+          },
+          "heading": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Heading"
+          },
+          "speed_kph": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speed Kph"
+          }
+        },
+        "type": "object",
+        "required": [
+          "timestamp",
+          "longitude",
+          "latitude"
+        ],
+        "title": "RealtimePosition"
+      },
+      "RealtimeState": {
+        "properties": {
+          "device_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Device Id"
+          },
+          "system_device_id": {
+            "type": "string",
+            "title": "System Device Id"
+          },
+          "position": {
+            "$ref": "#/components/schemas/RealtimePosition"
+          }
+        },
+        "type": "object",
+        "required": [
+          "device_id",
+          "system_device_id",
+          "position"
+        ],
+        "title": "RealtimeState"
+      },
       "RefreshToken": {
         "properties": {
           "sub": {
@@ -1492,6 +1741,23 @@
           "refresh_token"
         ],
         "title": "RefreshToken"
+      },
+      "Success_ConnectType_": {
+        "properties": {
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConnectType"
+              }
+            ],
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[ConnectType]"
       },
       "Success_ConnectionNoCredentials_": {
         "properties": {
@@ -1609,6 +1875,23 @@
           "data"
         ],
         "title": "Success[Trip]"
+      },
+      "Success_list_RealtimeState__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/RealtimeState"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[list[RealtimeState]]"
       },
       "Tenancy": {
         "properties": {

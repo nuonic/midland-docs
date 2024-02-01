@@ -92,18 +92,16 @@
       "group": "Endpoints",
       "pages": [
         {
-          "group": "realtime",
-          "pages": [
-            "api-reference/realtime/get-positions",
-            "api-reference/realtime/get-connect",
-            "api-reference/realtime/get-status"
-          ]
-        },
-        {
           "group": "Auth",
           "pages": [
             "api-reference/auth/login",
             "api-reference/auth/refresh"
+          ]
+        },
+        {
+          "group": "Status",
+          "pages": [
+            "api-reference/status/api-status"
           ]
         },
         {
@@ -128,10 +126,10 @@
           ]
         },
         {
-          "group": "Events",
+          "group": "Positions",
           "pages": [
-            "api-reference/events/events",
-            "api-reference/events/event-by-id"
+            "api-reference/positions/positions",
+            "api-reference/positions/positions-by-trip-id"
           ]
         },
         {
@@ -142,13 +140,19 @@
           ]
         },
         {
-          "group": "Positions",
+          "group": "Events",
           "pages": [
-            "api-reference/positions/positions",
-            "api-reference/positions/positions-by-trip-id"
+            "api-reference/events/events",
+            "api-reference/events/event-by-id"
           ]
         },
-        "api-reference/api-status"
+        {
+          "group": "Real-time",
+          "pages": [
+            "api-reference/real-time/get-positions",
+            "api-reference/real-time/get-connect"
+          ]
+        }
       ]
     }
   ],
