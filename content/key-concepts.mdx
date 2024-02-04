@@ -1,0 +1,55 @@
+---
+title: Key concepts and definitions
+---
+
+This page describes the relevant entities for understanding and using PathStack.
+
+## Data Provider
+
+A Data Provider is an organisation or individual that has a Telematics Account which can be connected to a Tenancy to allow data for Devices intalled in vehicle's or other physical assets to be accessed by a Data Consumer.
+
+## Data Consumer
+
+A Data Consumer is an organisation or individual that may access data for one or more Connections via PathStack interfaces.
+
+## Telematics Account
+
+A Telematics Account is a logical grouping of Devices provided by a Telematics Provider under a service agreement that permits tracking and data collection of vehicle or other asset movements and activity.
+
+## Telematics Provider
+
+A Telematics Provider is an organisation that provides vehicle and/or asset tracking services using Device's.
+
+## Data Sharing Rules
+
+Data Sharing Rules are sets of rules that are applied to a Connection whcih allow a Data Provider to limit the data that is visible to a Data Consumer based on various criteria such as time ranges, locations or Devices.
+
+## Tenancy
+
+A Tenancy is a PathStack account created by a Data Consumer that will have one or more Connections established by Data Providers.
+
+## User
+
+A User is an individual within a Data Provider or Data Consumer organisation who interacts with PathStack to establish or manage a Connection or to access data and analytics from Connections.
+
+A User with API or Websocket access to a Tenancy may access data for any Connection within the tenancy, subject to the Data Sharing Rules established by each Data Provider.
+
+## Connection
+
+A Connection is an open channel for data flow from a Telematics Account to PathStack that is enabled by a Data Provider using the PathStack connection interface.
+
+## Device
+
+A Device is a GPS tracking unit installed in a vehicle or other physcial asset that exists within a Telematics Account.
+
+## Activity
+
+An Activity is a defined period of time during which a vehicle or other tracked asset performs a specified task such as travelling, idling, loading, unloading, waiting or maintenance.
+
+## Trip
+
+A Trip is a specific case of an Activity where the vehicle or asset in focus is in motion (other than stationary periods required during the trip) and travelling from a defined origin to a defined destination. 
+
+## Position
+
+A Postion is a record of a vehicle or asset's exact location and state at a specified moment in time.

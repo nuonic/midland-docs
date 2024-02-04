@@ -24,11 +24,11 @@
   ],
   "topbarCtaButton": {
     "name": "Sign up",
-    "url": "https://pathstack.io/signup"
+    "url": "https://pathstack.io/register"
   },
   "tabs": [
     {
-      "name": "Telematics Provider Guides",
+      "name": "Telematics Provider guides",
       "url": "integration-guides"
     },
     {
@@ -47,6 +47,7 @@
     {
       "group": "Guides",
       "pages": [
+        "content/key-concepts",
         "content/get-connected",
         "content/authentication",
         "content/request-data"
@@ -63,9 +64,7 @@
             "integration-guides/digitalmatter",
             "integration-guides/fleetsu",
             "integration-guides/geotab",
-            "integration-guides/linxio",
             "integration-guides/mixtelematics",
-            "integration-guides/mtdata",
             "integration-guides/navman",
             "integration-guides/netstar",
             "integration-guides/radius",
@@ -96,12 +95,6 @@
           "pages": [
             "api-reference/auth/login",
             "api-reference/auth/refresh"
-          ]
-        },
-        {
-          "group": "Status",
-          "pages": [
-            "api-reference/status/api-status"
           ]
         },
         {
