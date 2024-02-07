@@ -979,10 +979,10 @@
             "schema": {
               "type": "boolean",
               "title": "Include OpenStreetMap road classification",
-              "description": "Enrich the positions by determining if the position is within a certain distance of a road; this distance varies depending on the type of road. If the position is on-road, this endpoint returns the name of the road and the distance of the point from the road centerline. It otherwise returns null values for road name and distance from the road centerline.",
+              "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road.",
               "default": false
             },
-            "description": "Enrich the positions by determining if the position is within a certain distance of a road; this distance varies depending on the type of road. If the position is on-road, this endpoint returns the name of the road and the distance of the point from the road centerline. It otherwise returns null values for road name and distance from the road centerline."
+            "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road."
           },
           {
             "name": "page",
@@ -1132,10 +1132,10 @@
             "schema": {
               "type": "boolean",
               "title": "Include OpenStreetMap road classification",
-              "description": "Enrich the positions by determining if the position is within a certain distance of a road; this distance varies depending on the type of road. If the position is on-road, this endpoint returns the name of the road and the distance of the point from the road centerline. It otherwise returns null values for road name and distance from the road centerline.",
+              "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road.",
               "default": false
             },
-            "description": "Enrich the positions by determining if the position is within a certain distance of a road; this distance varies depending on the type of road. If the position is on-road, this endpoint returns the name of the road and the distance of the point from the road centerline. It otherwise returns null values for road name and distance from the road centerline."
+            "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road."
           }
         ],
         "responses": {
