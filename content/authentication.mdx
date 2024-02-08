@@ -25,25 +25,12 @@ This will return a response that looks something like this:
 
 ```json
 {
-  "ChallengeParameters": {},
-  "AuthenticationResult": {
-    "AccessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-    "ExpiresIn": 3600,
-    "TokenType": "Bearer",
-    "RefreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTUxNjIzOTAyMn0.s44AZWrSQEtuU7iw7PToz1KizteiHcBOsSNxsPVS2eo",
-    "IdToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZSIsIm5hbWUiOiJmZWZlZmYgRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.t2pF-KZ6eLthf9r4hjz1Ar343fwMA8P63sumVzwK-Sw"
-  },
-  "ResponseMetadata": {
-    "RequestId": "41d6256d-b92f-4637-973e-802879e63a31",
-    "HTTPStatusCode": 200,
-    "HTTPHeaders": {
-      "date": "Fri, 12 Jan 2024 08:25:26 GMT",
-      "content-type": "application/x-amz-json-1.1",
-      "content-length": "4217",
-      "connection": "keep-alive",
-      "x-amzn-requestid": "41d6256d-b92f-4637-973e-802879e63a31"
-    },
-    "RetryAttempts": 0
+  "data": {
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJld2ZlZXdmZmUiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.TgSl52RmirkU3f1tYG6E5lK5Ptt1C0_KSOSj9H-WYAQ",
+    "sub": "a6caf0bd-dbdf-4dfb-bcab-34f73e4c5b64"
   }
 }
 ```
@@ -56,15 +43,6 @@ Access tokens only last for **1 hour**, and after they expire all your calls wil
 To get a new token, you can either authenticate again with your username and password, or you call the `/refresh` endpoint.
 The latter option is often preferable since you will not need to store your username and password for later use.
 
-To use the `/refresh` endpoint, you first need to decode the AccessToken you have been using for requests.
-You can do this with the following code in Python:
-
-```python
-from jose import jwt
-
-sub = jwt.get_unverified_claims(token)["sub"]
-```
-
-Now, with the `sub` and the `RefreshToken`, you can call the `/refresh` endpoint to get new access and refresh token.
+Using the `sub` and the `refresh_token`, you can call the `/refresh` endpoint to get new access and refresh token.
 
 <RefreshSnippet />

@@ -12,8 +12,8 @@ headers = {"Content-Type": "application/json"}
 
 response = requests.request("POST", url, json=payload, headers=headers)
 
-access_token = response.json()['AuthenticationResult']['AccessToken']
-refresh_token = response.json()['AuthenticationResult']['RefreshToken']
+access_token = response.json()['data']['access_token']
+refresh_token = response.json()['data']['refresh_token']
 ```
 
 ```javascript JavaScript
@@ -59,8 +59,8 @@ public class RefreshTokenRequest {
             String responseBody = scanner.useDelimiter("\\A").next();
             JSONObject jsonResponse = new JSONObject(responseBody);
 
-            String access_token = jsonResponse.getJSONObject("AuthenticationResult").getString("AccessToken");
-            String refresh_token = jsonResponse.getJSONObject("AuthenticationResult").getString("RefreshToken");
+            String access_token = jsonResponse.getJSONObject("data").getString("access_token");
+            String refresh_token = jsonResponse.getJSONObject("data").getString("refresh_token");
 
             System.out.println("Access Token: " + access_token);
             System.out.println("Refresh Token: " + refresh_token);
@@ -106,8 +106,8 @@ class RefreshTokenRequest
             string responseBody = reader.ReadToEnd();
             JObject jsonResponse = JObject.Parse(responseBody);
 
-            string access_token = jsonResponse["AuthenticationResult"]["AccessToken"].ToString();
-            string refresh_token = jsonResponse["AuthenticationResult"]["RefreshToken"].ToString();
+            string access_token = jsonResponse["data"]["access_token"].ToString();
+            string refresh_token = jsonResponse["data"]["refresh_token"].ToString();
 
             Console.WriteLine("Access Token: " + access_token);
             Console.WriteLine("Refresh Token: " + refresh_token);
