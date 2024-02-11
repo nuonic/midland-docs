@@ -17,7 +17,7 @@
           "Auth"
         ],
         "summary": "Login",
-        "description": "This endpoint takes a username/email and password and returns an access token and refresh token.\n\nThe access token can be used for subsequent calls.",
+        "description": "This endpoint takes a username or email, and a password, and returns an access token, refresh token, expiry time,\ntoken type, and a sub which is used with the refresh token to get a new access token by calling the refresh\nendpoint.\n\nThe access token is to be used for all endpoints except for /token and /refresh.",
         "operationId": "login_token_post",
         "requestBody": {
           "content": {
@@ -123,7 +123,7 @@
           "Auth"
         ],
         "summary": "Refresh",
-        "description": "This endpoint takes the internal username (UUID) which can be found in the sub parameter of the access token, and\na refresh token and returns an access token and refresh token.\n\nThe access token can be used for subsequent calls.",
+        "description": "This endpoint takes the sub and a refresh token and returns an access token and refresh token.\n\nThe access token is to be used for all endpoints except for /token and /refresh.",
         "operationId": "refresh_refresh_post",
         "requestBody": {
           "content": {
@@ -223,66 +223,13 @@
         }
       }
     },
-    "/tenancy": {
-      "get": {
-        "tags": [
-          "Tenancies"
-        ],
-        "summary": "Tenancies",
-        "description": "This endpoint returns all Tenancies.",
-        "operationId": "tenancies_tenancy_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success_list_Tenancy__"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "title": "Error code",
-                          "example": 403
-                        },
-                        "message": {
-                          "type": "string",
-                          "title": "Error message",
-                          "example": "Not authenticated"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ]
-      }
-    },
     "/connection": {
       "get": {
         "tags": [
           "Connections"
         ],
         "summary": "Connections",
-        "description": "Return the connections for the tenant.\nIf telematics_provider is provided, it filters to only include connections with that provider.",
+        "description": "This endpoint returns all connections within your tenancy.\n\nYou can specify the telematics_provider, and it will return only Connections with that provider.",
         "operationId": "connections_connection_get",
         "security": [
           {
@@ -301,9 +248,9 @@
                 }
               ],
               "title": "Telematics Provider",
-              "description": "Name of the telematics, use this if you want to filter the results to a certain telematics provider"
+              "description": "Name of the telematics provider"
             },
-            "description": "Name of the telematics, use this if you want to filter the results to a certain telematics provider"
+            "description": "Name of the telematics provider"
           }
         ],
         "responses": {
@@ -398,7 +345,7 @@
           "Connections"
         ],
         "summary": "Create Connection",
-        "description": "Create a new connection for a given tenant id. Returns with the connection details\nList of allowed values for integration_name can be found under Provider Enum",
+        "description": "This endpoint takes attributes for a new Connection and a tenant_id and creates and returns a new Connection.\n\nThe allowed values for integration_name can be found under ProviderEnum.",
         "operationId": "create_connection_connection_post",
         "parameters": [
           {
@@ -515,7 +462,7 @@
           "Connections"
         ],
         "summary": "Connection By Id",
-        "description": "Return a connection for a tenant by ID.",
+        "description": "This endpoint returns a Connection by ID.",
         "operationId": "connection_by_id_connection__connection_id__get",
         "security": [
           {
@@ -531,9 +478,9 @@
               "type": "string",
               "format": "uuid",
               "title": "Connection ID",
-              "description": "ID of the connection to be requested"
+              "description": "Connection ID of the Connection to be returned"
             },
-            "description": "ID of the connection to be requested"
+            "description": "Connection ID of the Connection to be returned"
           }
         ],
         "responses": {
@@ -656,7 +603,7 @@
           "Devices"
         ],
         "summary": "Devices",
-        "description": "This endpoint returns all the devices that an account has access to.\nThere are certain enhancements that can be done to the response by tweaking the request query parameters",
+        "description": "This endpoint returns all Devices that have been created by Connections for your Tenancy.\n\nYou can specify the telematics_provider, and it will return only Devices with that provider.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
         "operationId": "devices_device_get",
         "security": [
           {
@@ -675,9 +622,9 @@
                 }
               ],
               "title": "Telematics Provider",
-              "description": "Name of the telematics, use this if you want to filter the results to a certain telematics provider"
+              "description": "Name of the telematics provider"
             },
-            "description": "Name of the telematics, use this if you want to filter the results to a certain telematics provider"
+            "description": "Name of the telematics provider"
           },
           {
             "name": "page",
@@ -787,7 +734,7 @@
           "Devices"
         ],
         "summary": "Device By Id",
-        "description": "This endpoint returns a vehicle that an account has access to using the midland vehicle id.\nThere are certain enhancements that can be done to the response by tweaking the request query parameters",
+        "description": "This endpoint returns a Device by ID.",
         "operationId": "device_by_id_device__device_id__get",
         "security": [
           {
@@ -802,10 +749,10 @@
             "schema": {
               "type": "string",
               "format": "uuid",
-              "title": "Vehicle id",
-              "description": "Device ID of the device to be requested"
+              "title": "Device id",
+              "description": "Device ID of the Device to be returned"
             },
-            "description": "Device ID of the device to be requested"
+            "description": "Device ID of the Device to be returned"
           }
         ],
         "responses": {
@@ -922,14 +869,14 @@
         }
       }
     },
-    "/position": {
+    "/device/{device_id}/position": {
       "get": {
         "tags": [
           "Positions"
         ],
         "summary": "Positions",
-        "description": "This endpoint returns the historical point information for a given Device between start_time_utc and end_time_utc.\nIf start_time_utc or end_time_utc are not given, return the latest 1000 positions for a device.",
-        "operationId": "positions_position_get",
+        "description": "This endpoint returns the Positions for a Device.\n\nYou can optionally specify parameters for start_time_utc and end_time_utc to filter the results.\n\nYou can enable OSM road classification by passing through include_osm_road_classification=true.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
+        "operationId": "positions_device__device_id__position_get",
         "security": [
           {
             "JWTBearer": []
@@ -938,15 +885,15 @@
         "parameters": [
           {
             "name": "device_id",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid",
-              "title": "Vehicle id",
-              "description": "Vehicle id of the vehicle to be requested"
+              "title": "Device ID",
+              "description": "Device ID of the Positions to be returned"
             },
-            "description": "Vehicle id of the vehicle to be requested"
+            "description": "Device ID of the Positions to be returned"
           },
           {
             "name": "start_time_utc",
@@ -1086,14 +1033,14 @@
         }
       }
     },
-    "/position/trip/{trip_id}": {
+    "/trip/{trip_id}/position": {
       "get": {
         "tags": [
           "Positions"
         ],
         "summary": "Positions By Trip Id",
-        "description": "This endpoint returns the historical point information for a given Device between start_time_utc and end_time_utc.\nIf start_time_utc or end_time_utc are not given, return the latest 1000 positions for a device.",
-        "operationId": "positions_by_trip_id_position_trip__trip_id__get",
+        "description": "This endpoint returns the Positions for a Trip.\n\nYou can enable OSM road classification by passing through include_osm_road_classification=true.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
+        "operationId": "positions_by_trip_id_trip__trip_id__position_get",
         "security": [
           {
             "JWTBearer": []
@@ -1108,9 +1055,9 @@
               "type": "string",
               "format": "uuid",
               "title": "Trip ID",
-              "description": "Trip id of the positions to be requested"
+              "description": "Trip ID of the Positions to be returned"
             },
-            "description": "Trip id of the positions to be requested"
+            "description": "Trip ID of the Positions to be returned"
           },
           {
             "name": "page",
@@ -1252,14 +1199,14 @@
         }
       }
     },
-    "/trip": {
+    "/device/{device_id}/trip": {
       "get": {
         "tags": [
           "Trips"
         ],
         "summary": "Trips",
-        "description": "Get Trip information for a specified period of time. If the start_time_utc or end_time_utc is not given, return\nthe last 100 trips.",
-        "operationId": "trips_trip_get",
+        "description": "This endpoint returns the Trips for a Device.\n\nYou can optionally specify parameters for start_time_utc and end_time_utc to filter the results.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
+        "operationId": "trips_device__device_id__trip_get",
         "security": [
           {
             "JWTBearer": []
@@ -1268,15 +1215,15 @@
         "parameters": [
           {
             "name": "device_id",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid",
               "title": "Device id",
-              "description": "Device id of the trip to be requested"
+              "description": "Device ID of the Trips to be returned"
             },
-            "description": "Device id of the trip to be requested"
+            "description": "Device ID of the Trips to be returned"
           },
           {
             "name": "start_time_utc",
@@ -1436,7 +1383,7 @@
           "Trips"
         ],
         "summary": "Trip By Id",
-        "description": "Get Trip information for a specified period of time for a given Device. If the start_time_utc or end_time_utc is not\ngiven, return the last 100 trips for that Device.",
+        "description": "This endpoint returns a Trip by ID.",
         "operationId": "trip_by_id_trip__trip_id__get",
         "security": [
           {
@@ -1452,9 +1399,9 @@
               "type": "string",
               "format": "uuid",
               "title": "Trip id",
-              "description": "Id of the trip to be requested"
+              "description": "Trip ID of the Trip to be returned"
             },
-            "description": "Id of the trip to be requested"
+            "description": "Trip ID of the Trip to be returned"
           }
         ],
         "responses": {
@@ -1571,20 +1518,32 @@
         }
       }
     },
-    "/event": {
+    "/device/{device_id}/event": {
       "get": {
         "tags": [
           "Events"
         ],
         "summary": "Events",
-        "description": "Return a list of events.",
-        "operationId": "events_event_get",
+        "description": "This endpoint returns the Events for a Device.\n\nYou can optionally specify parameters for event_type, start_time_utc and end_time_utc to filter the results.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
+        "operationId": "events_device__device_id__event_get",
         "security": [
           {
             "JWTBearer": []
           }
         ],
         "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Device id",
+              "description": "Device ID of the Events to be returned"
+            },
+            "description": "Device ID of the Events to be returned"
+          },
           {
             "name": "event_type",
             "in": "query",
@@ -1596,9 +1555,9 @@
                 }
               ],
               "title": "Event type",
-              "description": "The event type for events to be matched"
+              "description": "Only include events of this type"
             },
-            "description": "The event type for events to be matched"
+            "description": "Only include events of this type"
           },
           {
             "name": "start_time_utc",
@@ -1732,7 +1691,7 @@
           "Events"
         ],
         "summary": "Event By Id",
-        "description": "Fetch an event by ID.",
+        "description": "This endpoint returns an Event by ID.",
         "operationId": "event_by_id_event__event_id__get",
         "security": [
           {
@@ -1748,9 +1707,9 @@
               "type": "string",
               "format": "uuid",
               "title": "Event id",
-              "description": "Id of the Event to be returned"
+              "description": "Event ID of the Event to be returned"
             },
-            "description": "Id of the Event to be returned"
+            "description": "Event ID of the Event to be returned"
           }
         ],
         "responses": {
@@ -1873,7 +1832,7 @@
           "Real-time"
         ],
         "summary": "Get Positions",
-        "description": "Gets the most recent position of the devices specified by device_ids.",
+        "description": "This endpoint takes a list of device_ids and returns the most recent Position of each Device.",
         "operationId": "get_positions_realtime_device_post",
         "requestBody": {
           "content": {
@@ -2010,7 +1969,7 @@
           "Real-time"
         ],
         "summary": "Get Connect",
-        "description": "Get an authenticated url for a websocket connection.",
+        "description": "This endpoint return an authenticated url for a websocket connection.",
         "operationId": "get_connect_realtime_connect_get",
         "responses": {
           "200": {
@@ -3037,23 +2996,6 @@
         ],
         "title": "Success[Trip]"
       },
-      "Success_list_Tenancy__": {
-        "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/Tenancy"
-            },
-            "type": "array",
-            "title": "Data",
-            "description": "Successful response payload"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "Success[list[Tenancy]]"
-      },
       "Success_list_Union_RealtimeTimeoutState__RealtimeValidState___": {
         "properties": {
           "data": {
@@ -3077,73 +3019,6 @@
           "data"
         ],
         "title": "Success[list[Union[RealtimeTimeoutState, RealtimeValidState]]]"
-      },
-      "Tenancy": {
-        "properties": {
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description"
-          },
-          "logo_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Logo Url"
-          },
-          "toc_link": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Toc Link"
-          },
-          "privacy_link": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Privacy Link"
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "name",
-          "description",
-          "logo_url",
-          "toc_link",
-          "privacy_link",
-          "id"
-        ],
-        "title": "Tenancy"
       },
       "Trip": {
         "properties": {
