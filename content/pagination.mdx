@@ -1,0 +1,16 @@
+---
+title: Pagination
+---
+
+The [Device](/api-reference/devices/devices), [Trip](/api-reference/trips/trip), [Position](/api-reference/positions)
+and [Event](/api-reference/events/events) endpoints that list entities are all paginated. This means, for example,
+that if a device has more than 100 trips, you will need to make more requests to get all the trips.
+
+<Info>For the Device, Trip and Event endpoints, a maximum of **100** results can be returned per page. For the Position
+endpoint, a maximum of **500** results can be returned.</Info>
+
+Paginated endpoints have an optional `page` query parameter which takes a zero-indexed integer which is the page number.
+If you do not pass a page number, it will default to 0 (the first page).
+
+PathStack provides `next` and `previous` links for paginated responses. If the `next` link is not null, that means there
+is more data to fetch. You can then call the URL in the `next` link to get the next page.
