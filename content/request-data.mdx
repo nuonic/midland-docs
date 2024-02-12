@@ -43,7 +43,12 @@ This will return a response that looks something like this:
       "connection_id": "c2708314-1fb4-4955-ab6d-1c6d0735d1d5"
     },
     ...
-  ]
+  ],
+  "links": {
+    "previous": null,
+    "current": "/device?page=0",
+    "next": null
+  }
 }
 ```
 
@@ -61,9 +66,8 @@ which you can use to get the trips for a particular device, which you will see i
   use algorithms to estimate trips within the positions recieved.
 </Note>
 
-Once you have the list of devices, you can fetch the trips for a device by making a call to `/trip` endpoint. You will
-need to pass in the `device_id` for the device you are requesting trips for. Additionaly, you can filter trips by
-**start time** and **end time** by passing `start_time_utc` and `end_time_utc`.
+Once you have the list of devices, you can fetch the trips for a device by making a call to `/device/{device_id}/trip` 
+endpoint. You can filter trips by **start time** and **end time** by passing `start_time_utc` and `end_time_utc`.
 
 <TripsSnippet />
 
@@ -89,7 +93,12 @@ This will return a response that looks something like this:
       "device_id": "38c6d776-b2de-488e-bcd3-be3df6df37ea"
     },
     ...
-  ]
+  ],
+  "links": {
+    "previous": null,
+    "current": "/device/{device_id}/trip?page=0",
+    "next": null
+  }
 }
 ```
 
@@ -105,7 +114,7 @@ trip, as you will see in the next section.
 </Info>
 
 Once you have a list of trips, if you want you can request the positions for each trip, using the
-`/position/trip/{trip_id}` endpoint.
+`/trip/{trip_id}/position` endpoint.
 
 <PositionsSnippet />
 
@@ -127,6 +136,13 @@ This will return a response that looks something like this:
       "trip_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
     },
     ...
-  ]
+  ],
+  "links": {
+    "previous": null,
+    "current": "/trip/{trip_id}/position?page=0",
+    "next": "/trip/{trip_id}/position?page=1"
+  }
 }
 ```
+
+The Devices, Trips, Positions and Events endpoints are all paginated. You can find out more [here.](/content/pagination)
