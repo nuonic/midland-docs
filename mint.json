@@ -98,12 +98,6 @@
           ]
         },
         {
-          "group": "Tenancies",
-          "pages": [
-            "api-reference/tenancies/tenancies"
-          ]
-        },
-        {
           "group": "Connections",
           "pages": [
             "api-reference/connections/connections",
