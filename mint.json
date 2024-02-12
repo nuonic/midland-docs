@@ -50,7 +50,8 @@
         "content/key-concepts",
         "content/get-connected",
         "content/authentication",
-        "content/request-data"
+        "content/request-data",
+        "content/pagination"
       ]
     },
     {
