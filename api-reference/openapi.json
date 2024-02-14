@@ -951,7 +951,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_Union_List_Point___List_PointWithFeatures___"
+                  "$ref": "#/components/schemas/PaginatedSuccess_List_PointWithFeatures__"
                 }
               }
             }
@@ -1029,6 +1029,32 @@
               }
             },
             "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Device with ID <device_id> not found",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
           }
         }
       }
@@ -1091,7 +1117,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_Union_List_Point___List_PointWithFeatures___"
+                  "$ref": "#/components/schemas/PaginatedSuccess_List_PointWithFeatures__"
                 }
               }
             }
@@ -2334,6 +2360,39 @@
         ],
         "title": "EventTypeEnum"
       },
+      "OsmRoadClassification": {
+        "properties": {
+          "road_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Road Name"
+          },
+          "on_road": {
+            "type": "boolean",
+            "title": "On Road",
+            "default": false
+          },
+          "distance_from_road_metres": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distance From Road Metres"
+          }
+        },
+        "type": "object",
+        "title": "OsmRoadClassification"
+      },
       "PaginatedSuccess_List_Device__": {
         "properties": {
           "data": {
@@ -2376,6 +2435,27 @@
         ],
         "title": "PaginatedSuccess[List[Event]]"
       },
+      "PaginatedSuccess_List_PointWithFeatures__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/PointWithFeatures"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PaginationLinks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "links"
+        ],
+        "title": "PaginatedSuccess[List[PointWithFeatures]]"
+      },
       "PaginatedSuccess_List_Trip__": {
         "properties": {
           "data": {
@@ -2396,37 +2476,6 @@
           "links"
         ],
         "title": "PaginatedSuccess[List[Trip]]"
-      },
-      "PaginatedSuccess_Union_List_Point___List_PointWithFeatures___": {
-        "properties": {
-          "data": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/Point"
-                },
-                "type": "array"
-              },
-              {
-                "items": {
-                  "$ref": "#/components/schemas/PointWithFeatures"
-                },
-                "type": "array"
-              }
-            ],
-            "title": "Data",
-            "description": "Successful response payload"
-          },
-          "links": {
-            "$ref": "#/components/schemas/PaginationLinks"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data",
-          "links"
-        ],
-        "title": "PaginatedSuccess[Union[List[Point], List[PointWithFeatures]]]"
       },
       "PaginationLinks": {
         "properties": {
@@ -2466,115 +2515,6 @@
         },
         "type": "object",
         "title": "PaginationLinks"
-      },
-      "Point": {
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "title": "Latitude"
-          },
-          "longitude": {
-            "type": "number",
-            "title": "Longitude"
-          },
-          "time": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Time"
-          },
-          "speed_kilometres_per_hour": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Speed Kilometres Per Hour"
-          },
-          "hdop": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Hdop"
-          },
-          "vdop": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Vdop"
-          },
-          "number_of_satellites": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Number Of Satellites"
-          },
-          "heading": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Heading"
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Id"
-          },
-          "trip_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Trip Id"
-          },
-          "device_id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Device Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "latitude",
-          "longitude",
-          "time",
-          "speed_kilometres_per_hour",
-          "hdop",
-          "vdop",
-          "number_of_satellites",
-          "heading",
-          "id",
-          "trip_id",
-          "device_id"
-        ],
-        "title": "Point"
       },
       "PointWithFeatures": {
         "properties": {
@@ -2668,32 +2608,15 @@
             "format": "uuid",
             "title": "Device Id"
           },
-          "road_name": {
+          "osm_road_classification": {
             "anyOf": [
               {
-                "type": "string"
+                "$ref": "#/components/schemas/OsmRoadClassification"
               },
               {
                 "type": "null"
               }
-            ],
-            "title": "Road Name"
-          },
-          "on_road": {
-            "type": "boolean",
-            "title": "On Road",
-            "default": false
-          },
-          "distance_from_road_metres": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Distance From Road Metres"
+            ]
           }
         },
         "type": "object",
