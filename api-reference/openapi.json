@@ -1707,6 +1707,32 @@
               }
             },
             "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Device with ID <device_id> not found",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
           }
         }
       }
