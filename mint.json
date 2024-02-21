@@ -109,7 +109,10 @@
           "group": "Devices",
           "pages": [
             "api-reference/devices/devices",
-            "api-reference/devices/device-by-id"
+            "api-reference/devices/create-device",
+            "api-reference/devices/device-by-id",
+            "api-reference/devices/delete-device-by-id",
+            "api-reference/devices/update-device-by-id"
           ]
         },
         {
