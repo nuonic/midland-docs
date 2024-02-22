@@ -598,6 +598,173 @@
       }
     },
     "/device": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Create Device",
+        "description": "This endpoint creates a Device.\n\nNot all providers are supported, currently only Digital Matter is supported.\n\nThe created Device is returned in the response.",
+        "operationId": "create_device_device_post",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DeviceCreate"
+                  }
+                ],
+                "title": "Device",
+                "description": "Details for device"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_Device_"
+                }
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Not authenticated",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Connection with ID <connection_id> not found",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 405,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "The telematics provider for this Device does not support creation of Devices with the API",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          }
+        }
+      },
       "get": {
         "tags": [
           "Devices"
@@ -865,6 +1032,388 @@
               }
             },
             "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Update Device By Id",
+        "description": "This endpoint update a Device.\n\nYou can specify the attributes which you want to be updated and their new values.\n\nThe updated Device is returned in the response.",
+        "operationId": "update_device_by_id_device__device_id__patch",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Device id",
+              "description": "Device ID of the Device to be updated"
+            },
+            "description": "Device ID of the Device to be updated"
+          },
+          {
+            "name": "registration",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Registration"
+            }
+          },
+          {
+            "name": "make",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Make"
+            }
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Model"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Year"
+            }
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Active"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_Device_"
+                }
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Not authenticated",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Device with ID <device_id> not found",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Delete Device By Id",
+        "description": "This endpoint deletes a Device.\n\nNot all providers are supported, currently only Digital Matter is supported.\n\nThe deleted Device is returned in the response.",
+        "operationId": "delete_device_by_id_device__device_id__delete",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Device id",
+              "description": "Device ID of the Device to be deleted"
+            },
+            "description": "Device ID of the Device to be deleted"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Not authenticated",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Device with ID <device_id> not found",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 405,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "The telematics provider for this Device does not support deletion of Devices with the API",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Method Not Allowed"
           }
         }
       }
@@ -2317,6 +2866,78 @@
           "connection_id"
         ],
         "title": "Device"
+      },
+      "DeviceCreate": {
+        "properties": {
+          "system_device_id": {
+            "type": "string",
+            "title": "System Device Id"
+          },
+          "registration": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registration"
+          },
+          "make": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Make"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Year"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active"
+          },
+          "connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Connection Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "system_device_id",
+          "registration",
+          "make",
+          "model",
+          "year",
+          "active",
+          "connection_id"
+        ],
+        "title": "DeviceCreate"
       },
       "DeviceList": {
         "properties": {
