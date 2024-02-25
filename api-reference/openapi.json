@@ -2948,6 +2948,11 @@
             },
             "type": "array",
             "title": "Device Ids"
+          },
+          "include_speed": {
+            "type": "boolean",
+            "title": "Include Speed",
+            "default": true
           }
         },
         "type": "object",
@@ -3325,16 +3330,15 @@
             ],
             "title": "Heading"
           },
-          "speed_kph": {
+          "speed": {
             "anyOf": [
               {
-                "type": "number"
+                "$ref": "#/components/schemas/Speed"
               },
               {
                 "type": "null"
               }
-            ],
-            "title": "Speed Kph"
+            ]
           }
         },
         "type": "object",
@@ -3429,6 +3433,23 @@
           "refresh_token"
         ],
         "title": "RefreshToken"
+      },
+      "Speed": {
+        "properties": {
+          "speed_kph": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speed Kph"
+          }
+        },
+        "type": "object",
+        "title": "Speed"
       },
       "Success_AuthenticationResult_": {
         "properties": {
