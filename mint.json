@@ -142,6 +142,16 @@
             "api-reference/real-time/get-positions",
             "api-reference/real-time/get-connect"
           ]
+        },
+        {
+          "group": "Webhooks",
+          "pages": [
+            "api-reference/webhooks/get-webhooks",
+            "api-reference/webhooks/create-webhook",
+            "api-reference/webhooks/get-webhook",
+            "api-reference/webhooks/delete-webhook",
+            "api-reference/webhooks/patch-webhook"
+          ]
         }
       ]
     }
