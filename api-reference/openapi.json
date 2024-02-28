@@ -3475,14 +3475,14 @@
         ]
       }
     },
-    "/webhook/": {
+    "/webhook": {
       "get": {
         "tags": [
           "Webhooks"
         ],
         "summary": "Get Webhooks",
         "description": "Returns a list of webhooks",
-        "operationId": "get_webhooks_webhook__get",
+        "operationId": "get_webhooks_webhook_get",
         "security": [
           {
             "JWTBearer": []
@@ -3659,7 +3659,7 @@
         ],
         "summary": "Create Webhook",
         "description": "Creates a new webhook.",
-        "operationId": "create_webhook_webhook__post",
+        "operationId": "create_webhook_webhook_post",
         "security": [
           {
             "JWTBearer": []
