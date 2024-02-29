@@ -63,14 +63,16 @@
           "pages": [
             "integration-guides/verizon",
             "integration-guides/digitalmatter",
-            "integration-guides/fleetsu",
+            "integration-guides/randmcnally",
             "integration-guides/geotab",
             "integration-guides/mixtelematics",
             "integration-guides/navman",
             "integration-guides/netstar",
             "integration-guides/radius",
             "integration-guides/volvo",
-            "integration-guides/webfleet"
+            "integration-guides/webfleet",
+            "integration-guides/scania",
+            "integration-guides/toyota-halo"
           ]
         }
       ]
