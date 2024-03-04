@@ -152,6 +152,12 @@
             "api-reference/webhooks/delete-webhook",
             "api-reference/webhooks/patch-webhook"
           ]
+        },
+        {
+          "group": "Tags",
+          "pages": [
+            "api-reference/tags/get-tags"
+          ]
         }
       ]
     }
