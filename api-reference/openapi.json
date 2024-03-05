@@ -1030,7 +1030,7 @@
           "Devices"
         ],
         "summary": "Devices",
-        "description": "This endpoint returns all Devices that have been created by Connections for your Tenancy.\n\nYou can specify the telematics_provider, and it will return only Devices with that provider.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
+        "description": "This endpoint returns all Devices that have been created by Connections for your Tenancy.\n\nYou can specify the telematics_provider, and it will return only Devices with that provider.\n\nYou can specify the tags, and it will return only Devices that have all the tags specified.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
         "operationId": "devices_device_get",
         "security": [
           {
@@ -1052,6 +1052,22 @@
               "description": "Name of the telematics provider"
             },
             "description": "Name of the telematics provider"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
+              },
+              "title": "Tags",
+              "description": "Tags to include. Use query parameters e.g ?tags=a&tags=b to filter for Devices with tags 'a' and 'b'."
+            },
+            "description": "Tags to include. Use query parameters e.g ?tags=a&tags=b to filter for Devices with tags 'a' and 'b'."
           },
           {
             "name": "page",
@@ -1423,88 +1439,18 @@
               "description": "Device ID of the Device to be updated"
             },
             "description": "Device ID of the Device to be updated"
-          },
-          {
-            "name": "registration",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Registration"
-            }
-          },
-          {
-            "name": "make",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Make"
-            }
-          },
-          {
-            "name": "model",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Model"
-            }
-          },
-          {
-            "name": "year",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Year"
-            }
-          },
-          {
-            "name": "active",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Active"
-            }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceUpdate"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -4411,6 +4357,33 @@
           }
         }
       }
+    },
+    "/tag": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "summary": "Get Tags",
+        "description": "This endpoint returns all Tags on Devices for a Tenant.",
+        "operationId": "get_tags_tag_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_list_str__"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -4638,6 +4611,20 @@
             "type": "boolean",
             "title": "Active"
           },
+          "tags": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tags"
+          },
           "id": {
             "type": "string",
             "format": "uuid4",
@@ -4657,6 +4644,7 @@
           "model",
           "year",
           "active",
+          "tags",
           "id",
           "connection_id"
         ],
@@ -4716,6 +4704,20 @@
             "type": "boolean",
             "title": "Active"
           },
+          "tags": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tags"
+          },
           "connection_id": {
             "type": "string",
             "format": "uuid4",
@@ -4730,6 +4732,7 @@
           "model",
           "year",
           "active",
+          "tags",
           "connection_id"
         ],
         "title": "DeviceCreate"
@@ -4755,6 +4758,85 @@
           "device_ids"
         ],
         "title": "DeviceList"
+      },
+      "DeviceUpdate": {
+        "properties": {
+          "registration": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registration"
+          },
+          "make": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Make"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Year"
+          },
+          "active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active"
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "maxLength": 255,
+                  "minLength": 1
+                },
+                "type": "array",
+                "maxItems": 10
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tags for the Device",
+            "description": "\n                A maximum of 10 tags is allowed on a Device. Each tag must have a length between 1 and 255\n                characters. Tags are stored in lower case, and duplicate tags are removed. Leading and trailing \n                whitespaces are removed.\n                "
+          }
+        },
+        "type": "object",
+        "title": "DeviceUpdate"
       },
       "Event": {
         "properties": {
@@ -5443,6 +5525,23 @@
           "data"
         ],
         "title": "Success[list[Union[RealtimeTimeoutState, RealtimeValidState]]]"
+      },
+      "Success_list_str__": {
+        "properties": {
+          "data": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[list[str]]"
       },
       "Trip": {
         "properties": {
