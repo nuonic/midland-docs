@@ -5791,35 +5791,6 @@
             ],
             "title": "Device Ids"
           },
-          "connection_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string",
-                  "format": "uuid4"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Connection Ids"
-          },
-          "system_device_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "System Device Ids"
-          },
           "options": {
             "anyOf": [
               {
@@ -5846,18 +5817,6 @@
               }
             ],
             "title": "Include Speed"
-          },
-          "create_devices": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Create Devices",
-            "default": true
           }
         },
         "type": "object",
