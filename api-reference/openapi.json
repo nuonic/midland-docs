@@ -5268,6 +5268,11 @@
       },
       "RealtimeValidState": {
         "properties": {
+          "connection_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Connection Id"
+          },
           "device_id": {
             "type": "string",
             "format": "uuid4",
@@ -5283,6 +5288,7 @@
         },
         "type": "object",
         "required": [
+          "connection_id",
           "device_id",
           "system_device_id",
           "position"
@@ -5771,17 +5777,27 @@
       "WebhookFilter": {
         "properties": {
           "device_ids": {
-            "items": {
-              "type": "string",
-              "format": "uuid4"
-            },
-            "type": "array",
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Device Ids"
           },
           "options": {
-            "allOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/WebhookOptions"
+              },
+              {
+                "type": "null"
               }
             ]
           }
@@ -5792,7 +5808,14 @@
       "WebhookOptions": {
         "properties": {
           "include_speed": {
-            "type": "boolean",
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Include Speed"
           }
         },
