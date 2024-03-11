@@ -4739,12 +4739,62 @@
       },
       "DeviceList": {
         "properties": {
+          "connection_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Connection Ids"
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tags"
+          },
+          "system_device_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "System Device Ids"
+          },
           "device_ids": {
-            "items": {
-              "type": "string",
-              "format": "uuid4"
-            },
-            "type": "array",
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Device Ids"
           },
           "include_speed": {
@@ -4754,9 +4804,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "device_ids"
-        ],
         "title": "DeviceList"
       },
       "DeviceUpdate": {
