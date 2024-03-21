@@ -3165,7 +3165,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DeviceList"
+                "$ref": "#/components/schemas/RealTimeConfiguration"
               }
             }
           },
@@ -3466,7 +3466,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_list_Webhook__"
+                  "$ref": "#/components/schemas/PaginatedSuccess_list_WebhookResponseDeprecated__"
                 }
               }
             }
@@ -3618,7 +3618,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/WebhookCreate"
+                    "$ref": "#/components/schemas/WebhookDeprecated"
                   }
                 ],
                 "title": "Webhook",
@@ -3633,7 +3633,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_Webhook_"
+                  "$ref": "#/components/schemas/Success_WebhookResponseDeprecated_"
                 }
               }
             }
@@ -3800,7 +3800,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_Webhook_"
+                  "$ref": "#/components/schemas/Success_WebhookResponseDeprecated_"
                 }
               }
             }
@@ -3991,7 +3991,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_Webhook_"
+                  "$ref": "#/components/schemas/Success_WebhookResponseDeprecated_"
                 }
               }
             }
@@ -4183,7 +4183,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/WebhookUpdate"
+                    "$ref": "#/components/schemas/WebhookDeprecated"
                   }
                 ],
                 "title": "Webhook",
@@ -4198,7 +4198,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_Webhook_"
+                  "$ref": "#/components/schemas/Success_WebhookResponseDeprecated_"
                 }
               }
             }
@@ -4433,6 +4433,28 @@
           "url"
         ],
         "title": "ConnectType"
+      },
+      "ConnectionDevices": {
+        "properties": {
+          "connection_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Connection Id"
+          },
+          "system_device_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "System Device Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "connection_id",
+          "system_device_ids"
+        ],
+        "title": "ConnectionDevices"
       },
       "ConnectionInput": {
         "properties": {
@@ -4737,75 +4759,6 @@
         ],
         "title": "DeviceCreate"
       },
-      "DeviceList": {
-        "properties": {
-          "connection_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string",
-                  "format": "uuid4"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Connection Ids"
-          },
-          "tags": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tags"
-          },
-          "system_device_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "System Device Ids"
-          },
-          "device_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string",
-                  "format": "uuid4"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Device Ids"
-          },
-          "include_speed": {
-            "type": "boolean",
-            "title": "Include Speed",
-            "default": true
-          }
-        },
-        "type": "object",
-        "title": "DeviceList"
-      },
       "DeviceUpdate": {
         "properties": {
           "registration": {
@@ -5053,11 +5006,11 @@
         ],
         "title": "PaginatedSuccess[List[Trip]]"
       },
-      "PaginatedSuccess_list_Webhook__": {
+      "PaginatedSuccess_list_WebhookResponseDeprecated__": {
         "properties": {
           "data": {
             "items": {
-              "$ref": "#/components/schemas/Webhook"
+              "$ref": "#/components/schemas/WebhookResponseDeprecated"
             },
             "type": "array",
             "title": "Data",
@@ -5072,7 +5025,7 @@
           "data",
           "links"
         ],
-        "title": "PaginatedSuccess[list[Webhook]]"
+        "title": "PaginatedSuccess[list[WebhookResponseDeprecated]]"
       },
       "PaginationLinks": {
         "properties": {
@@ -5248,6 +5201,110 @@
           "webfleet"
         ],
         "title": "ProviderEnum"
+      },
+      "RealTimeConfiguration": {
+        "properties": {
+          "filters": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RealTimeFilter"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RealTimeOption"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "RealTimeConfiguration"
+      },
+      "RealTimeFilter": {
+        "properties": {
+          "connection_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Connection Ids"
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tags"
+          },
+          "device_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Device Ids"
+          },
+          "connection_devices": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ConnectionDevices"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Connection Devices"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "RealTimeFilter"
+      },
+      "RealTimeOption": {
+        "properties": {
+          "include_speed": {
+            "type": "boolean",
+            "title": "Include Speed",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "RealTimeOption"
       },
       "RealtimePosition": {
         "properties": {
@@ -5538,12 +5595,12 @@
         ],
         "title": "Success[Trip]"
       },
-      "Success_Webhook_": {
+      "Success_WebhookResponseDeprecated_": {
         "properties": {
           "data": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Webhook"
+                "$ref": "#/components/schemas/WebhookResponseDeprecated"
               }
             ],
             "description": "Successful response payload"
@@ -5553,7 +5610,7 @@
         "required": [
           "data"
         ],
-        "title": "Success[Webhook]"
+        "title": "Success[WebhookResponseDeprecated]"
       },
       "Success_list_Union_RealtimeTimeoutState__RealtimeValidState___": {
         "properties": {
@@ -5725,7 +5782,77 @@
         ],
         "title": "UsernamePassword"
       },
-      "Webhook": {
+      "WebhookDeprecated": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "filter": {
+            "$ref": "#/components/schemas/WebhookFilterDeprecated"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "filter",
+          "enabled"
+        ],
+        "title": "WebhookDeprecated"
+      },
+      "WebhookFilterDeprecated": {
+        "properties": {
+          "device_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Device Ids"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WebhookOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "WebhookFilterDeprecated"
+      },
+      "WebhookOptions": {
+        "properties": {
+          "include_speed": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Include Speed"
+          }
+        },
+        "type": "object",
+        "title": "WebhookOptions"
+      },
+      "WebhookResponseDeprecated": {
         "properties": {
           "id": {
             "type": "string",
@@ -5737,11 +5864,7 @@
             "title": "Url"
           },
           "filter": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookFilter"
-              }
-            ]
+            "$ref": "#/components/schemas/WebhookFilterDeprecated"
           },
           "enabled": {
             "type": "boolean",
@@ -5789,6 +5912,7 @@
         "required": [
           "id",
           "url",
+          "filter",
           "enabled",
           "error_count",
           "last_error",
@@ -5796,100 +5920,7 @@
           "created_at",
           "updated_at"
         ],
-        "title": "Webhook"
-      },
-      "WebhookCreate": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "title": "Url"
-          },
-          "filter": {
-            "$ref": "#/components/schemas/WebhookFilter"
-          },
-          "enabled": {
-            "type": "boolean",
-            "title": "Enabled"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "url",
-          "filter",
-          "enabled"
-        ],
-        "title": "WebhookCreate"
-      },
-      "WebhookFilter": {
-        "properties": {
-          "device_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string",
-                  "format": "uuid4"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Device Ids"
-          },
-          "options": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/WebhookOptions"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "title": "WebhookFilter"
-      },
-      "WebhookOptions": {
-        "properties": {
-          "include_speed": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Include Speed"
-          }
-        },
-        "type": "object",
-        "title": "WebhookOptions"
-      },
-      "WebhookUpdate": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "title": "Url"
-          },
-          "filter": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookFilter"
-              }
-            ]
-          },
-          "enabled": {
-            "type": "boolean",
-            "title": "Enabled"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "WebhookUpdate"
+        "title": "WebhookResponseDeprecated"
       }
     },
     "securitySchemes": {
