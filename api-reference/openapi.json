@@ -3165,7 +3165,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RealTimeConfiguration"
+                "$ref": "#/components/schemas/RealTimeParameters"
               }
             }
           },
@@ -5202,33 +5202,6 @@
         ],
         "title": "ProviderEnum"
       },
-      "RealTimeConfiguration": {
-        "properties": {
-          "filters": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/RealTimeFilter"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "options": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/RealTimeOption"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "RealTimeConfiguration"
-      },
       "RealTimeFilter": {
         "properties": {
           "connection_ids": {
@@ -5305,6 +5278,33 @@
         "additionalProperties": false,
         "type": "object",
         "title": "RealTimeOption"
+      },
+      "RealTimeParameters": {
+        "properties": {
+          "filters": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RealTimeFilter"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RealTimeOption"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "RealTimeParameters"
       },
       "RealtimePosition": {
         "properties": {
