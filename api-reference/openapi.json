@@ -5824,7 +5824,7 @@
           "options": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/WebhookOptions"
+                "$ref": "#/components/schemas/RealTimeOption"
               },
               {
                 "type": "null"
@@ -5834,23 +5834,6 @@
         },
         "type": "object",
         "title": "WebhookFilterDeprecated"
-      },
-      "WebhookOptions": {
-        "properties": {
-          "include_speed": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Include Speed"
-          }
-        },
-        "type": "object",
-        "title": "WebhookOptions"
       },
       "WebhookResponseDeprecated": {
         "properties": {
