@@ -34,7 +34,11 @@
     {
       "name": "API Reference",
       "url": "api-reference"
-    }
+    },
+    {
+      "name": "Legal",
+      "url": "legal"
+    }    
   ],
   "navigation": [
     {
@@ -163,7 +167,16 @@
           ]
         }
       ]
-    }
+    },
+    {
+      "group": "Legal",
+      "pages": [
+        "legal/data-provider-terms",
+        "legal/data-consumer-terms",
+        "legal/privacy-statement",
+        "legal/security-statement"
+      ]
+    }    
   ],
   "footerSocials": {
     "linkedin": "https://au.linkedin.com/company/nuonic"
