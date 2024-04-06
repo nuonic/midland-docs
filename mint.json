@@ -38,7 +38,7 @@
     {
       "name": "Legal",
       "url": "legal"
-    }    
+    }
   ],
   "navigation": [
     {
@@ -176,7 +176,7 @@
         "legal/privacy-statement",
         "legal/security-statement"
       ]
-    }    
+    }
   ],
   "footerSocials": {
     "linkedin": "https://au.linkedin.com/company/nuonic"
