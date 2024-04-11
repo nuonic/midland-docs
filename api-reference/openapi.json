@@ -6210,14 +6210,17 @@
             "title": "Enabled"
           },
           "filter": {
-            "$ref": "#/components/schemas/WebhookFilterDeprecated"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookFilterDeprecated"
+              }
+            ]
           }
         },
         "type": "object",
         "required": [
           "url",
-          "enabled",
-          "filter"
+          "enabled"
         ],
         "title": "WebhookCreate"
       },
