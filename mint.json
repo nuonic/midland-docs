@@ -123,13 +123,6 @@
           ]
         },
         {
-          "group": "Positions",
-          "pages": [
-            "api-reference/positions/positions",
-            "api-reference/positions/positions-by-trip-id"
-          ]
-        },
-        {
           "group": "Trips",
           "pages": [
             "api-reference/trips/trips",
@@ -137,16 +130,16 @@
           ]
         },
         {
-          "group": "Events",
+          "group": "Positions",
           "pages": [
-            "api-reference/events/events",
-            "api-reference/events/event-by-id"
+            "api-reference/positions/positions",
+            "api-reference/positions/positions-by-trip-id"
           ]
         },
         {
           "group": "Real-time",
           "pages": [
-            "api-reference/real-time/get-positions",
+            "api-reference/real-time/get-realtime-positions",
             "api-reference/real-time/get-connect"
           ]
         },
@@ -164,6 +157,13 @@
           "group": "Tags",
           "pages": [
             "api-reference/tags/get-tags"
+          ]
+        },
+        {
+          "group": "Events",
+          "pages": [
+            "api-reference/events/events",
+            "api-reference/events/event-by-id"
           ]
         }
       ]

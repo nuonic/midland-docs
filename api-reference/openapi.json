@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "FastAPI",
-    "version": "0.1.0"
+    "version": "2024-03-26"
   },
   "servers": [
     {
@@ -19,15 +19,31 @@
         "summary": "Login",
         "description": "This endpoint takes a username or email, and a password, and returns an access token, refresh token, expiry time,\ntoken type, and a sub which is used with the refresh token to get a new access token by calling the refresh\nendpoint.\n\nThe access token is to be used for all endpoints except for /token and /refresh.",
         "operationId": "login_token_post",
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UsernamePassword"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -41,100 +57,100 @@
             }
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
                     "error": {
+                      "type": "object",
                       "properties": {
                         "code": {
                           "type": "integer",
-                          "title": "Error code",
-                          "example": 400
+                          "example": 400,
+                          "title": "Error code"
                         },
                         "message": {
                           "type": "string",
-                          "title": "Error message",
-                          "example": "Invalid JWT format"
+                          "example": "Invalid JWT format",
+                          "title": "Error message"
                         }
-                      },
-                      "type": "object"
+                      }
                     }
                   }
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
                     "error": {
+                      "type": "object",
                       "properties": {
                         "code": {
                           "type": "integer",
-                          "title": "Error code",
-                          "example": 401
+                          "example": 401,
+                          "title": "Error code"
                         },
                         "message": {
                           "type": "string",
-                          "title": "Error message",
-                          "example": "Authentication header is missing, or token is invalid/expired."
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
                         }
-                      },
-                      "type": "object"
+                      }
                     }
                   }
                 }
               }
-            }
+            },
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
                     "error": {
+                      "type": "object",
                       "properties": {
                         "code": {
                           "type": "integer",
-                          "title": "Error code",
-                          "example": 403
+                          "example": 403,
+                          "title": "Error code"
                         },
                         "message": {
                           "type": "string",
-                          "title": "Error message",
-                          "example": "You do not have access to this resource"
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
                         }
-                      },
-                      "type": "object"
+                      }
                     }
                   }
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "422": {
-            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
                     "error": {
+                      "type": "object",
                       "properties": {
                         "code": {
                           "type": "integer",
-                          "title": "Error code",
-                          "example": 422
+                          "example": 422,
+                          "title": "Error code"
                         },
                         "message": {
                           "type": "string",
-                          "title": "Error message",
-                          "example": "Field required"
+                          "example": "Field required",
+                          "title": "Error message"
                         },
                         "loc": {
                           "items": {
@@ -158,13 +174,13 @@
                           "type": "string",
                           "title": "Error Type"
                         }
-                      },
-                      "type": "object"
+                      }
                     }
                   }
                 }
               }
-            }
+            },
+            "description": "Unprocessable Entity"
           }
         }
       }
@@ -177,15 +193,31 @@
         "summary": "Refresh",
         "description": "This endpoint takes the sub and a refresh token and returns an access token and refresh token.\n\nThe access token is to be used for all endpoints except for /token and /refresh.",
         "operationId": "refresh_refresh_post",
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/RefreshToken"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -199,48 +231,48 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
                     "error": {
+                      "type": "object",
                       "properties": {
                         "code": {
                           "type": "integer",
-                          "title": "Error code",
-                          "example": 401
+                          "example": 401,
+                          "title": "Error code"
                         },
                         "message": {
                           "type": "string",
-                          "title": "Error message",
-                          "example": "Invalid Refresh Token"
+                          "example": "Invalid Refresh Token",
+                          "title": "Error message"
                         }
-                      },
-                      "type": "object"
+                      }
                     }
                   }
                 }
               }
-            }
+            },
+            "description": "Unauthorized"
           },
           "422": {
-            "description": "Unprocessable Entity",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
                     "error": {
+                      "type": "object",
                       "properties": {
                         "code": {
                           "type": "integer",
-                          "title": "Error code",
-                          "example": 422
+                          "example": 422,
+                          "title": "Error code"
                         },
                         "message": {
                           "type": "string",
-                          "title": "Error message",
-                          "example": "Field required"
+                          "example": "Field required",
+                          "title": "Error message"
                         },
                         "loc": {
                           "items": {
@@ -264,13 +296,13 @@
                           "type": "string",
                           "title": "Error Type"
                         }
-                      },
-                      "type": "object"
+                      }
                     }
                   }
                 }
               }
-            }
+            },
+            "description": "Unprocessable Entity"
           }
         }
       }
@@ -303,6 +335,20 @@
               "description": "Name of the telematics provider"
             },
             "description": "Name of the telematics provider"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "responses": {
@@ -311,7 +357,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_List_ConnectionNoCredentials__"
+                  "$ref": "#/components/schemas/Success_list_ConnectionNoCredentials__"
                 }
               }
             }
@@ -459,6 +505,20 @@
             "schema": {
               "type": "string",
               "title": "Tenant Id"
+            }
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
             }
           }
         ],
@@ -637,6 +697,20 @@
               "description": "Connection ID of the Connection to be returned"
             },
             "description": "Connection ID of the Connection to be returned"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "responses": {
@@ -816,6 +890,22 @@
         "security": [
           {
             "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "requestBody": {
@@ -1081,6 +1171,20 @@
               "default": 0
             },
             "description": "Page number for pagination (zero-indexed)"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "responses": {
@@ -1089,7 +1193,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_List_Device__"
+                  "$ref": "#/components/schemas/PaginatedSuccess_list_Device__"
                 }
               }
             }
@@ -1248,6 +1352,20 @@
               "description": "Device ID of the Device to be returned"
             },
             "description": "Device ID of the Device to be returned"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "responses": {
@@ -1439,6 +1557,20 @@
               "description": "Device ID of the Device to be updated"
             },
             "description": "Device ID of the Device to be updated"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "requestBody": {
@@ -1640,6 +1772,20 @@
               "description": "Device ID of the Device to be deleted"
             },
             "description": "Device ID of the Device to be deleted"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "responses": {
@@ -1647,7 +1793,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/Success_Device_"
+                }
               }
             }
           },
@@ -1832,6 +1980,457 @@
         }
       }
     },
+    "/device/{device_id}/trip": {
+      "get": {
+        "tags": [
+          "Trips"
+        ],
+        "summary": "Trips",
+        "description": "This endpoint returns the Trips for a Device.\n\nYou can optionally specify parameters for start_time_utc and end_time_utc to filter the results.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
+        "operationId": "trips_device__device_id__trip_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Device id",
+              "description": "Device ID of the Trips to be returned"
+            },
+            "description": "Device ID of the Trips to be returned"
+          },
+          {
+            "name": "start_time_utc",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Start time",
+              "description": "Start time from when the data will be returned"
+            },
+            "description": "Start time from when the data will be returned"
+          },
+          {
+            "name": "end_time_utc",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "End time",
+              "description": "End time from when the data will be returned"
+            },
+            "description": "End time from when the data will be returned"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "title": "Page number",
+              "description": "Page number for pagination (zero-indexed)",
+              "default": 0
+            },
+            "description": "Page number for pagination (zero-indexed)"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedSuccess_list_Trip__"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 400,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid JWT format",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 401,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Device with ID <device_id> not found",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/trip/{trip_id}": {
+      "get": {
+        "tags": [
+          "Trips"
+        ],
+        "summary": "Trip By Id",
+        "description": "This endpoint returns a Trip by ID.",
+        "operationId": "trip_by_id_trip__trip_id__get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "trip_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Trip id",
+              "description": "Trip ID of the Trip to be returned"
+            },
+            "description": "Trip ID of the Trip to be returned"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_Trip_"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 400,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid JWT format",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 401,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Trip with ID <trip_id> not found",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/device/{device_id}/position": {
       "get": {
         "tags": [
@@ -1890,7 +2489,7 @@
               "type": "boolean",
               "title": "Include OpenStreetMap road classification",
               "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road.",
-              "default": false
+              "default": 0
             },
             "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road."
           },
@@ -1906,6 +2505,20 @@
               "default": 0
             },
             "description": "Page number for pagination (zero-indexed)"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "responses": {
@@ -1914,7 +2527,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_List_PointWithFeatures__"
+                  "$ref": "#/components/schemas/PaginatedSuccess_list_PointWithFeatures__"
                 }
               }
             }
@@ -2121,9 +2734,23 @@
               "type": "boolean",
               "title": "Include OpenStreetMap road classification",
               "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road.",
-              "default": false
+              "default": 0
             },
             "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road."
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "responses": {
@@ -2132,7 +2759,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_List_PointWithFeatures__"
+                  "$ref": "#/components/schemas/PaginatedSuccess_list_PointWithFeatures__"
                 }
               }
             }
@@ -2292,14 +2919,14 @@
         }
       }
     },
-    "/device/{device_id}/trip": {
-      "get": {
+    "/realtime/device": {
+      "post": {
         "tags": [
-          "Trips"
+          "Real-time"
         ],
-        "summary": "Trips",
-        "description": "This endpoint returns the Trips for a Device.\n\nYou can optionally specify parameters for start_time_utc and end_time_utc to filter the results.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
-        "operationId": "trips_device__device_id__trip_get",
+        "summary": "Get Realtime Positions",
+        "description": "This endpoint takes a list of device_ids and returns the most recent Position of each Device.",
+        "operationId": "get_realtime_positions_realtime_device_post",
         "security": [
           {
             "JWTBearer": []
@@ -2307,40 +2934,325 @@
         ],
         "parameters": [
           {
-            "name": "device_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Device id",
-              "description": "Device ID of the Trips to be returned"
-            },
-            "description": "Device ID of the Trips to be returned"
-          },
-          {
-            "name": "start_time_utc",
-            "in": "query",
+            "name": "x-api-version",
+            "in": "header",
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time",
-              "title": "Start time",
-              "description": "Start time from when the data will be returned"
-            },
-            "description": "Start time from when the data will be returned"
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RealTimeParameters"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_list_Union_RealtimeTimeoutState__RealtimeValidState___"
+                }
+              }
+            }
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 400,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid JWT format",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 401,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Unknown device_ids <string>, ...",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/realtime/connect": {
+      "get": {
+        "tags": [
+          "Real-time"
+        ],
+        "summary": "Get Connect",
+        "description": "This endpoint return an authenticated url for a websocket connection.",
+        "operationId": "get_connect_realtime_connect_get",
+        "security": [
           {
-            "name": "end_time_utc",
-            "in": "query",
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time",
-              "title": "End time",
-              "description": "End time from when the data will be returned"
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_ConnectType_"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 401,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             },
-            "description": "End time from when the data will be returned"
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webhook": {
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Get Webhooks",
+        "description": "Returns a list of webhooks",
+        "operationId": "get_webhooks_webhook_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "enabled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Filter results to only enabled or disabled webhooks",
+              "description": "Return only webhooks with a matching value for enabled"
+            },
+            "description": "Return only webhooks with a matching value for enabled"
           },
           {
             "name": "page",
@@ -2354,6 +3266,20 @@
               "default": 0
             },
             "description": "Page number for pagination (zero-indexed)"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "responses": {
@@ -2362,7 +3288,371 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_List_Trip__"
+                  "$ref": "#/components/schemas/PaginatedSuccess_list_WebhookResponse__"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 400,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid JWT format",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 401,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Create Webhook",
+        "description": "Creates a new webhook.",
+        "operationId": "create_webhook_webhook_post",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/WebhookCreate"
+                  }
+                ],
+                "title": "Webhook",
+                "description": "Details for webhook"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_WebhookResponse_"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 400,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid JWT format",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 401,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/webhook/{webhook_id}": {
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Get Webhook",
+        "description": "Returns a webhooks",
+        "operationId": "get_webhook_webhook__webhook_id__get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Webhook id",
+              "description": "ID of the Webhook to be returned"
+            },
+            "description": "ID of the Webhook to be returned"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_WebhookResponse_"
                 }
               }
             }
@@ -2508,7 +3798,433 @@
                         },
                         "message": {
                           "type": "string",
-                          "example": "Device with ID <device_id> not found",
+                          "example": "Unknown webhook id <uuid>",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Delete Webhook",
+        "description": "Deletes a webhook.",
+        "operationId": "delete_webhook_webhook__webhook_id__delete",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Webhook id",
+              "description": "ID of the Webhook to be deleted"
+            },
+            "description": "ID of the Webhook to be deleted"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_WebhookResponse_"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 400,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid JWT format",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 401,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Unknown webhook id <uuid>",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Patch Webhook",
+        "description": "Modifies an existing webhook.\n\nNote that setting \"enabled\" to true will reset `error_count` to 0, and clear\nboth `last_error` and `last_error_at` fields.",
+        "operationId": "patch_webhook_webhook__webhook_id__patch",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Webhook id",
+              "description": "ID of the Webhook to be updated"
+            },
+            "description": "ID of the Webhook to be updated"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/WebhookUpdate"
+                  }
+                ],
+                "title": "Webhook",
+                "description": "Details for webhook"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_WebhookResponse_"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 400,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid JWT format",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 401,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Unknown webhook id <uuid>",
                           "title": "Error message"
                         }
                       }
@@ -2522,14 +4238,14 @@
         }
       }
     },
-    "/trip/{trip_id}": {
+    "/tag": {
       "get": {
         "tags": [
-          "Trips"
+          "Tags"
         ],
-        "summary": "Trip By Id",
-        "description": "This endpoint returns a Trip by ID.",
-        "operationId": "trip_by_id_trip__trip_id__get",
+        "summary": "Get Tags",
+        "description": "This endpoint returns all Tags on Devices for a Tenant.",
+        "operationId": "get_tags_tag_get",
         "security": [
           {
             "JWTBearer": []
@@ -2537,16 +4253,18 @@
         ],
         "parameters": [
           {
-            "name": "trip_id",
-            "in": "path",
-            "required": true,
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
             "schema": {
               "type": "string",
-              "format": "uuid",
-              "title": "Trip id",
-              "description": "Trip ID of the Trip to be returned"
-            },
-            "description": "Trip ID of the Trip to be returned"
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "responses": {
@@ -2555,162 +4273,20 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_Trip_"
+                  "$ref": "#/components/schemas/Success_list_str__"
                 }
               }
             }
           },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 400,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid JWT format",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 401,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Authentication header is missing, or token is invalid/expired.",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unauthorized"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 403,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "You do not have access to this resource",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Forbidden"
-          },
           "422": {
+            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 422,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Field required",
-                          "title": "Error message"
-                        },
-                        "loc": {
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "integer"
-                              }
-                            ]
-                          },
-                          "type": "array",
-                          "title": "Location"
-                        },
-                        "msg": {
-                          "type": "string",
-                          "title": "Message"
-                        },
-                        "type": {
-                          "type": "string",
-                          "title": "Error Type"
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
-            },
-            "description": "Unprocessable Entity"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 404,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Trip with ID <trip_id> not found",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not Found"
+            }
           }
         }
       }
@@ -2792,6 +4368,20 @@
               "default": 0
             },
             "description": "Page number for pagination (zero-indexed)"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "responses": {
@@ -2800,7 +4390,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_List_Event__"
+                  "$ref": "#/components/schemas/PaginatedSuccess_list_Event__"
                 }
               }
             }
@@ -2985,6 +4575,20 @@
               "description": "Event ID of the Event to be returned"
             },
             "description": "Event ID of the Event to be returned"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "responses": {
@@ -3151,1238 +4755,6 @@
             "description": "Not Found"
           }
         }
-      }
-    },
-    "/realtime/device": {
-      "post": {
-        "tags": [
-          "Real-time"
-        ],
-        "summary": "Get Positions",
-        "description": "This endpoint takes a list of device_ids and returns the most recent Position of each Device.",
-        "operationId": "get_positions_realtime_device_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RealTimeParameters"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success_list_Union_RealtimeTimeoutState__RealtimeValidState___"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "title": "Error code",
-                          "example": 400
-                        },
-                        "message": {
-                          "type": "string",
-                          "title": "Error message",
-                          "example": "Invalid JWT format"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "title": "Error code",
-                          "example": 401
-                        },
-                        "message": {
-                          "type": "string",
-                          "title": "Error message",
-                          "example": "Authentication header is missing, or token is invalid/expired."
-                        }
-                      },
-                      "type": "object"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "title": "Error code",
-                          "example": 403
-                        },
-                        "message": {
-                          "type": "string",
-                          "title": "Error message",
-                          "example": "You do not have access to this resource"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "title": "Error code",
-                          "example": 422
-                        },
-                        "message": {
-                          "type": "string",
-                          "title": "Error message",
-                          "example": "Field required"
-                        },
-                        "loc": {
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "integer"
-                              }
-                            ]
-                          },
-                          "type": "array",
-                          "title": "Location"
-                        },
-                        "msg": {
-                          "type": "string",
-                          "title": "Message"
-                        },
-                        "type": {
-                          "type": "string",
-                          "title": "Error Type"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "title": "Error code",
-                          "example": 404
-                        },
-                        "message": {
-                          "type": "string",
-                          "title": "Error message",
-                          "example": "Unknown device_ids <string>, ..."
-                        }
-                      },
-                      "type": "object"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ]
-      }
-    },
-    "/realtime/connect": {
-      "get": {
-        "tags": [
-          "Real-time"
-        ],
-        "summary": "Get Connect",
-        "description": "This endpoint return an authenticated url for a websocket connection.",
-        "operationId": "get_connect_realtime_connect_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success_ConnectType_"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "title": "Error code",
-                          "example": 401
-                        },
-                        "message": {
-                          "type": "string",
-                          "title": "Error message",
-                          "example": "Authentication header is missing, or token is invalid/expired."
-                        }
-                      },
-                      "type": "object"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "title": "Error code",
-                          "example": 403
-                        },
-                        "message": {
-                          "type": "string",
-                          "title": "Error message",
-                          "example": "You do not have access to this resource"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ]
-      }
-    },
-    "/webhook": {
-      "get": {
-        "tags": [
-          "Webhooks"
-        ],
-        "summary": "Get Webhooks",
-        "description": "Returns a list of webhooks",
-        "operationId": "get_webhooks_webhook_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "enabled",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "title": "Filter results to only enabled or disabled webhooks",
-              "description": "Return only webhooks with a matching value for enabled"
-            },
-            "description": "Return only webhooks with a matching value for enabled"
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 0,
-              "title": "Page number",
-              "description": "Page number for pagination (zero-indexed)",
-              "default": 0
-            },
-            "description": "Page number for pagination (zero-indexed)"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_list_WebhookResponseDeprecated__"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 400,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid JWT format",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 401,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Authentication header is missing, or token is invalid/expired.",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unauthorized"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 403,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "You do not have access to this resource",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Forbidden"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 422,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Field required",
-                          "title": "Error message"
-                        },
-                        "loc": {
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "integer"
-                              }
-                            ]
-                          },
-                          "type": "array",
-                          "title": "Location"
-                        },
-                        "msg": {
-                          "type": "string",
-                          "title": "Message"
-                        },
-                        "type": {
-                          "type": "string",
-                          "title": "Error Type"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unprocessable Entity"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Webhooks"
-        ],
-        "summary": "Create Webhook",
-        "description": "Creates a new webhook.",
-        "operationId": "create_webhook_webhook_post",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/WebhookDeprecated"
-                  }
-                ],
-                "title": "Webhook",
-                "description": "Details for webhook"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success_WebhookResponseDeprecated_"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 400,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid JWT format",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 401,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Authentication header is missing, or token is invalid/expired.",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unauthorized"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 403,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "You do not have access to this resource",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Forbidden"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 422,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Field required",
-                          "title": "Error message"
-                        },
-                        "loc": {
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "integer"
-                              }
-                            ]
-                          },
-                          "type": "array",
-                          "title": "Location"
-                        },
-                        "msg": {
-                          "type": "string",
-                          "title": "Message"
-                        },
-                        "type": {
-                          "type": "string",
-                          "title": "Error Type"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unprocessable Entity"
-          }
-        }
-      }
-    },
-    "/webhook/{webhook_id}": {
-      "get": {
-        "tags": [
-          "Webhooks"
-        ],
-        "summary": "Get Webhook",
-        "description": "Returns a webhooks",
-        "operationId": "get_webhook_webhook__webhook_id__get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "webhook_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Webhook id",
-              "description": "ID of the Webhook to be returned"
-            },
-            "description": "ID of the Webhook to be returned"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success_WebhookResponseDeprecated_"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 400,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid JWT format",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 401,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Authentication header is missing, or token is invalid/expired.",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unauthorized"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 403,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "You do not have access to this resource",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Forbidden"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 422,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Field required",
-                          "title": "Error message"
-                        },
-                        "loc": {
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "integer"
-                              }
-                            ]
-                          },
-                          "type": "array",
-                          "title": "Location"
-                        },
-                        "msg": {
-                          "type": "string",
-                          "title": "Message"
-                        },
-                        "type": {
-                          "type": "string",
-                          "title": "Error Type"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unprocessable Entity"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 404,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Unknown webhook id <uuid>",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not Found"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Webhooks"
-        ],
-        "summary": "Delete Webhook",
-        "description": "Deletes a webhook.",
-        "operationId": "delete_webhook_webhook__webhook_id__delete",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "webhook_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Webhook id",
-              "description": "ID of the Webhook to be deleted"
-            },
-            "description": "ID of the Webhook to be deleted"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success_WebhookResponseDeprecated_"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 400,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid JWT format",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 401,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Authentication header is missing, or token is invalid/expired.",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unauthorized"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 403,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "You do not have access to this resource",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Forbidden"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 422,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Field required",
-                          "title": "Error message"
-                        },
-                        "loc": {
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "integer"
-                              }
-                            ]
-                          },
-                          "type": "array",
-                          "title": "Location"
-                        },
-                        "msg": {
-                          "type": "string",
-                          "title": "Message"
-                        },
-                        "type": {
-                          "type": "string",
-                          "title": "Error Type"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unprocessable Entity"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 404,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Unknown webhook id <uuid>",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not Found"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Webhooks"
-        ],
-        "summary": "Patch Webhook",
-        "description": "Modifies an existing webhook.\n\nNote that setting \"enabled\" to true will reset `error_count` to 0, and clear\nboth `last_error` and `last_error_at` fields.",
-        "operationId": "patch_webhook_webhook__webhook_id__patch",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "webhook_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Webhook id",
-              "description": "ID of the Webhook to be updated"
-            },
-            "description": "ID of the Webhook to be updated"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/WebhookDeprecated"
-                  }
-                ],
-                "title": "Webhook",
-                "description": "Details for webhook"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success_WebhookResponseDeprecated_"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 400,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid JWT format",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 401,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Authentication header is missing, or token is invalid/expired.",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unauthorized"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 403,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "You do not have access to this resource",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Forbidden"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 422,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Field required",
-                          "title": "Error message"
-                        },
-                        "loc": {
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "integer"
-                              }
-                            ]
-                          },
-                          "type": "array",
-                          "title": "Location"
-                        },
-                        "msg": {
-                          "type": "string",
-                          "title": "Message"
-                        },
-                        "type": {
-                          "type": "string",
-                          "title": "Error Type"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unprocessable Entity"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 404,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Unknown webhook id <uuid>",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/tag": {
-      "get": {
-        "tags": [
-          "Tags"
-        ],
-        "summary": "Get Tags",
-        "description": "This endpoint returns all Tags on Devices for a Tenant.",
-        "operationId": "get_tags_tag_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success_list_str__"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ]
       }
     }
   },
@@ -4889,6 +5261,19 @@
         ],
         "title": "EventTypeEnum"
       },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
       "OsmRoadClassification": {
         "properties": {
           "road_name": {
@@ -4922,7 +5307,7 @@
         "type": "object",
         "title": "OsmRoadClassification"
       },
-      "PaginatedSuccess_List_Device__": {
+      "PaginatedSuccess_list_Device__": {
         "properties": {
           "data": {
             "items": {
@@ -4941,9 +5326,9 @@
           "data",
           "links"
         ],
-        "title": "PaginatedSuccess[List[Device]]"
+        "title": "PaginatedSuccess[list[Device]]"
       },
-      "PaginatedSuccess_List_Event__": {
+      "PaginatedSuccess_list_Event__": {
         "properties": {
           "data": {
             "items": {
@@ -4962,9 +5347,9 @@
           "data",
           "links"
         ],
-        "title": "PaginatedSuccess[List[Event]]"
+        "title": "PaginatedSuccess[list[Event]]"
       },
-      "PaginatedSuccess_List_PointWithFeatures__": {
+      "PaginatedSuccess_list_PointWithFeatures__": {
         "properties": {
           "data": {
             "items": {
@@ -4983,9 +5368,9 @@
           "data",
           "links"
         ],
-        "title": "PaginatedSuccess[List[PointWithFeatures]]"
+        "title": "PaginatedSuccess[list[PointWithFeatures]]"
       },
-      "PaginatedSuccess_List_Trip__": {
+      "PaginatedSuccess_list_Trip__": {
         "properties": {
           "data": {
             "items": {
@@ -5004,13 +5389,13 @@
           "data",
           "links"
         ],
-        "title": "PaginatedSuccess[List[Trip]]"
+        "title": "PaginatedSuccess[list[Trip]]"
       },
-      "PaginatedSuccess_list_WebhookResponseDeprecated__": {
+      "PaginatedSuccess_list_WebhookResponse__": {
         "properties": {
           "data": {
             "items": {
-              "$ref": "#/components/schemas/WebhookResponseDeprecated"
+              "$ref": "#/components/schemas/WebhookResponse"
             },
             "type": "array",
             "title": "Data",
@@ -5025,7 +5410,7 @@
           "data",
           "links"
         ],
-        "title": "PaginatedSuccess[list[WebhookResponseDeprecated]]"
+        "title": "PaginatedSuccess[list[WebhookResponse]]"
       },
       "PaginationLinks": {
         "properties": {
@@ -5302,7 +5687,6 @@
             ]
           }
         },
-        "additionalProperties": false,
         "type": "object",
         "title": "RealTimeParameters"
       },
@@ -5544,23 +5928,6 @@
         ],
         "title": "Success[Event]"
       },
-      "Success_List_ConnectionNoCredentials__": {
-        "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/ConnectionNoCredentials"
-            },
-            "type": "array",
-            "title": "Data",
-            "description": "Successful response payload"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "Success[List[ConnectionNoCredentials]]"
-      },
       "Success_RefreshResult_": {
         "properties": {
           "data": {
@@ -5595,12 +5962,12 @@
         ],
         "title": "Success[Trip]"
       },
-      "Success_WebhookResponseDeprecated_": {
+      "Success_WebhookResponse_": {
         "properties": {
           "data": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/WebhookResponseDeprecated"
+                "$ref": "#/components/schemas/WebhookResponse"
               }
             ],
             "description": "Successful response payload"
@@ -5610,7 +5977,24 @@
         "required": [
           "data"
         ],
-        "title": "Success[WebhookResponseDeprecated]"
+        "title": "Success[WebhookResponse]"
+      },
+      "Success_list_ConnectionNoCredentials__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ConnectionNoCredentials"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[list[ConnectionNoCredentials]]"
       },
       "Success_list_Union_RealtimeTimeoutState__RealtimeValidState___": {
         "properties": {
@@ -5782,27 +6166,63 @@
         ],
         "title": "UsernamePassword"
       },
-      "WebhookDeprecated": {
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WebhookCreate": {
         "properties": {
           "url": {
             "type": "string",
             "title": "Url"
           },
-          "filter": {
-            "$ref": "#/components/schemas/WebhookFilterDeprecated"
-          },
           "enabled": {
             "type": "boolean",
             "title": "Enabled"
+          },
+          "filter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookFilterDeprecated"
+              }
+            ]
           }
         },
         "type": "object",
         "required": [
           "url",
-          "filter",
           "enabled"
         ],
-        "title": "WebhookDeprecated"
+        "title": "WebhookCreate"
       },
       "WebhookFilterDeprecated": {
         "properties": {
@@ -5835,23 +6255,20 @@
         "type": "object",
         "title": "WebhookFilterDeprecated"
       },
-      "WebhookResponseDeprecated": {
+      "WebhookResponse": {
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id"
-          },
           "url": {
             "type": "string",
             "title": "Url"
           },
-          "filter": {
-            "$ref": "#/components/schemas/WebhookFilterDeprecated"
-          },
           "enabled": {
             "type": "boolean",
             "title": "Enabled"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id"
           },
           "error_count": {
             "type": "integer",
@@ -5889,21 +6306,62 @@
             "type": "string",
             "format": "date-time",
             "title": "Updated At"
+          },
+          "filter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookFilterDeprecated"
+              }
+            ]
           }
         },
         "type": "object",
         "required": [
-          "id",
           "url",
-          "filter",
           "enabled",
+          "id",
           "error_count",
           "last_error",
           "last_error_at",
           "created_at",
           "updated_at"
         ],
-        "title": "WebhookResponseDeprecated"
+        "title": "WebhookResponse"
+      },
+      "WebhookUpdate": {
+        "properties": {
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "enabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enabled"
+          },
+          "filter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebhookFilterDeprecated"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "WebhookUpdate"
       }
     },
     "securitySchemes": {
