@@ -5579,7 +5579,8 @@
           "fleetsu",
           "digital_matter",
           "netstar",
-          "webfleet"
+          "webfleet",
+          "scania"
         ],
         "title": "ProviderEnum"
       },
