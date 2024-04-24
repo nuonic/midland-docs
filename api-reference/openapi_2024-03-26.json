@@ -497,16 +497,12 @@
         "summary": "Create Connection",
         "description": "This endpoint takes attributes for a new Connection and a tenant_id and creates and returns a new Connection.\n\nThe allowed values for integration_name can be found under ProviderEnum.",
         "operationId": "create_connection_connection_post",
-        "parameters": [
+        "security": [
           {
-            "name": "tenant_id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Tenant Id"
-            }
-          },
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
           {
             "name": "x-api-version",
             "in": "header",
