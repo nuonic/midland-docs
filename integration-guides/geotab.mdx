@@ -1,0 +1,39 @@
+---
+title: Geotab
+---
+
+To connect your Geotab telematics data with PathStack, you will need the following access credentials:
+* Username
+* Password
+
+These credentials are the same ones used to log in to the MyGeotab web portal. We recommend creating a new user with read-only access for the PathStack connection. To do this, follow these step:
+
+<Steps>
+  <Step title = "Create a Geotab Service Account for PathStack">
+    Log in to MyGeotab account and navigate to (1) Administration > (2) Users, and click the (3) Add button.
+    <img src="/images/integration-guides/geo-4.png" />
+    <Note>Geotab have an online guide for creating new users [here](https://knowledge.geotab.com/portal/app/portlets/results/viewsolution.jsp?solutionid=221222143538200)</Note>    
+  </Step>
+  <Step title="Create a new user for PathStack">
+    On the new user page, complete the following:
+    <Steps>
+      <Step title = "User (Email) - Email used as PathStack Username" />
+      <Step title = "Password - Create a strong password for one-time user" />
+      <Step title = "Force password change on next login - Toggle to Yes" />
+      <Step title = "Security Clearence - Choose View Only" />
+      <Step title = "Data Access - Select Everything" />
+      <Step title = "Save" />
+    </Steps>
+    <img src="/images/integration-guides/geo-1.png" />
+    User (Email) is the username that will be used in PathStack as the credentials Username.
+    <img src="/images/integration-guides/geo-2.png" />
+  </Step>
+  <Step title="Retrieve Database name">
+    Once logged into your MyGeotab account, you will be able to retrieve your database name from the search bar at the 
+    top of your page. The database name sits in the search bar as `my.geotab.com/DatabaseName/#dashboard`. For example, 
+    in the image below the database name would be Nuonic. 
+    <img src="/images/integration-guides/geo-3.png" />
+  </Step>
+</Steps>
+
+<Tip>For further assistance configuring your Geotab account, please visit the [Geotab support centre](https://support.geotab.com/)</Tip>

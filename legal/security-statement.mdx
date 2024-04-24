@@ -1,0 +1,36 @@
+---
+title: Security Statement
+---
+
+### 1. GENERAL
+
+Nuonic Pty Ltd (Nuonic) uses a range of best practice security measures in the design and management of our infrastructure including encryption of all data at rest using AES-256 standards, SSL on all communications, all assets hosted in private subnets and customised security configurations for all infrastructure assets. We also use live monitoring and intrusion detection tools and have a dedicated IT operations & security team providing ongoing support and advice.
+
+### 2. DATA STORAGE
+
+Orderview stores customer data and hosts its solution infrastructure in Australian data centres managed by Amazon Web Services (AWS). AWS is ISO 27001 certified and has Service Organization Control (SOC) 1, SOC 2 and SOC 3 Security, Availability, and Confidentiality Reports available.
+
+### 3. DATA ENCRYPTION
+
+All customer data is encrypted at rest and in motion using AES-256 block cipher encryption for data and keys, implemented using AWS storage technologies and HTTPS. Specifically, AWS’ Key Management Service (KMS) is used to generate and hold keys used to encrypt stored data. Keys are rotated at least every 12 months.
+
+All software holding client or company data must utilise the HTTPS protocol for data transmission. Where practical, encryption before transit may also be applied.
+
+### 4. PENETRATION TESTING
+
+Nuonic engages third party assessors to perform external vulnerability scanning / penetration testing of our web applications, APIs and associated infrastructure. External security companies with the requisite security credentials and experience are engaged to perform the testing, at a minimum annually. Resulting recommendations are prioritised and implemented as appropriate.
+
+### 5. INFRASTRUCTURE SECURITY
+
+All Nuonic applications infrastructure is implemented using best practice DevOps and automation techniques. Infrastructure provision is automated wherever possible and all changes to infrastructure are conducted through a "infrastructure as code" change, pull request and peer review process.
+
+The PathStack production environment in AWS is segregated from non-production environments. Administrative access to Nuonic AWS environments is IP whitelisted to restrict access from Nuonic office networks only, requires strong passwords and multi-factor authentication.
+
+PathStack utilises native AWS security solutions in the production and pre-production environments, including AWS Trusted Advisor, AWS Guard Duty and AWS Shield. To prevent malware running, servers are configuration controlled and do not include any MS Office components. In addition, the application design restricts write permissions to local disk, and all file storage is in a non-active off-server storage location (AWS S3).
+
+### 6. PHYSICAL SECURITY
+Physical access to Nuonic AWS environments is governed by AWS according to their policies which are ISO 27001 compliant. Physical access is not available to Nuonic staff or customers.
+
+### 7. CONTACT
+
+For more information about Nuonic’s IT Security practices please contact us at info@nuonic.com.au or 1300 822 370.

@@ -516,6 +516,20 @@
               "default": "2024-03-26",
               "title": "X-Api-Version"
             }
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
           }
         ],
         "requestBody": {
@@ -5579,7 +5593,8 @@
           "fleetsu",
           "digital_matter",
           "netstar",
-          "webfleet"
+          "webfleet",
+          "scania"
         ],
         "title": "ProviderEnum"
       },

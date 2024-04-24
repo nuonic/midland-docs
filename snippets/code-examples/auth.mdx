@@ -12,8 +12,8 @@ headers = {"Content-Type": "application/json"}
 
 response = requests.request("POST", url, json=payload, headers=headers)
 
-access_token = response.json()['AuthenticationResult']['AccessToken']
-refresh_token = response.json()['AuthenticationResult']['RefreshToken']
+access_token = response.json()['data']['access_token']
+refresh_token = response.json()['data']['refresh_token']
 ```
 
 ```javascript JavaScript
@@ -26,8 +26,8 @@ const options = {
 fetch('https://api.pathstack.io/token', options)
   .then(response => response.json())
   .then(response => {
-    const access_token = response['AuthenticationResult']['AccessToken'];
-    const refresh_token = response['AuthenticationResult']['RefreshToken'];
+    const access_token = response['data']['access_token'];
+    const refresh_token = response['data']['refresh_token'];
   })
   .catch(err => console.error(err));
 ```
@@ -56,8 +56,8 @@ public class TokenRequest {
         try (Scanner scanner = new Scanner(connection.getInputStream())) {
             String responseBody = scanner.useDelimiter("\\A").next();
             JSONObject jsonResponse = new JSONObject(responseBody);
-            String access_token = jsonResponse.getJSONObject("AuthenticationResult").getString("AccessToken");
-            String refresh_token = jsonResponse.getJSONObject("AuthenticationResult").getString("RefreshToken");
+            String access_token = jsonResponse.getJSONObject("data").getString("access_token");
+            String refresh_token = jsonResponse.getJSONObject("data").getString("refresh_token");
         }
 
         connection.disconnect();
@@ -96,8 +96,8 @@ class TokenRequest
         {
             string responseBody = reader.ReadToEnd();
             JObject jsonResponse = JObject.Parse(responseBody);
-            string access_token = jsonResponse["AuthenticationResult"]["AccessToken"].ToString();
-            string refresh_token = jsonResponse["AuthenticationResult"]["RefreshToken"].ToString();
+            string access_token = jsonResponse["data"]["access_token"].ToString();
+            string refresh_token = jsonResponse["data"]["refresh_token"].ToString();
         }
     }
 }
