@@ -95,80 +95,6 @@
       ]
     },
     {
-      "group": "Endpoints",
-      "pages": [
-        {
-          "group": "Auth",
-          "pages": [
-            "api-reference/auth/login",
-            "api-reference/auth/refresh"
-          ]
-        },
-        {
-          "group": "Connections",
-          "pages": [
-            "api-reference/connections/connections",
-            "api-reference/connections/create-connection",
-            "api-reference/connections/connection-by-id"
-          ]
-        },
-        {
-          "group": "Devices",
-          "pages": [
-            "api-reference/devices/devices",
-            "api-reference/devices/create-device",
-            "api-reference/devices/device-by-id",
-            "api-reference/devices/delete-device-by-id",
-            "api-reference/devices/update-device-by-id"
-          ]
-        },
-        {
-          "group": "Trips",
-          "pages": [
-            "api-reference/trips/trips",
-            "api-reference/trips/trip-by-id"
-          ]
-        },
-        {
-          "group": "Positions",
-          "pages": [
-            "api-reference/positions/positions",
-            "api-reference/positions/positions-by-trip-id"
-          ]
-        },
-        {
-          "group": "Real-time",
-          "pages": [
-            "api-reference/real-time/get-realtime-positions",
-            "api-reference/real-time/get-connect"
-          ]
-        },
-        {
-          "group": "Webhooks",
-          "pages": [
-            "api-reference/webhooks/get-webhooks",
-            "api-reference/webhooks/create-webhook",
-            "api-reference/webhooks/get-webhook",
-            "api-reference/webhooks/delete-webhook",
-            "api-reference/webhooks/patch-webhook"
-          ]
-        },
-        {
-          "group": "Tags",
-          "pages": [
-            "api-reference/tags/get-tags"
-          ]
-        },
-        {
-          "group": "Events",
-          "pages": [
-            "api-reference/events/events",
-            "api-reference/events/event-by-id"
-          ]
-        }
-      ]
-    },
-    {
       "group": "Legal",
       "pages": [
         "legal/data-provider-terms",
@@ -176,12 +102,185 @@
         "legal/privacy-statement",
         "legal/security-statement"
       ]
+    },
+    {
+      "group": "Endpoints",
+      "pages": [
+        {
+          "group": "Auth",
+          "pages": [
+            "api-reference/2024-03-26/auth/login",
+            "api-reference/2024-03-26/auth/refresh"
+          ],
+          "version": "2024-03-26"
+        },
+        {
+          "group": "Connections",
+          "pages": [
+            "api-reference/2024-03-26/connections/connections",
+            "api-reference/2024-03-26/connections/create-connection",
+            "api-reference/2024-03-26/connections/connection-by-id"
+          ],
+          "version": "2024-03-26"
+        },
+        {
+          "group": "Devices",
+          "pages": [
+            "api-reference/2024-03-26/devices/devices",
+            "api-reference/2024-03-26/devices/create-device",
+            "api-reference/2024-03-26/devices/device-by-id",
+            "api-reference/2024-03-26/devices/delete-device-by-id",
+            "api-reference/2024-03-26/devices/update-device-by-id"
+          ],
+          "version": "2024-03-26"
+        },
+        {
+          "group": "Trips",
+          "pages": [
+            "api-reference/2024-03-26/trips/trips",
+            "api-reference/2024-03-26/trips/trip-by-id"
+          ],
+          "version": "2024-03-26"
+        },
+        {
+          "group": "Positions",
+          "pages": [
+            "api-reference/2024-03-26/positions/positions",
+            "api-reference/2024-03-26/positions/positions-by-trip-id"
+          ],
+          "version": "2024-03-26"
+        },
+        {
+          "group": "Real-time",
+          "pages": [
+            "api-reference/2024-03-26/real-time/get-realtime-positions",
+            "api-reference/2024-03-26/real-time/get-connect"
+          ],
+          "version": "2024-03-26"
+        },
+        {
+          "group": "Webhooks",
+          "pages": [
+            "api-reference/2024-03-26/webhooks/get-webhooks",
+            "api-reference/2024-03-26/webhooks/create-webhook",
+            "api-reference/2024-03-26/webhooks/get-webhook",
+            "api-reference/2024-03-26/webhooks/delete-webhook",
+            "api-reference/2024-03-26/webhooks/patch-webhook"
+          ],
+          "version": "2024-03-26"
+        },
+        {
+          "group": "Tags",
+          "pages": [
+            "api-reference/2024-03-26/tags/get-tags"
+          ],
+          "version": "2024-03-26"
+        },
+        {
+          "group": "Events",
+          "pages": [
+            "api-reference/2024-03-26/events/events",
+            "api-reference/2024-03-26/events/event-by-id"
+          ],
+          "version": "2024-03-26"
+        }
+      ],
+      "version": "2024-03-26"
+    },
+    {
+      "group": "Endpoints",
+      "pages": [
+        {
+          "group": "Auth",
+          "pages": [
+            "api-reference/2024-03-27/auth/login",
+            "api-reference/2024-03-27/auth/refresh"
+          ],
+          "version": "2024-03-27"
+        },
+        {
+          "group": "Connections",
+          "pages": [
+            "api-reference/2024-03-27/connections/connections",
+            "api-reference/2024-03-27/connections/create-connection",
+            "api-reference/2024-03-27/connections/connection-by-id"
+          ],
+          "version": "2024-03-27"
+        },
+        {
+          "group": "Devices",
+          "pages": [
+            "api-reference/2024-03-27/devices/devices",
+            "api-reference/2024-03-27/devices/create-device",
+            "api-reference/2024-03-27/devices/device-by-id",
+            "api-reference/2024-03-27/devices/delete-device-by-id",
+            "api-reference/2024-03-27/devices/update-device-by-id"
+          ],
+          "version": "2024-03-27"
+        },
+        {
+          "group": "Trips",
+          "pages": [
+            "api-reference/2024-03-27/trips/trips",
+            "api-reference/2024-03-27/trips/trip-by-id"
+          ],
+          "version": "2024-03-27"
+        },
+        {
+          "group": "Positions",
+          "pages": [
+            "api-reference/2024-03-27/positions/positions",
+            "api-reference/2024-03-27/positions/positions-by-trip-id"
+          ],
+          "version": "2024-03-27"
+        },
+        {
+          "group": "Real-time",
+          "pages": [
+            "api-reference/2024-03-27/real-time/get-realtime-positions",
+            "api-reference/2024-03-27/real-time/get-connect"
+          ],
+          "version": "2024-03-27"
+        },
+        {
+          "group": "Webhooks",
+          "pages": [
+            "api-reference/2024-03-27/webhooks/get-webhooks",
+            "api-reference/2024-03-27/webhooks/create-webhook",
+            "api-reference/2024-03-27/webhooks/get-webhook",
+            "api-reference/2024-03-27/webhooks/delete-webhook",
+            "api-reference/2024-03-27/webhooks/patch-webhook"
+          ],
+          "version": "2024-03-27"
+        },
+        {
+          "group": "Tags",
+          "pages": [
+            "api-reference/2024-03-27/tags/get-tags"
+          ],
+          "version": "2024-03-27"
+        },
+        {
+          "group": "Events",
+          "pages": [
+            "api-reference/2024-03-27/events/events",
+            "api-reference/2024-03-27/events/event-by-id"
+          ],
+          "version": "2024-03-27"
+        }
+      ],
+      "version": "2024-03-27"
     }
   ],
   "footerSocials": {
     "linkedin": "https://au.linkedin.com/company/nuonic"
   },
   "openapi": [
-    "/api-reference/openapi.yml"
+    "api-reference/openapi_2024-03-27.json",
+    "api-reference/openapi_2024-03-26.json"
+  ],
+  "versions": [
+    "2024-03-27",
+    "2024-03-26"
   ]
 }
