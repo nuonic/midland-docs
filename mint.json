@@ -77,7 +77,10 @@
             "integration-guides/volvo",
             "integration-guides/webfleet",
             "integration-guides/scania",
-            "integration-guides/toyota-halo"
+            "integration-guides/toyota-halo",
+            "integration-guides/geoforce",
+            "integration-guides/bestrane",
+            "integration-guides/intellifleet"
           ]
         }
       ]
@@ -101,7 +104,8 @@
         "legal/data-provider-terms",
         "legal/data-consumer-terms",
         "legal/privacy-statement",
-        "legal/security-statement"
+        "legal/security-statement",
+        "legal/contact-information"
       ]
     },
     {
