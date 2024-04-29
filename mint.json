@@ -45,6 +45,7 @@
       "group": "Get Started",
       "pages": [
         "introduction",
+        "common-use-cases",
         "quickstart"
       ]
     },
