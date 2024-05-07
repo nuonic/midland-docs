@@ -5166,8 +5166,10 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Authorization token provided by tenancy owner.",
               "title": "Code"
-            }
+            },
+            "description": "Authorization token provided by tenancy owner."
           },
           {
             "name": "x-api-version",
