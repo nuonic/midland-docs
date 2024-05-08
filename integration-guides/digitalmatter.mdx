@@ -2,7 +2,17 @@
 title: Digital Matter
 ---
 
-PathStack's integration with Digital Matter devices uses the real-time TCP connector which must be configured to send binary-encoded data to our server using the Telematics Guru platform. You must also provide us with the serial number of each device. Please contact us on 1300 822 370 or at support@nuonic.com.au to obtain the server address and initiate a Digital Matter integration.
+PathStack supports integration with Digital Matter devices over HTTP and TCP.
 
-For technical details in relation to the Telematics Guru configuration, please read Digital Matter's [connector guide](https://support.digitalmatter.com/integration/create-a-connector-set-up-an-integration).
-<img src="/images/integration-guides/dm-1.png"/>
+For HTTP, the connector must be configured to send JSON data to our server using the Telematics Guru platform. Set the
+URL to `https://dm.pathstack.io/upload/<your-connection-id>`, replacing with the connection ID of the Digital Matter
+connection you have created. You will not need to create devices as they will be automatically created for you.
+
+For TCP, the connector must be configured to send binary-encoded data to our server using the Telematics Guru
+platform. You must also provide us with the serial number of each device. Please contact us on 1300 822 370 or at
+support@nuonic.com.au to obtain the server address and initiate a Digital Matter integration.
+
+For technical details in relation to the Telematics Guru configuration, please read Digital Matter's
+[connector guide](https://support.digitalmatter.com/integration/create-a-connector-set-up-an-integration).
+
+<img src="/images/integration-guides/dm-1.png" />
