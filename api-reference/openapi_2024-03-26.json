@@ -6179,7 +6179,8 @@
           "digital_matter",
           "netstar",
           "webfleet",
-          "scania"
+          "scania",
+          "linxio"
         ],
         "title": "ProviderEnum"
       },
