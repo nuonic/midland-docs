@@ -188,6 +188,15 @@
             "api-reference/2024-03-26/events/event-by-id"
           ],
           "version": "2024-03-26"
+        },
+        {
+          "group": "Tenants",
+          "pages": [
+            "api-reference/2024-03-26/tenants/tenant-by-id",
+            "api-reference/2024-03-26/tenants/update-tenant-by-id",
+            "api-reference/2024-03-26/tenants/tenant-configuration"
+          ],
+          "version": "2024-03-26"
         }
       ],
       "version": "2024-03-26"
@@ -270,6 +279,15 @@
           "pages": [
             "api-reference/2024-03-27/events/events",
             "api-reference/2024-03-27/events/event-by-id"
+          ],
+          "version": "2024-03-27"
+        },
+        {
+          "group": "Tenants",
+          "pages": [
+            "api-reference/2024-03-27/tenants/tenant-by-id",
+            "api-reference/2024-03-27/tenants/update-tenant-by-id",
+            "api-reference/2024-03-27/tenants/tenant-configuration"
           ],
           "version": "2024-03-27"
         }
