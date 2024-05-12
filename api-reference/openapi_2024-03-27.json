@@ -1140,6 +1140,18 @@
             "description": "Name of the telematics provider"
           },
           {
+            "name": "connection_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Data Provider",
+              "description": "Connection ID of data provider"
+            },
+            "description": "Connection ID of data provider"
+          },
+          {
             "name": "tags",
             "in": "query",
             "required": false,
