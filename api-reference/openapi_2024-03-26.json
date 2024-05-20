@@ -6295,6 +6295,7 @@
             ]
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "title": "RealTimeParameters"
       },
