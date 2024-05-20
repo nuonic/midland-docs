@@ -2,8 +2,47 @@
 title: Supported providers
 ---
 
-PathStack supports many telematics providers, see the list below to check which providers we integrate with. For integration
-guides, check out the [Telematics Provider Guides](/integration-guides) page.
+import { ProviderTable, ProviderTableRow } from '/snippets/components/providerTable.mdx';
+
+The table below lists the asset tracking providers PathStack supports and what data types are availble. For help connecting a specific provider, check out the [integration guides](/integration-guides) page.
+
+
+<ProviderTable>
+  <ProviderTableRow 
+    img={'/images/telematics/brand-logo-verizon.png'} 
+    name={'Verizon Connect REVEAL'}
+    realTime={'available'}
+    assetRegister={'available'}
+    positions={'available'}
+    trips={'available'}
+    tripMilestones={'planned'}
+    operatingEvents={'planned'}
+    safetyEvents={'planned'}
+  />
+  <ProviderTableRow 
+    img={'/images/telematics/brand-logo-navman.png'} 
+    name={'Teletrac Navman T360'}
+    realTime={'available'}
+    assetRegister={'available'}
+    positions={'available'}
+    trips={'available'}
+    tripMilestones={'planned'}
+    operatingEvents={'planned'}
+    safetyEvents={'planned'}
+  />  
+  <ProviderTableRow 
+    img={'/images/telematics/brand-logo-volvo.png'} 
+    name={'Volvo Dynafleet'}
+    realTime={'available'}
+    assetRegister={'available'}
+    positions={'available'}
+    trips={'available'}
+    tripMilestones={'planned'}
+    operatingEvents={'planned'}
+    safetyEvents={'unavailable'}
+  />    
+</ProviderTable>
+
 
 <CardGroup cols={2}>
   <Card title="Verizon Connect" href="https://www.verizonconnect.com/">

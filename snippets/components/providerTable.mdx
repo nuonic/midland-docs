@@ -1,0 +1,63 @@
+export const ProviderTable = ({ children }) => (
+    <table
+        style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            padding: '0 0 0 0',
+            alignItems: 'center',
+        }}
+    >
+        <tr style={{margin: 0, paddingBottom: '1rem', minHeight: 0, borderBottom: '1px solid #000'}}>
+            <th style={{minWidth: '8rem'}}>Provider</th>
+            <th style={{minWidth: '12rem'}}></th>
+            <th style={{minWidth: '10rem'}}>Real-Time Status</th>
+            <th style={{minWidth: '10rem'}}>Asset Register</th>
+            <th style={{minWidth: '10rem'}}>Postitions</th>
+            <th style={{minWidth: '10rem'}}>Trips</th>
+            <th style={{minWidth: '10rem'}}>Trip Milestones</th>
+            <th style={{minWidth: '10rem'}}>Operating Events</th>
+            <th style={{minWidth: '10rem'}}>Safety Events</th>
+        </tr>
+        {children}
+    </table>
+);
+
+export const ProviderTableRow = ({ img, name, realTime, assetRegister, positions, trips, tripMilestones, operatingEvents, safetyEvents }) => {
+    return (
+        <tr 
+            style={{
+                margin: 0, 
+                padding: 0, 
+                cursor: 'pointer'
+            }}
+            >
+            <td style={{margin: 0, minWidth: '8rem'}}>
+                <img src={img} width="100" style={{margin: 0}}  style={{cursor: 'pointer'}} />
+            </td>
+            <td style={{margin: 0, minWidth: '12rem'}}>
+                {name}
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${realTime}.png`} width="80" style={{cursor: 'pointer'}} />
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${assetRegister}.png`} width="80" style={{cursor: 'pointer'}} />
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${positions}.png`} width="80" style={{cursor: 'pointer'}} />
+            </td>            
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${trips}.png`} width="80" style={{cursor: 'pointer'}} />
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${tripMilestones}.png`} width="80" style={{cursor: 'pointer'}} />
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${operatingEvents}.png`} width="80" style={{cursor: 'pointer'}} />
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${safetyEvents}.png`} width="80" style={{cursor: 'pointer'}} />
+            </td>            
+        </tr>
+    );
+};
