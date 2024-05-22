@@ -57,8 +57,7 @@
         "content/get-connected",
         "content/authentication",
         "content/request-data",
-        "content/pagination",
-        "content/events"        
+        "content/pagination"
       ]
     },
     {

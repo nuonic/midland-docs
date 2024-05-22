@@ -13,10 +13,10 @@ for security to ensure no one else can access your data.
 To get an access token, you need to make a call to the `/token` endpoint and pass your username and password.
 
 <Note>
-  Access tokens expire 30 minutes after they are generated. Once an access token has expired you will no longer be able
-  to use it and any API calls you try to make will return a **401** error response with a message that the token has
-  expired. You will then either have to generate a new token with the `/token` endpoint, or you can use the **Refresh
-  Token** from the original `/token` call to get a new **Access Token**.
+  Access tokens expire 60 minutes after they are generated. Once an access token has expired you will no longer be able
+  to use it and any API calls you try to make will return a **401: JWT has expired** error response with a message that
+  the token has expired. You will then either have to generate a new token with the `/token` endpoint, or you can use
+  the **Refresh Token** from the original `/token` call to get a new **Access Token**.
 </Note>
 
 <AuthSnippet />
@@ -39,7 +39,6 @@ Now that you have an **Access Token**, you can begin [making requests to the Pat
 
 ## Using a refresh token
 
-Access tokens only last for **1 hour**, and after they expire all your calls will return a **401: JWT has expired** response.
 To get a new token, you can either authenticate again with your username and password, or you call the `/refresh` endpoint.
 The latter option is often preferable since you will not need to store your username and password for later use.
 

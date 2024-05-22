@@ -2933,7 +2933,7 @@
           "Real-time"
         ],
         "summary": "Get Realtime Positions",
-        "description": "This endpoint takes a list of device_ids and returns the most recent Position of each Device.",
+        "description": "This endpoint returns the most recent Position of each Device. You can optionally pass in filter_parameters to\nfilter the devices you will receive.",
         "operationId": "get_realtime_positions_realtime_device_post",
         "security": [
           {
@@ -2972,7 +2972,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_list_Union_RealtimeTimeoutState__RealtimeValidState___"
+                  "$ref": "#/components/schemas/Success_list_Union_RealtimeValidState__RealtimeTimeoutState___"
                 }
               }
             }
@@ -3619,7 +3619,7 @@
           "Webhooks"
         ],
         "summary": "Get Webhook",
-        "description": "Returns a webhooks",
+        "description": "Returns a webhook",
         "operationId": "get_webhook_webhook__webhook_id__get",
         "security": [
           {
@@ -6295,6 +6295,7 @@
             ]
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "title": "RealTimeParameters"
       },
@@ -6637,16 +6638,16 @@
         ],
         "title": "Success[list[ConnectionNoCredentials]]"
       },
-      "Success_list_Union_RealtimeTimeoutState__RealtimeValidState___": {
+      "Success_list_Union_RealtimeValidState__RealtimeTimeoutState___": {
         "properties": {
           "data": {
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/RealtimeTimeoutState"
+                  "$ref": "#/components/schemas/RealtimeValidState"
                 },
                 {
-                  "$ref": "#/components/schemas/RealtimeValidState"
+                  "$ref": "#/components/schemas/RealtimeTimeoutState"
                 }
               ]
             },
@@ -6659,7 +6660,7 @@
         "required": [
           "data"
         ],
-        "title": "Success[list[Union[RealtimeTimeoutState, RealtimeValidState]]]"
+        "title": "Success[list[Union[RealtimeValidState, RealtimeTimeoutState]]]"
       },
       "Success_list_str__": {
         "properties": {
