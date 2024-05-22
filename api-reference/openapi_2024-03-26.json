@@ -315,11 +315,6 @@
         "summary": "Connections",
         "description": "This endpoint returns all connections within your tenancy.\n\nYou can specify the telematics_provider, and it will return only Connections with that provider.",
         "operationId": "connections_connection_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "telematics_provider",
@@ -497,11 +492,6 @@
         "summary": "Create Connection",
         "description": "This endpoint takes attributes for a new Connection and a tenant_id and creates and returns a new Connection.\n\nThe allowed values for integration_name can be found under ProviderEnum.",
         "operationId": "create_connection_connection_post",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "x-api-version",
@@ -676,11 +666,6 @@
         "summary": "Connection By Id",
         "description": "This endpoint returns a Connection by ID.",
         "operationId": "connection_by_id_connection__connection_id__get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "connection_id",
@@ -883,11 +868,6 @@
         "summary": "Create Device",
         "description": "This endpoint creates a Device.\n\nNot all providers are supported, currently only Digital Matter is supported.\n\nThe created Device is returned in the response.",
         "operationId": "create_device_device_post",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "x-api-version",
@@ -1118,11 +1098,6 @@
         "summary": "Devices",
         "description": "This endpoint returns all Devices that have been created by Connections for your Tenancy.\n\nYou can specify the telematics_provider, and it will return only Devices with that provider.\n\nYou can specify the tags, and it will return only Devices that have all the tags specified.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
         "operationId": "devices_device_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "telematics_provider",
@@ -1343,11 +1318,6 @@
         "summary": "Device By Id",
         "description": "This endpoint returns a Device by ID.",
         "operationId": "device_by_id_device__device_id__get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "device_id",
@@ -1548,11 +1518,6 @@
         "summary": "Update Device By Id",
         "description": "This endpoint update a Device.\n\nYou can specify the attributes which you want to be updated and their new values.\n\nThe updated Device is returned in the response.",
         "operationId": "update_device_by_id_device__device_id__patch",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "device_id",
@@ -1763,11 +1728,6 @@
         "summary": "Delete Device By Id",
         "description": "This endpoint deletes a Device.\n\nNot all providers are supported, currently only Digital Matter is supported.\n\nThe deleted Device is returned in the response.",
         "operationId": "delete_device_by_id_device__device_id__delete",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "device_id",
@@ -1996,11 +1956,6 @@
         "summary": "Trips",
         "description": "This endpoint returns the Trips for a Device.\n\nYou can optionally specify parameters for start_time_utc and end_time_utc to filter the results.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
         "operationId": "trips_device__device_id__trip_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "device_id",
@@ -2240,11 +2195,6 @@
         "summary": "Trip By Id",
         "description": "This endpoint returns a Trip by ID.",
         "operationId": "trip_by_id_trip__trip_id__get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "trip_id",
@@ -2447,11 +2397,6 @@
         "summary": "Positions",
         "description": "This endpoint returns the Positions for a Device.\n\nYou can optionally specify parameters for start_time_utc and end_time_utc to filter the results.\n\nYou can enable OSM road classification by passing through include_osm_road_classification=true.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
         "operationId": "positions_device__device_id__position_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "device_id",
@@ -2703,11 +2648,6 @@
         "summary": "Positions By Trip Id",
         "description": "This endpoint returns the Positions for a Trip.\n\nYou can enable OSM road classification by passing through include_osm_road_classification=true.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
         "operationId": "positions_by_trip_id_trip__trip_id__position_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "trip_id",
@@ -2935,11 +2875,6 @@
         "summary": "Get Realtime Positions",
         "description": "This endpoint takes a list of device_ids and returns the most recent Position of each Device.",
         "operationId": "get_realtime_positions_realtime_device_post",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "x-api-version",
@@ -3140,11 +3075,6 @@
         "summary": "Get Connect",
         "description": "This endpoint return an authenticated url for a websocket connection.",
         "operationId": "get_connect_realtime_connect_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "x-api-version",
@@ -3245,11 +3175,6 @@
         "summary": "Get Webhooks",
         "description": "Returns a list of webhooks",
         "operationId": "get_webhooks_webhook_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "enabled",
@@ -3436,11 +3361,6 @@
         "summary": "Create Webhook",
         "description": "Creates a new webhook.",
         "operationId": "create_webhook_webhook_post",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "x-api-version",
@@ -3621,11 +3541,6 @@
         "summary": "Get Webhook",
         "description": "Returns a webhooks",
         "operationId": "get_webhook_webhook__webhook_id__get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "webhook_id",
@@ -3826,11 +3741,6 @@
         "summary": "Delete Webhook",
         "description": "Deletes a webhook.",
         "operationId": "delete_webhook_webhook__webhook_id__delete",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "webhook_id",
@@ -4031,11 +3941,6 @@
         "summary": "Patch Webhook",
         "description": "Modifies an existing webhook.\n\nNote that setting \"enabled\" to true will reset `error_count` to 0, and clear\nboth `last_error` and `last_error_at` fields.",
         "operationId": "patch_webhook_webhook__webhook_id__patch",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "webhook_id",
@@ -4254,11 +4159,6 @@
         "summary": "Get Tags",
         "description": "This endpoint returns all Tags on Devices for a Tenant.",
         "operationId": "get_tags_tag_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "x-api-version",
@@ -4307,11 +4207,6 @@
         "summary": "Events",
         "description": "This endpoint returns the Events for a Device.\n\nYou can optionally specify parameters for event_type, start_time_utc and end_time_utc to filter the results.\n\nThe response is paginated, so if the next link is not null, use that link to get the next page of results.",
         "operationId": "events_device__device_id__event_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "device_id",
@@ -4566,11 +4461,6 @@
         "summary": "Event By Id",
         "description": "This endpoint returns an Event by ID.",
         "operationId": "event_by_id_event__event_id__get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "event_id",
@@ -4773,11 +4663,6 @@
         "summary": "Tenant By Id",
         "description": "This endpoint gets a Tenant.",
         "operationId": "tenant_by_id_tenant_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "x-api-version",
@@ -4966,11 +4851,6 @@
         "summary": "Update Tenant By Id",
         "description": "This endpoint updates a Tenant.\n\nYou can specify the attributes which you want to be updated and their new values.\n\nThe updated Tenant is returned in the response.",
         "operationId": "update_tenant_by_id_tenant_patch",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "x-api-version",
@@ -7207,12 +7087,6 @@
         },
         "type": "object",
         "title": "WebhookUpdate"
-      }
-    },
-    "securitySchemes": {
-      "JWTBearer": {
-        "type": "http",
-        "scheme": "bearer"
       }
     }
   }
