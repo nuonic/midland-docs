@@ -28,12 +28,12 @@
   },
   "tabs": [
     {
-      "name": "Telematics Provider guides",
-      "url": "integration-guides"
-    },
-    {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "Provider access guides",
+      "url": "integration-guides"
     },
     {
       "name": "Legal",
@@ -53,6 +53,7 @@
       "group": "Guides",
       "pages": [
         "content/key-concepts",
+        "content/providers",
         "content/get-connected",
         "content/authentication",
         "content/request-data",
@@ -62,33 +63,21 @@
     {
       "group": "",
       "pages": [
-        "integration-guides/introduction",
-        {
-          "group": "Provider guides",
-          "pages": [
-            "integration-guides/verizon",
-            "integration-guides/digitalmatter",
-            "integration-guides/randmcnally",
-            "integration-guides/geotab",
-            "integration-guides/mixtelematics",
-            "integration-guides/navman",
-            "integration-guides/netstar",
-            "integration-guides/radius",
-            "integration-guides/volvo",
-            "integration-guides/webfleet",
-            "integration-guides/scania",
-            "integration-guides/toyota-halo",
-            "integration-guides/geoforce",
-            "integration-guides/bestrane",
-            "integration-guides/intellifleet"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "In depth guides",
-      "pages": [
-        "in-depth/providers"
+        "integration-guides/verizon",
+        "integration-guides/digitalmatter",
+        "integration-guides/randmcnally",
+        "integration-guides/geotab",
+        "integration-guides/mixtelematics",
+        "integration-guides/navman",
+        "integration-guides/netstar",
+        "integration-guides/radius",
+        "integration-guides/volvo",
+        "integration-guides/webfleet",
+        "integration-guides/scania",
+        "integration-guides/toyota-halo",
+        "integration-guides/geoforce",
+        "integration-guides/bestrane",
+        "integration-guides/intellifleet"
       ]
     },
     {

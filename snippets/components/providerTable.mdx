@@ -1,0 +1,62 @@
+export const ProviderTable = ({ children }) => (
+    <table
+        style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            padding: '0 0 0 0',
+            alignItems: 'center',
+        }}
+    >
+        <tr style={{margin: 0, paddingBottom: '1rem', minHeight: 0, borderBottom: '1px solid #000'}}>
+            <th style={{minWidth: '8rem'}}>Provider</th>
+            <th style={{minWidth: '12rem'}}></th>
+            <th style={{minWidth: '10rem'}}>Real-Time Status</th>
+            <th style={{minWidth: '10rem'}}>Asset Register</th>
+            <th style={{minWidth: '10rem'}}>Positions</th>
+            <th style={{minWidth: '10rem'}}>Trips</th>
+            <th style={{minWidth: '10rem'}}>Trip Milestones</th>
+            <th style={{minWidth: '10rem'}}>Operating Events</th>
+            <th style={{minWidth: '10rem'}}>Safety Events</th>
+        </tr>
+        {children}
+    </table>
+);
+
+export const ProviderTableRow = ({ img, name, realTime, assetRegister, positions, trips, tripMilestones, operatingEvents, safetyEvents }) => {
+    return (
+        <tr 
+            style={{
+                margin: 0, 
+                padding: 0, 
+            }}
+            >
+            <td style={{margin: 0, minWidth: '8rem'}}>
+                <img src={img} noZoom width="100" style={{margin: 0}} />
+            </td>
+            <td style={{margin: 0, minWidth: '12rem'}}>
+                {name}
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${realTime}.png`} noZoom width="80" />
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${assetRegister}.png`} noZoom width="80" />
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${positions}.png`} noZoom width="80" />
+            </td>            
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${trips}.png`} noZoom width="80" />
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${tripMilestones}.png`} noZoom width="80" />
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${operatingEvents}.png`} noZoom width="80" />
+            </td>
+            <td style={{margin: 0, minWidth: '10rem'}}>
+                <img src={`/images/badge-${safetyEvents}.png`} noZoom width="80" />
+            </td>            
+        </tr>
+    );
+};
