@@ -58,15 +58,15 @@ which you can use to get the trips for a particular device, which you will see i
 ## Trips
 
 <Info>
-  Trips represent a journey that a device has taken from start to finish, and consist of many **positions**. Trips have
-  a start and end position and time.
+  A trip represents a journey that a device has taken from start to finish, and consist of many **positions**. A trip
+  has a start and end position and time.
 </Info>
 <Note>
   Not all telematics providers have trip information. For cases where there is no trip information given, PathStack will
-  use algorithms to estimate trips within the positions recieved.
+  use algorithms to estimate trips within the positions received.
 </Note>
 
-Once you have the list of devices, you can fetch the trips for a device by making a call to `/device/{device_id}/trip` 
+Once you have the list of devices, you can fetch the trips for a device by making a call to `/device/{device_id}/trip`
 endpoint. You can filter trips by **start time** and **end time** by passing `start_time_utc` and `end_time_utc`.
 
 <TripsSnippet />
@@ -109,7 +109,7 @@ trip, as you will see in the next section.
 ## Positions
 
 <Info>
-  A position is a single point in time with a latitude and longitude. They are the building blocks of trips, and a
+  A position is a single point in time with a latitude and longitude. Positions are the building blocks of trips, and a
   trip may have hundreds or even thousands of positions.
 </Info>
 

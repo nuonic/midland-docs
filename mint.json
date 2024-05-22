@@ -88,8 +88,7 @@
     {
       "group": "In depth guides",
       "pages": [
-        "in-depth/providers",
-        "in-depth/events"
+        "in-depth/providers"
       ]
     },
     {
