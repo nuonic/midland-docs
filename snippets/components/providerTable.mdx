@@ -1,3 +1,5 @@
+export const IMAGE_BASE_URL = 'https://mintlify.s3-us-west-1.amazonaws.com/nuonic-39';
+
 export const ProviderTable = ({ children }) => (
     <table
         style={{
@@ -37,25 +39,25 @@ export const ProviderTableRow = ({ img, name, realTime, assetRegister, positions
                 {name}
             </td>
             <td style={{margin: 0, minWidth: '10rem'}}>
-                <img src={`/images/badge-${realTime}.png`} noZoom width="80" />
+                <img src={`${IMAGE_BASE_URL}/images/badge-${realTime}.png`} noZoom width="80" />
             </td>
             <td style={{margin: 0, minWidth: '10rem'}}>
-                <img src={`/images/badge-${assetRegister}.png`} noZoom width="80" />
+                <img src={`${IMAGE_BASE_URL}/images/badge-${assetRegister}.png`} noZoom width="80" />
             </td>
             <td style={{margin: 0, minWidth: '10rem'}}>
-                <img src={`/images/badge-${positions}.png`} noZoom width="80" />
+                <img src={`${IMAGE_BASE_URL}/images/badge-${positions}.png`} noZoom width="80" />
             </td>            
             <td style={{margin: 0, minWidth: '10rem'}}>
-                <img src={`/images/badge-${trips}.png`} noZoom width="80" />
+                <img src={`${IMAGE_BASE_URL}/images/badge-${trips}.png`} noZoom width="80" />
             </td>
             <td style={{margin: 0, minWidth: '10rem'}}>
-                <img src={`/images/badge-${tripMilestones}.png`} noZoom width="80" />
+                <img src={`${IMAGE_BASE_URL}/images/badge-${tripMilestones}.png`} noZoom width="80" />
             </td>
             <td style={{margin: 0, minWidth: '10rem'}}>
-                <img src={`/images/badge-${operatingEvents}.png`} noZoom width="80" />
+                <img src={`${IMAGE_BASE_URL}/images/badge-${operatingEvents}.png`} noZoom width="80" />
             </td>
             <td style={{margin: 0, minWidth: '10rem'}}>
-                <img src={`/images/badge-${safetyEvents}.png`} noZoom width="80" />
+                <img src={`${IMAGE_BASE_URL}/images/badge-${safetyEvents}.png`} noZoom width="80" />
             </td>            
         </tr>
     );
