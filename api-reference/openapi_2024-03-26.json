@@ -6562,11 +6562,30 @@
       "TenantConfiguration": {
         "properties": {
           "providers": {
-            "items": {
-              "$ref": "#/components/schemas/ProviderEnum"
-            },
-            "type": "array",
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ProviderEnum"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Providers"
+          },
+          "api_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Version"
           }
         },
         "type": "object",
