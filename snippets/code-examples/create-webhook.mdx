@@ -1,0 +1,234 @@
+<CodeGroup>
+```python Python
+import requests
+
+url = "https://api.pathstack.io/webhook"
+
+payload = {
+    "filters": {
+        "connection_ids": ["2b20295c-45f2-4a32-9042-6ce3cf917536"],
+        "tags": ["new"],
+        "device_ids": ["91618d7f-4826-44f3-a2ca-1165a6865a93", "3a08beab-426e-4c22-89b8-4e650f97f143"],
+        "connection_devices": [
+            {
+                "connection_id": "2b20295c-45f2-4a32-9042-6ce3cf917536",
+                "system_device_ids": ["vehicle1"]
+            }
+        ]
+    },
+    "options": {"include_speed": True},
+    "url": "<webhook-url>",
+    "enabled": True
+}
+headers = {"Authorization": "Bearer <access-token>"}
+
+response = requests.request("POST", url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+```javascript JavaScript
+const options = {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer <access-token>'},
+  body: '{"filters":{"connection_ids":["2b20295c-45f2-4a32-9042-6ce3cf917536"],"tags":["new"],"device_ids":["91618d7f-4826-44f3-a2ca-1165a6865a93","3a08beab-426e-4c22-89b8-4e650f97f143"],"connection_devices":[{"connection_id":"2b20295c-45f2-4a32-9042-6ce3cf917536","system_device_ids":["vehicle1"]}]},"options":{"include_speed":true},"url":"<webhook-url>","enabled":true}'
+};
+
+fetch('https://api.pathstack.io/webhook', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
+```
+
+```java Java
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpHeaders;
+import java.net.http.HttpRequest.BodyPublishers;
+import java.net.http.HttpRequest.BodyPublishers;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class HttpClientExample {
+
+    public static void main(String[] args) throws Exception {
+        String url = "https://api.pathstack.io/webhook";
+        String token = "<access-token>";
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        
+        // Constructing the request payload
+        var requestData = new RequestData(
+            new Filters(
+                new String[] { "2b20295c-45f2-4a32-9042-6ce3cf917536" },
+                new String[] { "new" },
+                new String[] { "91618d7f-4826-44f3-a2ca-1165a6865a93", "3a08beab-426e-4c22-89b8-4e650f97f143" },
+                new ConnectionDevice[] {
+                    new ConnectionDevice(
+                        "2b20295c-45f2-4a32-9042-6ce3cf917536",
+                        new String[] { "vehicle1" }
+                    )
+                }
+            ),
+            new Options(true),
+            "<webhook-url>",
+            true
+        );
+
+        // Serializing request payload to JSON
+        String json = objectMapper.writeValueAsString(requestData);
+
+        // Creating the HTTP request
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Authorization", "Bearer " + token)
+            .header("Content-Type", "application/json")
+            .POST(BodyPublishers.ofString(json))
+            .build();
+
+        // Sending the HTTP request
+        HttpClient client = HttpClient.newHttpClient();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        // Printing the response
+        System.out.println(response.body());
+    }
+
+    // Classes to match the structure of the JSON payload
+    static class RequestData {
+        public Filters filters;
+        public Options options;
+        public String url;
+        public boolean enabled;
+
+        public RequestData(Filters filters, Options options, String url, boolean enabled) {
+            this.filters = filters;
+            this.options = options;
+            this.url = url;
+            this.enabled = enabled;
+        }
+    }
+
+    static class Filters {
+        public String[] connection_ids;
+        public String[] tags;
+        public String[] device_ids;
+        public ConnectionDevice[] connection_devices;
+
+        public Filters(String[] connection_ids, String[] tags, String[] device_ids, ConnectionDevice[] connection_devices) {
+            this.connection_ids = connection_ids;
+            this.tags = tags;
+            this.device_ids = device_ids;
+            this.connection_devices = connection_devices;
+        }
+    }
+
+    static class ConnectionDevice {
+        public String connection_id;
+        public String[] system_device_ids;
+
+        public ConnectionDevice(String connection_id, String[] system_device_ids) {
+            this.connection_id = connection_id;
+            this.system_device_ids = system_device_ids;
+        }
+    }
+
+    static class Options {
+        public boolean include_speed;
+
+        public Options(boolean include_speed) {
+            this.include_speed = include_speed;
+        }
+    }
+}
+```
+
+```csharp .NET
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+namespace HttpClientExample
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var url = "https://api.pathstack.io/webhook";
+            var token = "<access-token>";
+
+            var requestData = new
+            {
+                filters = new
+                {
+                    connection_ids = new[] { "2b20295c-45f2-4a32-9042-6ce3cf917536" },
+                    tags = new[] { "new" },
+                    device_ids = new[] { "91618d7f-4826-44f3-a2ca-1165a6865a93", "3a08beab-426e-4c22-89b8-4e650f97f143" },
+                    connection_devices = new[]
+                    {
+                        new
+                        {
+                            connection_id = "2b20295c-45f2-4a32-9042-6ce3cf917536",
+                            system_device_ids = new[] { "vehicle1" }
+                        }
+                    }
+                },
+                options = new
+                {
+                    include_speed = true
+                },
+                url = "<webhook-url>",
+                enabled = true
+            };
+
+            var json = JsonConvert.SerializeObject(requestData);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+
+            var response = await client.PostAsync(url, data);
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(responseString);
+        }
+    }
+}
+```
+
+```bash cURL
+curl --request POST \
+  --url https://api.pathstack.io/webhook \
+  --header 'Authorization: Bearer <access-token>' \
+  --data '{
+  "filters": {
+    "connection_ids": [
+      "2b20295c-45f2-4a32-9042-6ce3cf917536"
+    ],
+    "tags": [
+      "new"
+    ],
+    "device_ids": [
+      "91618d7f-4826-44f3-a2ca-1165a6865a93",
+      "3a08beab-426e-4c22-89b8-4e650f97f143"
+    ],
+    "connection_devices": [
+      {
+        "connection_id": "2b20295c-45f2-4a32-9042-6ce3cf917536",
+        "system_device_ids": [
+          "vehicle1"
+        ]
+      }
+    ]
+  },
+  "options": {
+    "include_speed": true
+  },
+  "url": "<webhook-url>",
+  "enabled": true
+}'
+```
+</CodeGroup>
