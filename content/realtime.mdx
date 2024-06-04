@@ -6,30 +6,7 @@ import CreateWebhookSnippet from '/snippets/code-examples/create-webhook.mdx';
 
 PathStack supports realtime data access through many of our providers, you can find the list of supported providers
 [here](/content/providers). We provide a direct connection to the telematics provider so you can get live data as soon
-as possible.
-
-## Applications
-
-Applications for realtime data include:
-
-- **Realtime Tracking of Vehicles in Your Fleet**
-
-  We can provide the live location, as well as attributes such as speed
-  and heading if they are available.
-
-<Note>Trip milestones is an upcoming feature. Please contact us on 1300 822 370 to find out more!</Note>
-
-- **Real-time ETA and Milestone Updates for Your Trip**
-
-  If you give us details about your delivery such as the start point/time and end point/time, we can provide regular
-  updates on ETA to the destination, as well as milestones during the delivery.
-
-  These milestones include:
-
-  - the delivery has started
-  - the delivery has been delayed
-  - the delivery has been completed
-  - ...many others to come
+as possible. We can provide the **live location**, as well as attributes such as **speed** and **heading** if they are available.
 
 ## Getting started
 
@@ -122,8 +99,8 @@ client requests and allowing continuous message exchange.
 
 When using WebSockets for realtime data collection with PathStack, you will have to first get a connection URL using the
 `/realtime/connect` endpoint. This will return a unique URL which you can use to create a WebSocket connection with
-PathStack. See below for an example of how to connect to PathStack over websockets using that URL. Note, you will need
-to install the websockets library with `pip install websockets`.
+PathStack. See below for an example of how to connect to PathStack over WebSockets using that URL. Note, you will need
+to install the `websockets` library with `pip install websockets`.
 
 ```python Python
 import asyncio
@@ -172,6 +149,12 @@ If there are any errors, they will be received in the format:
   "error": "<error description>"
 }
 ```
+
+<Warning>
+  The WebSocket URL is only valid for starting a connection for 5 minutes after it is generated. If your WebSocket
+  disconnects, you should get a new WebSocket URL using the `/realtime/connect` endpoint to connect again, as the old
+  URL would likely have expired.
+</Warning>
 
 ### Polling
 
@@ -233,31 +216,51 @@ This will return a response that looks something like this:
 
 ## Filters
 
-For realtime data you can provide filters to control what data you receive. Filters are optional, if no filters are 
+For realtime data you can provide filters to control what data you receive. Filters are optional, if no filters are
 provided then data from all devices will be sent.
 
 There are 4 types of filters that you can utilise:
+
 - Connection ID Filter
 
   You can specify the connection IDs that you wish to collect data for.
 
   `type: list of uuid`
+
 - Tag Filter
 
   You can specify the tags of Devices which you wish to collect data for. This will only match devices which have
   **all** the specified tags.
 
   `type: list of string`
+
 - Device ID Filter
 
   You can specify the device IDs that you wish to collect data for.
 
   `type: list of uuid`
+
 - Connection Device Filter
-  
+
   You can specify which system devices IDs for a connection to collect data for.
 
   `type: list of object with connection ID of type uuid and system device IDs of type list of string`
 
 All filters will be applied to the data, so in order for a device to have it's realtime data collected, it must meet
 all the filter criteria.
+
+## 🚧 Planned features
+
+The following features are planned for development. Please contact us on **1300 822 370** to find out more!
+
+### Trip milestones
+
+If you give us details about your delivery such as the start point/time and end point/time, we can provide regular
+updates on ETA to the destination, as well as milestones during the delivery.
+
+These milestones include:
+
+- the delivery has started
+- the delivery has been delayed
+- the delivery has been completed
+- ...many others to come
