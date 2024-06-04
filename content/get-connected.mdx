@@ -2,17 +2,38 @@
 title: 'Connect telematics accounts'
 description: 'This guide shows the steps for connecting your Telematics account to PathStack so you can access unified device data.'
 ---
+
 import ConnectionSnippet from '/snippets/code-examples/connections.mdx';
 
 <Steps>
   <Step title="Get an integration link">
-    As part of the onboarding process, you would have received an email with a link to your integration page. This link
-    is used to integrate with our partnered telematics providers. See a full list of supported providers
-    [here](/in-depth/providers).
+    To connect providers, you will need to obtain a connection link. To obtain a connection link, call the `/tenant`
+    endpoint.
+
+    ```python Python
+    import requests
+
+    url = "https://api.pathstack.io/tenant"
+    headers = {"Authorization": "Bearer <access-token>"}
+
+    response = requests.request("GET", url, headers=headers)
+
+    connection_url = response.json()["data"]["connection_url"]
+    print(connection_url)
+    # example: https://portal.dev.pathstack.io/connect?code=83pbN8feZDK8F4L3rJH2fX-EsJS0MDEDKE0
+    ```
+
+    Replace `<access-token>` with an access token. You can find out how to get an access token [here](/content/authentication).
+
+    This connection link is used to integrate with our partnered telematics providers. See a full list of supported
+    providers [here](/in-depth/providers).
 
     This link is used to connect your telematics accounts to PathStack. You can do this yourself, or send this link to
     your clients. To connect an integration, select the telematics company in the list.
-    <img src="/images/integration-page-1.png" />
+    <Frame>
+      <img className="block dark:hidden" src="/images/integration-page-1.png" />
+      <img className="hidden dark:block" src="/images/integration-page-1-dark.png" />
+    </Frame>
 
   </Step>
   <Step title="Connect your integration to PathStack">
@@ -23,7 +44,10 @@ import ConnectionSnippet from '/snippets/code-examples/connections.mdx';
     username and password for accessing the API.
 
     <Note>All credentials are securely stored in PathStack once a telematics integration has been connected.</Note>
-    <img src="/images/integration-page-2.png" />
+    <Frame>
+      <img className="block dark:hidden" src="/images/integration-page-2.png" />
+      <img className="hidden dark:block" src="/images/integration-page-2-dark.png" />
+    </Frame>
 
   </Step>
   <Step title="You're connected!">
