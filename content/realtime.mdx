@@ -1,0 +1,266 @@
+---
+title: Realtime data collection
+---
+
+import CreateWebhookSnippet from '/snippets/code-examples/create-webhook.mdx';
+
+PathStack supports realtime data access through many of our providers, you can find the list of supported providers
+[here](/content/providers). We provide a direct connection to the telematics provider so you can get live data as soon
+as possible. We can provide the **live location**, as well as attributes such as **speed** and **heading** if they are available.
+
+## Getting started
+
+Firstly, you'll want to check if your telematics provider supports realtime. To check, go to the
+[Providers](/content/providers) page and see if your provider has **Real-Time Status** available, as not all providers
+support this feature.
+
+There are three methods of receiving realtime data from your telematics provider with PathStack. These are:
+
+- Webhooks
+- WebSockets
+- Polling
+
+The choice of which method to choose depends on your architecture and how you will be using the data. See the sections
+below to understand the methods and the differences between each method.
+
+## Realtime data collection methods
+
+### Webhook
+
+A webhook is an HTTP-based callback function that allows lightweight, event-driven communication between 2 APIs. To set
+up a webhook, you will need to provide PathStack a unique URL, as well as filters defining what events PathStack should
+send to your server. The URL must be able to accept POST requests.
+To create a webhook, use the `/webhook [POST]` endpoint. For testing, you can use a webhook testing service such as
+[https://webhook.site](https://webhook.site) to generate a URL that you can use for testing webhooks.
+
+<CreateWebhookSnippet />
+
+This will return a response that looks something like this:
+
+```json JSON
+{
+  "data": {
+    "filters": {
+      "connection_ids": ["2b20295c-45f2-4a32-9042-6ce3cf917536"],
+      "tags": ["new"],
+      "device_ids": ["91618d7f-4826-44f3-a2ca-1165a6865a93", "3a08beab-426e-4c22-89b8-4e650f97f143"],
+      "connection_devices": [
+        {
+          "connection_id": "2b20295c-45f2-4a32-9042-6ce3cf917536",
+          "system_device_ids": ["vehicle1"]
+        }
+      ]
+    },
+    "options": {
+      "include_speed": true
+    },
+    "url": "<webhook-url>",
+    "enabled": true,
+    "id": "f5782140-faa0-42c7-bc62-1f7a13135460",
+    "error_count": 0,
+    "last_error": null,
+    "last_error_at": null,
+    "created_at": "2023-11-07T05:31:56Z",
+    "updated_at": "2023-11-07T05:31:56Z"
+  }
+}
+```
+
+You will now receive realtime position updates for all devices that match the filters that you have specified. For a
+detailed overview of filters, read the section on [Filters](#filters). You can also specify options for the webhook. We
+current support toggling speed.
+
+The data that you will receive at the designated webhook URL will be of the format:
+
+```json JSON
+{
+  "webhook_id": "6aafe01e-b7e6-4476-a888-ee1bb570ce5f",
+  "payload": {
+    "connection_id": "2b20295c-45f2-4a32-9042-6ce3cf917536",
+    "device_id": "91618d7f-4826-44f3-a2ca-1165a6865a93",
+    "system_device_id": "vehicle1",
+    "position": {
+      "timestamp": "2024-05-04T02:38:43.000000",
+      "longitude": 144.4108704,
+      "latitude": -37.1229045,
+      "heading": 338.0,
+      "speed": { "speed_kph": 82.521 }
+    }
+  }
+}
+```
+
+### WebSocket
+
+WebSocket is a protocol enabling simultaneous two-way communication over a single TCP connection. It allows full-duplex
+interaction between a client and server with lower overhead compared to HTTP polling, facilitating real-time data
+transfer. This protocol maintains an open connection, enabling the server to send content to the client without initial
+client requests and allowing continuous message exchange.
+
+When using WebSockets for realtime data collection with PathStack, you will have to first get a connection URL using the
+`/realtime/connect` endpoint. This will return a unique URL which you can use to create a WebSocket connection with
+PathStack. See below for an example of how to connect to PathStack over WebSockets using that URL. Note, you will need
+to install the `websockets` library with `pip install websockets`.
+
+```python Python
+import asyncio
+import websockets
+
+async def connect():
+    uri = "wss://api.pathstack.io/realtime/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+    async with websockets.connect(uri) as ws:
+        # set the filters and options for the WebSocket
+        payload = {
+            "filters": {"device_ids": ["91618d7f-4826-44f3-a2ca-1165a6865a93"]},
+            "options": {"include_speed": True},
+        }
+        await ws.send(json.dumps(payload))
+
+        while True:
+          response = await websocket.recv()
+          data = json.loads(response)
+          print(f"Received {data}")
+
+if __name__ == "__main__":
+    asyncio.run(connect())
+```
+
+The data that you will receive from the WebSocket will be of the format:
+
+```json JSON
+{
+  "connection_id": "2b20295c-45f2-4a32-9042-6ce3cf917536",
+  "device_id": "91618d7f-4826-44f3-a2ca-1165a6865a93",
+  "system_device_id": "vehicle1",
+  "position": {
+    "timestamp": "2024-05-04T02:38:43.000000",
+    "longitude": 144.4108704,
+    "latitude": -37.1229045,
+    "heading": 338.0,
+    "speed": { "speed_kph": 82.521 }
+  }
+}
+```
+
+If there are any errors, they will be received in the format:
+
+```json JSON
+{
+  "error": "<error description>"
+}
+```
+
+<Warning>
+  The WebSocket URL is only valid for starting a connection for 5 minutes after it is generated. If your WebSocket
+  disconnects, you should get a new WebSocket URL using the `/realtime/connect` endpoint to connect again, as the old
+  URL would likely have expired.
+</Warning>
+
+### Polling
+
+Polling is another method of realtime data collection where a client continually requests data from a server (e.g.
+making a request every second). PathStack provides a realtime positions endpoint that fulfills this requirement by
+returning the most recent position of each device.
+
+To get realtime positions using polling, use the `/realtime/device` endpoint. You can also pass through a filter and
+options.
+
+```python Python
+import requests
+
+url = "https://api.pathstack.io/realtime/device"
+
+payload = {
+    "filters": {
+        "connection_ids": ["2b20295c-45f2-4a32-9042-6ce3cf917536"],
+        "tags": ["new"],
+        "device_ids": ["91618d7f-4826-44f3-a2ca-1165a6865a93", "3a08beab-426e-4c22-89b8-4e650f97f143"],
+        "connection_devices": [
+            {
+                "connection_id": "2b20295c-45f2-4a32-9042-6ce3cf917536",
+                "system_device_ids": ["vehicle1"]
+            }
+        ]
+    },
+    "options": {"include_speed": True}
+}
+headers = {"Authorization": "Bearer <access-token>"}
+
+response = requests.request("POST", url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+This will return a response that looks something like this:
+
+```json JSON
+{
+  "data": [
+    {
+      "connection_id": "2b20295c-45f2-4a32-9042-6ce3cf917536",
+      "device_id": "91618d7f-4826-44f3-a2ca-1165a6865a93",
+      "system_device_id": "vehicle1",
+      "position": {
+        "timestamp": "2024-05-04T02:38:43.000000",
+        "longitude": 144.4108704,
+        "latitude": -37.1229045,
+        "heading": 338.0,
+        "speed": {
+          "speed_kph": 82.521
+        }
+      }
+    }
+  ]
+}
+```
+
+## Filters
+
+For realtime data you can provide filters to control what data you receive. Filters are optional, if no filters are
+provided then data from all devices will be sent.
+
+There are 4 types of filters that you can utilise:
+
+- Connection ID Filter
+
+  You can specify the connection IDs that you wish to collect data for.
+
+  `type: list of uuid`
+
+- Tag Filter
+
+  You can specify the tags of Devices which you wish to collect data for. This will only match devices which have
+  **all** the specified tags.
+
+  `type: list of string`
+
+- Device ID Filter
+
+  You can specify the device IDs that you wish to collect data for.
+
+  `type: list of uuid`
+
+- Connection Device Filter
+
+  You can specify which system devices IDs for a connection to collect data for.
+
+  `type: list of object with connection ID of type uuid and system device IDs of type list of string`
+
+All filters will be applied to the data, so in order for a device to have it's realtime data collected, it must meet
+all the filter criteria.
+
+## 🚧 Planned features
+
+The following features are planned for development. Please contact us on **1300 822 370** to find out more!
+
+### Trip milestones
+
+If you give us details about your delivery such as the start point/time and end point/time, we can provide regular
+updates on ETA to the destination, as well as milestones during the delivery.
+
+These milestones include:
+
+- the delivery has started
+- the delivery has been delayed
+- the delivery has been completed
+- ...many others to come
