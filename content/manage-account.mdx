@@ -1,0 +1,53 @@
+---
+title: Configuration and versioning
+---
+
+There are configuration settings that you can apply for your tenancy. The guide below shows how to configure these
+settings.
+
+## Modifying tenant configuration
+
+To modify your configuration, use the `/tenant [PATCH]` endpoint. The body of the request should include the new values 
+of all fields that you would like to be changed. In the example code below, the `api_version`, `providers`, `logo_url`,
+`name`, and `description` are changed. For a full list of configuration options, check out the [API reference](/api-reference/introduction).
+
+```python Python
+import requests
+
+url = "https://api.pathstack.io/tenant"
+
+payload = {
+    "configuration": {
+        "api_version": "2024-03-27",
+        "providers": ["verizon_connect", "navman"]
+    },
+    "logo_url": "https://example.com/logo.png",
+    "name": "New name",
+    "description": "New description"
+}
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.request("PATCH", url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+### Setting a logo
+The `logo_url` field is used to set the logo of your account. This logo will be shown to users that connect to your
+tenancy.
+
+### Setting allowed providers
+You can control which providers are enabled for connection using the `providers` field. You can set the field to a list
+of providers which you would like to allow for connection to your account. If `providers` is set to null, which it is
+by default, all providers are enabled for connection. For a list of provider names, check out the [API reference](/api-reference/introduction).
+
+### Setting API version
+The `api_version` field is used to set the API version for your account. When breaking changes are made to the API,
+PathStack pushes out a new version. When you first use the API, your account is locked to the latest API version. To
+upgrade the version, you must set the `api_version` to the latest version code.
+
+To test a new version, you can pass the version code in the `x-api-version` header. This will override the version set
+in your account.

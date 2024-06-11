@@ -58,7 +58,8 @@
         "content/authentication",
         "content/request-data",
         "content/realtime",
-        "content/pagination"
+        "content/pagination",
+        "content/manage-account"
       ]
     },
     {
