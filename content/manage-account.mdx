@@ -1,0 +1,63 @@
+---
+title: Configuration and versioning
+---
+
+There are configuration settings that you can apply for your tenancy. The guide below shows how to configure these
+settings.
+
+## Modifying tenant configuration
+
+To modify your configuration, use the `/tenant [PATCH]` endpoint. The body of the request should include the new values
+of all fields that you would like to be changed. In the example code below, the `api_version`, `providers`, `logo_url`,
+`name`, and `description` are changed. For a full list of configuration options, check out the [API reference](/api-reference/introduction).
+
+```python Python
+import requests
+
+url = "https://api.pathstack.io/tenant"
+
+payload = {
+    "configuration": {
+        "api_version": "2024-03-27",
+        "providers": ["verizon_connect", "navman"]
+    },
+    "logo_url": "https://example.com/logo.png",
+    "name": "New name",
+    "description": "New description"
+}
+headers = {
+    "Authorization": "Bearer <token>",
+    "Content-Type": "application/json"
+}
+
+response = requests.request("PATCH", url, json=payload, headers=headers)
+
+print(response.json())
+```
+
+### Setting a logo
+
+The `logo_url` field is used to set the logo of your account. This logo will be shown to users that connect to your
+tenancy.
+
+### Setting allowed providers
+
+You can control which providers are enabled for connection using the `providers` field. You can set the field to a list
+of providers which you would like to allow for connection to your account. If `providers` is set to null, which it is
+by default, all providers are enabled for connection. For a list of provider names, check out the [API reference](/api-reference/introduction).
+
+## API versioning
+
+When writing production code, we recommend you add an `x-api-version` header to all requests. This will ensure that all
+calls made to the PathStack API will be using the same API version and will allow control over when to upgrade versions.
+If the `x-api-version` header is not passed, the version will default to the API version set in your configuration.
+
+<Note>
+  The first time that you make a call to the API without specifying the API version, we will set the API version in your
+  tenant configuration to the latest version. All subsequent calls to the API where the `x-api-version` header is not
+  sent will defer to using the API version set in the configuration.
+</Note>
+
+### Setting API version
+
+To set/change the default API version of your account, use the `api_version` field. This will be used if you do not specify the version in the `x-api-version` header.
