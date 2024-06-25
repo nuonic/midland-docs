@@ -7426,7 +7426,8 @@
           "netstar",
           "webfleet",
           "scania",
-          "linxio"
+          "linxio",
+          "geoforce"
         ],
         "title": "ProviderEnum"
       },
