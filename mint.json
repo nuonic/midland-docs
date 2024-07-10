@@ -184,7 +184,8 @@
             "api-reference/2024-03-26/milestones/create-milestone",
             "api-reference/2024-03-26/milestones/get-milestone",
             "api-reference/2024-03-26/milestones/put-milestone",
-            "api-reference/2024-03-26/milestones/delete-milestone"
+            "api-reference/2024-03-26/milestones/delete-milestone",
+            "api-reference/2024-03-26/milestones/get-connect"
           ],
           "version": "2024-03-26"
         }
@@ -288,7 +289,8 @@
             "api-reference/2024-03-27/milestones/create-milestone",
             "api-reference/2024-03-27/milestones/get-milestone",
             "api-reference/2024-03-27/milestones/put-milestone",
-            "api-reference/2024-03-27/milestones/delete-milestone"
+            "api-reference/2024-03-27/milestones/delete-milestone",
+            "api-reference/2024-03-27/milestones/get-connect"
           ],
           "version": "2024-03-27"
         }

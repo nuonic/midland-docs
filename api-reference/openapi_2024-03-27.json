@@ -5364,14 +5364,14 @@
         }
       }
     },
-    "/milestone": {
+    "/milestone/": {
       "get": {
         "tags": [
           "Milestones"
         ],
         "summary": "Get Milestones",
         "description": "Returns a list of milestones",
-        "operationId": "get_milestones_milestone_get",
+        "operationId": "get_milestones_milestone__get",
         "security": [
           {
             "JWTBearer": []
@@ -5551,7 +5551,7 @@
         ],
         "summary": "Create Milestone",
         "description": "Creates a new milestone.",
-        "operationId": "create_milestone_milestone_post",
+        "operationId": "create_milestone_milestone__post",
         "security": [
           {
             "JWTBearer": []
@@ -6351,6 +6351,111 @@
               }
             },
             "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/milestone/connect": {
+      "get": {
+        "tags": [
+          "Milestones"
+        ],
+        "summary": "Get Connect",
+        "description": "This endpoint return an authenticated url for a websocket connection for milestone",
+        "operationId": "get_connect_milestone_connect_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-27"
+              ],
+              "default": "2024-03-27",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_ConnectType_"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 401,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
         }
       }
