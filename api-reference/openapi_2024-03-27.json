@@ -8339,6 +8339,7 @@
           },
           "provider_email": {
             "type": "string",
+            "format": "email",
             "title": "Provider Email"
           },
           "provider_tenant_id": {
@@ -8392,6 +8393,7 @@
         "properties": {
           "email": {
             "type": "string",
+            "format": "email",
             "title": "Email"
           },
           "filter": {
