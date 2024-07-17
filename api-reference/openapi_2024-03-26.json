@@ -6355,32 +6355,20 @@
         }
       }
     },
-    "/milestone/{milestone_id}/update": {
+    "/milestone/connect": {
       "get": {
         "tags": [
           "Milestones"
         ],
-        "summary": "Get Milestone Update",
-        "description": "Returns a milestone update",
-        "operationId": "get_milestone_update_milestone__milestone_id__update_get",
+        "summary": "Get Connect",
+        "description": "This endpoint returns an authenticated url for a websocket connection for milestone",
+        "operationId": "get_connect_milestone_connect_get",
         "security": [
           {
             "JWTBearer": []
           }
         ],
         "parameters": [
-          {
-            "name": "milestone_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid",
-              "title": "Milestone id",
-              "description": "ID of the Milestone to be returned"
-            },
-            "description": "ID of the Milestone to be returned"
-          },
           {
             "name": "x-api-version",
             "in": "header",
@@ -6402,36 +6390,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_Union_MilestoneValidState__MilestoneTimeoutState__"
+                  "$ref": "#/components/schemas/Success_ConnectType_"
                 }
               }
             }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 400,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid JWT format",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Bad Request"
           },
           "401": {
             "content": {
@@ -6486,424 +6448,14 @@
             "description": "Forbidden"
           },
           "422": {
+            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 422,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Field required",
-                          "title": "Error message"
-                        },
-                        "loc": {
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "integer"
-                              }
-                            ]
-                          },
-                          "type": "array",
-                          "title": "Location"
-                        },
-                        "msg": {
-                          "type": "string",
-                          "title": "Message"
-                        },
-                        "type": {
-                          "type": "string",
-                          "title": "Error Type"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unprocessable Entity"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 404,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Unknown Milestone id <uuid>",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/consumer/connection/share_request": {
-      "post": {
-        "tags": [
-          "Consumer"
-        ],
-        "summary": "Create Share Request",
-        "description": "This endpoint creates a Share Request.\n\nThe created Share Request is returned in the response.",
-        "operationId": "create_share_request_consumer_connection_share_request_post",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "x-api-version",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
-              "default": "2024-03-26",
-              "title": "X-Api-Version"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ShareRequestInput"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success_ShareRequest_"
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 400,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid JWT format",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 401,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Authentication header is missing, or token is invalid/expired.",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unauthorized"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 403,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "You do not have access to this resource",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Forbidden"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 422,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Field required",
-                          "title": "Error message"
-                        },
-                        "loc": {
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "integer"
-                              }
-                            ]
-                          },
-                          "type": "array",
-                          "title": "Location"
-                        },
-                        "msg": {
-                          "type": "string",
-                          "title": "Message"
-                        },
-                        "type": {
-                          "type": "string",
-                          "title": "Error Type"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unprocessable Entity"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Consumer"
-        ],
-        "summary": "Get Share Requests",
-        "description": "This endpoint returns all Share Requests that have been created.",
-        "operationId": "get_share_requests_consumer_connection_share_request_get",
-        "security": [
-          {
-            "JWTBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "x-api-version",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
-              "default": "2024-03-26",
-              "title": "X-Api-Version"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success_list_ShareRequest__"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 400,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Invalid JWT format",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 401,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Authentication header is missing, or token is invalid/expired.",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unauthorized"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 403,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "You do not have access to this resource",
-                          "title": "Error message"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Forbidden"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "object",
-                      "properties": {
-                        "code": {
-                          "type": "integer",
-                          "example": 422,
-                          "title": "Error code"
-                        },
-                        "message": {
-                          "type": "string",
-                          "example": "Field required",
-                          "title": "Error message"
-                        },
-                        "loc": {
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "integer"
-                              }
-                            ]
-                          },
-                          "type": "array",
-                          "title": "Location"
-                        },
-                        "msg": {
-                          "type": "string",
-                          "title": "Message"
-                        },
-                        "type": {
-                          "type": "string",
-                          "title": "Error Type"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Unprocessable Entity"
           }
         }
       }
@@ -7106,25 +6658,6 @@
           "tenant_id"
         ],
         "title": "ConnectionNoCredentials"
-      },
-      "ConsumerTenant": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "title": "ConsumerTenant"
       },
       "Coordinate": {
         "properties": {
@@ -7603,25 +7136,6 @@
         ],
         "title": "MilestoneCreate"
       },
-      "MilestoneTimeoutState": {
-        "properties": {
-          "milestone_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Milestone Id"
-          },
-          "status": {
-            "type": "string",
-            "title": "Status"
-          }
-        },
-        "type": "object",
-        "required": [
-          "milestone_id",
-          "status"
-        ],
-        "title": "MilestoneTimeoutState"
-      },
       "MilestoneUpdate": {
         "properties": {
           "device_id": {
@@ -7690,52 +7204,6 @@
           "end_time"
         ],
         "title": "MilestoneUpdate"
-      },
-      "MilestoneValidState": {
-        "properties": {
-          "milestone_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Milestone Id"
-          },
-          "connection_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Connection Id"
-          },
-          "device_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Device Id"
-          },
-          "system_device_id": {
-            "type": "string",
-            "title": "System Device Id"
-          },
-          "current_position": {
-            "$ref": "#/components/schemas/RealtimePosition"
-          },
-          "eta": {
-            "type": "string",
-            "format": "duration",
-            "title": "Eta"
-          },
-          "distance_to_destination_km": {
-            "type": "number",
-            "title": "Distance To Destination Km"
-          }
-        },
-        "type": "object",
-        "required": [
-          "milestone_id",
-          "connection_id",
-          "device_id",
-          "system_device_id",
-          "current_position",
-          "eta",
-          "distance_to_destination_km"
-        ],
-        "title": "MilestoneValidState"
       },
       "OsmRoadClassification": {
         "properties": {
@@ -8312,108 +7780,6 @@
         ],
         "title": "RefreshToken"
       },
-      "ShareRequest": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id"
-          },
-          "created_at": {
-            "type": "string",
-            "title": "Created At"
-          },
-          "responded_at": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Responded At"
-          },
-          "consumer_tenant": {
-            "$ref": "#/components/schemas/ConsumerTenant"
-          },
-          "provider_email": {
-            "type": "string",
-            "format": "email",
-            "title": "Provider Email"
-          },
-          "provider_tenant_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid4"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Provider Tenant Id"
-          },
-          "filter_id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Filter Id"
-          },
-          "share_code": {
-            "type": "string",
-            "title": "Share Code"
-          },
-          "accepted": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Accepted"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "created_at",
-          "responded_at",
-          "consumer_tenant",
-          "provider_email",
-          "provider_tenant_id",
-          "filter_id",
-          "share_code",
-          "accepted"
-        ],
-        "title": "ShareRequest"
-      },
-      "ShareRequestInput": {
-        "properties": {
-          "email": {
-            "type": "string",
-            "format": "email",
-            "title": "Email"
-          },
-          "filter": {
-            "anyOf": [
-              {
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Filter"
-          }
-        },
-        "type": "object",
-        "required": [
-          "email"
-        ],
-        "title": "ShareRequestInput"
-      },
       "Speed": {
         "properties": {
           "speed_kph": {
@@ -8550,23 +7916,6 @@
         ],
         "title": "Success[RefreshResult]"
       },
-      "Success_ShareRequest_": {
-        "properties": {
-          "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ShareRequest"
-              }
-            ],
-            "description": "Successful response payload"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "Success[ShareRequest]"
-      },
       "Success_TenantConfigurationResponse_": {
         "properties": {
           "data": {
@@ -8618,27 +7967,6 @@
         ],
         "title": "Success[Trip]"
       },
-      "Success_Union_MilestoneValidState__MilestoneTimeoutState__": {
-        "properties": {
-          "data": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/MilestoneValidState"
-              },
-              {
-                "$ref": "#/components/schemas/MilestoneTimeoutState"
-              }
-            ],
-            "title": "Data",
-            "description": "Successful response payload"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "Success[Union[MilestoneValidState, MilestoneTimeoutState]]"
-      },
       "Success_WebhookResponse_": {
         "properties": {
           "data": {
@@ -8672,23 +8000,6 @@
           "data"
         ],
         "title": "Success[list[ConnectionNoCredentials]]"
-      },
-      "Success_list_ShareRequest__": {
-        "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/ShareRequest"
-            },
-            "type": "array",
-            "title": "Data",
-            "description": "Successful response payload"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "Success[list[ShareRequest]]"
       },
       "Success_list_Union_RealtimeValidState__RealtimeTimeoutState___": {
         "properties": {
