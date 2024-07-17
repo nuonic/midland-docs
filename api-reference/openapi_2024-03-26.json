@@ -6355,20 +6355,32 @@
         }
       }
     },
-    "/milestone/connect": {
+    "/milestone/{milestone_id}/update": {
       "get": {
         "tags": [
           "Milestones"
         ],
-        "summary": "Get Connect",
-        "description": "This endpoint returns an authenticated url for a websocket connection for milestone",
-        "operationId": "get_connect_milestone_connect_get",
+        "summary": "Get Milestone Update",
+        "description": "Returns a milestone update",
+        "operationId": "get_milestone_update_milestone__milestone_id__update_get",
         "security": [
           {
             "JWTBearer": []
           }
         ],
         "parameters": [
+          {
+            "name": "milestone_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Milestone id",
+              "description": "ID of the Milestone to be returned"
+            },
+            "description": "ID of the Milestone to be returned"
+          },
           {
             "name": "x-api-version",
             "in": "header",
@@ -6390,10 +6402,36 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_ConnectType_"
+                  "$ref": "#/components/schemas/Success_Union_MilestoneValidState__MilestoneTimeoutState__"
                 }
               }
             }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 400,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid JWT format",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
           },
           "401": {
             "content": {
@@ -6448,14 +6486,78 @@
             "description": "Forbidden"
           },
           "422": {
-            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
                 }
               }
-            }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Unknown Milestone id <uuid>",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
           }
         }
       }
@@ -7136,6 +7238,25 @@
         ],
         "title": "MilestoneCreate"
       },
+      "MilestoneTimeoutState": {
+        "properties": {
+          "milestone_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Milestone Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "milestone_id",
+          "status"
+        ],
+        "title": "MilestoneTimeoutState"
+      },
       "MilestoneUpdate": {
         "properties": {
           "device_id": {
@@ -7204,6 +7325,52 @@
           "end_time"
         ],
         "title": "MilestoneUpdate"
+      },
+      "MilestoneValidState": {
+        "properties": {
+          "milestone_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Milestone Id"
+          },
+          "connection_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Connection Id"
+          },
+          "device_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Device Id"
+          },
+          "system_device_id": {
+            "type": "string",
+            "title": "System Device Id"
+          },
+          "current_position": {
+            "$ref": "#/components/schemas/RealtimePosition"
+          },
+          "eta": {
+            "type": "string",
+            "format": "duration",
+            "title": "Eta"
+          },
+          "distance_to_destination_km": {
+            "type": "number",
+            "title": "Distance To Destination Km"
+          }
+        },
+        "type": "object",
+        "required": [
+          "milestone_id",
+          "connection_id",
+          "device_id",
+          "system_device_id",
+          "current_position",
+          "eta",
+          "distance_to_destination_km"
+        ],
+        "title": "MilestoneValidState"
       },
       "OsmRoadClassification": {
         "properties": {
@@ -7966,6 +8133,27 @@
           "data"
         ],
         "title": "Success[Trip]"
+      },
+      "Success_Union_MilestoneValidState__MilestoneTimeoutState__": {
+        "properties": {
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MilestoneValidState"
+              },
+              {
+                "$ref": "#/components/schemas/MilestoneTimeoutState"
+              }
+            ],
+            "title": "Data",
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[Union[MilestoneValidState, MilestoneTimeoutState]]"
       },
       "Success_WebhookResponse_": {
         "properties": {
