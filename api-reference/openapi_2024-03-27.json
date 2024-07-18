@@ -7409,25 +7409,33 @@
       },
       "Event": {
         "properties": {
-          "event_type": {
+          "event_key": {
             "type": "string",
-            "title": "Event Type"
+            "title": "Event Key"
           },
           "time": {
             "type": "string",
             "format": "date-time",
             "title": "Time"
           },
-          "event_metadata": {
+          "raw_data": {
+            "type": "object",
+            "title": "Raw Data"
+          },
+          "value": {
+            "type": "object",
+            "title": "Value"
+          },
+          "position": {
             "anyOf": [
               {
-                "type": "object"
+                "$ref": "#/components/schemas/Coordinate"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Event Metadata"
+            "title": "Position"
           },
           "id": {
             "type": "string",
@@ -7442,9 +7450,11 @@
         },
         "type": "object",
         "required": [
-          "event_type",
+          "event_key",
           "time",
-          "event_metadata",
+          "raw_data",
+          "value",
+          "position",
           "id",
           "device_id"
         ],
@@ -7454,7 +7464,15 @@
         "type": "string",
         "enum": [
           "ignition_on",
-          "ignition_off"
+          "ignition_off",
+          "harsh_braking",
+          "harsh_acceleration",
+          "harsh_cornering",
+          "engine_speed",
+          "accident",
+          "total_fuel",
+          "over_speeding",
+          "power_take_off_engaged"
         ],
         "title": "EventTypeEnum"
       },
