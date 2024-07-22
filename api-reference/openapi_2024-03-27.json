@@ -7727,6 +7727,17 @@
             "type": "string",
             "format": "date-time",
             "title": "Updated At"
+          },
+          "webhook_enabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Webhook Enabled"
           }
         },
         "type": "object",
@@ -7946,6 +7957,17 @@
               }
             ],
             "title": "Webhook Url"
+          },
+          "webhook_enabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Webhook Enabled"
           }
         },
         "type": "object",
