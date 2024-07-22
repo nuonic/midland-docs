@@ -7409,25 +7409,60 @@
       },
       "Event": {
         "properties": {
-          "event_type": {
-            "type": "string",
-            "title": "Event Type"
+          "event_key": {
+            "$ref": "#/components/schemas/EventTypeEnum"
           },
           "time": {
             "type": "string",
             "format": "date-time",
             "title": "Time"
           },
-          "event_metadata": {
+          "raw_data": {
+            "type": "object",
+            "title": "Raw Data"
+          },
+          "value": {
             "anyOf": [
               {
-                "type": "object"
+                "$ref": "#/components/schemas/EventHarshBrakingValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventHardCorneringValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventHarshAccelerationValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventEngineSpeedValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventAccidentValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventTotalFuelValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventPowerTakeOffValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventIgnitionStatusValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventOdometerValue"
+              }
+            ],
+            "title": "Value"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Coordinate"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Event Metadata"
+            "title": "Position"
           },
           "id": {
             "type": "string",
@@ -7442,19 +7477,146 @@
         },
         "type": "object",
         "required": [
-          "event_type",
+          "event_key",
           "time",
-          "event_metadata",
+          "raw_data",
+          "value",
+          "position",
           "id",
           "device_id"
         ],
         "title": "Event"
       },
+      "EventAccidentValue": {
+        "properties": {
+          "accident": {
+            "type": "boolean",
+            "title": "Accident"
+          }
+        },
+        "type": "object",
+        "required": [
+          "accident"
+        ],
+        "title": "EventAccidentValue"
+      },
+      "EventEngineSpeedValue": {
+        "properties": {
+          "revolutions_per_minute": {
+            "type": "integer",
+            "title": "Revolutions Per Minute"
+          }
+        },
+        "type": "object",
+        "required": [
+          "revolutions_per_minute"
+        ],
+        "title": "EventEngineSpeedValue"
+      },
+      "EventHardCorneringValue": {
+        "properties": {
+          "hard_cornering": {
+            "type": "boolean",
+            "title": "Hard Cornering"
+          }
+        },
+        "type": "object",
+        "required": [
+          "hard_cornering"
+        ],
+        "title": "EventHardCorneringValue"
+      },
+      "EventHarshAccelerationValue": {
+        "properties": {
+          "harsh_acceleration": {
+            "type": "boolean",
+            "title": "Harsh Acceleration"
+          }
+        },
+        "type": "object",
+        "required": [
+          "harsh_acceleration"
+        ],
+        "title": "EventHarshAccelerationValue"
+      },
+      "EventHarshBrakingValue": {
+        "properties": {
+          "harsh_braking": {
+            "type": "boolean",
+            "title": "Harsh Braking"
+          }
+        },
+        "type": "object",
+        "required": [
+          "harsh_braking"
+        ],
+        "title": "EventHarshBrakingValue"
+      },
+      "EventIgnitionStatusValue": {
+        "properties": {
+          "ignition_on": {
+            "type": "boolean",
+            "title": "Ignition On"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ignition_on"
+        ],
+        "title": "EventIgnitionStatusValue"
+      },
+      "EventOdometerValue": {
+        "properties": {
+          "odometer_kilometres": {
+            "type": "number",
+            "title": "Odometer Kilometres"
+          }
+        },
+        "type": "object",
+        "required": [
+          "odometer_kilometres"
+        ],
+        "title": "EventOdometerValue"
+      },
+      "EventPowerTakeOffValue": {
+        "properties": {
+          "power_take_off_engaged": {
+            "type": "boolean",
+            "title": "Power Take Off Engaged"
+          }
+        },
+        "type": "object",
+        "required": [
+          "power_take_off_engaged"
+        ],
+        "title": "EventPowerTakeOffValue"
+      },
+      "EventTotalFuelValue": {
+        "properties": {
+          "total_fuel_litres": {
+            "type": "number",
+            "title": "Total Fuel Litres"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total_fuel_litres"
+        ],
+        "title": "EventTotalFuelValue"
+      },
       "EventTypeEnum": {
         "type": "string",
         "enum": [
-          "ignition_on",
-          "ignition_off"
+          "ignition_status",
+          "odometer",
+          "harsh_braking",
+          "harsh_acceleration",
+          "hard_cornering",
+          "engine_speed",
+          "accident",
+          "total_fuel",
+          "over_speeding",
+          "power_take_off_engaged"
         ],
         "title": "EventTypeEnum"
       },
