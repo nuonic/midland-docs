@@ -6133,13 +6133,13 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "Milestones"
         ],
-        "summary": "Put Milestone",
+        "summary": "Patch Milestone",
         "description": "Modifies an existing milestone.",
-        "operationId": "put_milestone_milestone__milestone_id__put",
+        "operationId": "patch_milestone_milestone__milestone_id__patch",
         "security": [
           {
             "JWTBearer": []
@@ -7640,6 +7640,14 @@
             "format": "uuid4",
             "title": "Device Id"
           },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MilestoneStatusEnum"
+              }
+            ],
+            "default": "trip_not_started"
+          },
           "start_point": {
             "allOf": [
               {
@@ -7682,6 +7690,43 @@
             "type": "string",
             "format": "uuid4",
             "title": "Tenant Id"
+          },
+          "webhook_error_count": {
+            "type": "integer",
+            "title": "Webhook Error Count",
+            "default": 0
+          },
+          "last_webhook_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Webhook Error"
+          },
+          "last_webhook_error_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Webhook Error At"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
           }
         },
         "type": "object",
@@ -7692,7 +7737,9 @@
           "start_time",
           "end_time",
           "id",
-          "tenant_id"
+          "tenant_id",
+          "created_at",
+          "updated_at"
         ],
         "title": "Milestone"
       },
@@ -7702,6 +7749,14 @@
             "type": "string",
             "format": "uuid4",
             "title": "Device Id"
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MilestoneStatusEnum"
+              }
+            ],
+            "default": "trip_not_started"
           },
           "start_point": {
             "anyOf": [
@@ -7765,6 +7820,15 @@
         ],
         "title": "MilestoneCreate"
       },
+      "MilestoneStatusEnum": {
+        "type": "string",
+        "enum": [
+          "trip_not_started",
+          "trip_in_progress",
+          "trip_ended"
+        ],
+        "title": "MilestoneStatusEnum"
+      },
       "MilestoneTimeoutState": {
         "properties": {
           "milestone_id": {
@@ -7787,9 +7851,26 @@
       "MilestoneUpdate": {
         "properties": {
           "device_id": {
-            "type": "string",
-            "format": "uuid4",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Device Id"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MilestoneStatusEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "start_point": {
             "anyOf": [
@@ -7811,21 +7892,45 @@
               },
               {
                 "type": "string"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Start Point"
           },
           "end_point": {
-            "$ref": "#/components/schemas/Coordinate"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Coordinate"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "start_time": {
-            "type": "string",
-            "format": "date-time",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Start Time"
           },
           "end_time": {
-            "type": "string",
-            "format": "date-time",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "End Time"
           },
           "webhook_url": {
@@ -7844,13 +7949,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "device_id",
-          "start_point",
-          "end_point",
-          "start_time",
-          "end_time"
-        ],
         "title": "MilestoneUpdate"
       },
       "MilestoneValidState": {
