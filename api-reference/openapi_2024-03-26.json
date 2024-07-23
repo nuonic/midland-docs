@@ -8005,6 +8005,11 @@
           "distance_to_destination_km": {
             "type": "number",
             "title": "Distance To Destination Km"
+          },
+          "last_updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Updated At"
           }
         },
         "type": "object",
@@ -8015,7 +8020,8 @@
           "system_device_id",
           "current_position",
           "eta",
-          "distance_to_destination_km"
+          "distance_to_destination_km",
+          "last_updated_at"
         ],
         "title": "MilestoneValidState"
       },
