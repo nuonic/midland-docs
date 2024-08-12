@@ -7727,6 +7727,17 @@
             "type": "string",
             "format": "date-time",
             "title": "Updated At"
+          },
+          "webhook_enabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Webhook Enabled"
           }
         },
         "type": "object",
@@ -7946,6 +7957,17 @@
               }
             ],
             "title": "Webhook Url"
+          },
+          "webhook_enabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Webhook Enabled"
           }
         },
         "type": "object",
@@ -7983,6 +8005,11 @@
           "distance_to_destination_km": {
             "type": "number",
             "title": "Distance To Destination Km"
+          },
+          "last_updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Updated At"
           }
         },
         "type": "object",
@@ -7993,7 +8020,8 @@
           "system_device_id",
           "current_position",
           "eta",
-          "distance_to_destination_km"
+          "distance_to_destination_km",
+          "last_updated_at"
         ],
         "title": "MilestoneValidState"
       },
