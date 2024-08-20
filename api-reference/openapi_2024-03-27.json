@@ -2022,9 +2022,9 @@
               "type": "string",
               "format": "date-time",
               "title": "Start time",
-              "description": "Start time from when the data will be returned"
+              "description": "Start time from when the data will be returned. Trips with end time >= start time will be returned"
             },
-            "description": "Start time from when the data will be returned"
+            "description": "Start time from when the data will be returned. Trips with end time >= start time will be returned"
           },
           {
             "name": "end_time_utc",
@@ -2034,9 +2034,9 @@
               "type": "string",
               "format": "date-time",
               "title": "End time",
-              "description": "End time from when the data will be returned"
+              "description": "End time from when the data will be returned. Trips with end time <= specified end time will be returned"
             },
-            "description": "End time from when the data will be returned"
+            "description": "End time from when the data will be returned. Trips with end time <= specified end time will be returned"
           },
           {
             "name": "page",
