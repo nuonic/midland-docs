@@ -8292,6 +8292,39 @@
             ],
             "title": "Heading"
           },
+          "odometer_kilometres": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Odometer reading at this point"
+          },
+          "odometer_distance_metres": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distance travelled between this point and the previous point calculated with odometer readings"
+          },
+          "gps_distance_metres": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distance travelled between this point and the previous point calculated by GPS distance using WGS84"
+          },
           "id": {
             "type": "string",
             "format": "uuid4",
@@ -8335,6 +8368,9 @@
           "vdop",
           "number_of_satellites",
           "heading",
+          "odometer_kilometres",
+          "odometer_distance_metres",
+          "gps_distance_metres",
           "id",
           "trip_id",
           "device_id"
