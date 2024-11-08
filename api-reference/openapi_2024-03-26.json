@@ -7457,6 +7457,39 @@
         "type": "object",
         "title": "DeviceUpdate"
       },
+      "DriverId": {
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/DriverIdFormat"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "format",
+          "value"
+        ],
+        "title": "DriverId"
+      },
+      "DriverIdFormat": {
+        "type": "string",
+        "enum": [
+          "text",
+          "map",
+          "base64"
+        ],
+        "title": "DriverIdFormat"
+      },
       "Event": {
         "properties": {
           "event_key": {
@@ -8518,6 +8551,11 @@
             "type": "boolean",
             "title": "Include Speed",
             "default": true
+          },
+          "include_driver_id": {
+            "type": "boolean",
+            "title": "Include Driver Id",
+            "default": false
           }
         },
         "additionalProperties": false,
@@ -8580,6 +8618,16 @@
             "anyOf": [
               {
                 "$ref": "#/components/schemas/Speed"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "driver_id": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DriverId"
               },
               {
                 "type": "null"
