@@ -7029,6 +7029,30 @@
           "active": {
             "type": "boolean",
             "title": "Active"
+          },
+          "collection_start_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection Start Time"
+          },
+          "collection_end_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection End Time"
           }
         },
         "type": "object",
@@ -7093,6 +7117,30 @@
             "type": "string",
             "format": "uuid4",
             "title": "Tenant Id"
+          },
+          "collection_start_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection Start Time"
+          },
+          "collection_end_time": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection End Time"
           }
         },
         "type": "object",
@@ -7103,7 +7151,9 @@
           "email",
           "active",
           "id",
-          "tenant_id"
+          "tenant_id",
+          "collection_start_time",
+          "collection_end_time"
         ],
         "title": "ConnectionNoCredentials"
       },
