@@ -8553,9 +8553,15 @@
             "default": true
           },
           "include_driver_id": {
-            "type": "boolean",
-            "title": "Include Driver Id",
-            "default": false
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Include Driver Id"
           }
         },
         "additionalProperties": false,
