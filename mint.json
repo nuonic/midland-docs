@@ -59,7 +59,8 @@
         "content/request-data",
         "content/realtime",
         "content/pagination",
-        "content/manage-account"
+        "content/manage-account",
+        "content/processing-times"
       ]
     },
     {
