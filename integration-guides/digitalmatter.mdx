@@ -4,16 +4,72 @@ title: Digital Matter
 
 PathStack supports integration with Digital Matter devices over HTTP and TCP.
 
-For HTTP, the connector must be configured to send JSON data to our server using the Telematics Guru platform. Set the
-URL to `https://dm.pathstack.io/upload/<your-connection-id>`, replacing with the connection ID of the Digital Matter
-connection you have created. You will not need to create devices as they will be automatically created for you.
+For HTTP, the connector must be configured to send JSON data to our server using the Telematics Guru platform.
 
-For TCP, the connector must be configured to send binary-encoded data to our server using the Telematics Guru
-platform. You must also provide us with the serial number of each device. Please contact us on 1300 822 370 or at
-support@nuonic.com.au to obtain the server address and initiate a Digital Matter integration.
+Below are the steps for creating your HTTP connection:
+<Steps>
+  <Step title="Select and name the connector">
+    Navigate to the Connectors option in the side panel of the Digital Matter / Telematics Guru portal and click on `New` connection.
+    <img src="/images/integration-guides/dm-2.png" />
+  </Step>
+  <Step title="Set Connector Details">
+    <Steps>
+      <Step title="Name: Enter your business name (e.g., <Your Business Name> FTC HTTP)." />
+      <Step title="Description: Add a description (e.g., <Fuel Tax Credit HTTP>)." />
+      <Step title="Connector Type: Set the connector type to 'HTTP Connector'" />
+    </Steps>
+    <img src="/images/integration-guides/dm-4.png" />
+  </Step>
+  <Step title="Enter the URL">
+    Input the following URL:
+    `https://dm.pathstack.io/upload/<your-connection-id>`
+    (The Nuonic/Prism support team will provide your ‘connection ID.’)
+     <img src="/images/integration-guides/dm-5.png" />
+  </Step>
+  <Step title="Set Client Name">
+    Enter your client name in the field below Vendor.
+    <Note>Leave all other settings as default and click OK to save.</Note>
+  </Step>
+  <Step title="Configure your devices">
+    Select devices and configure your device with the HTTP connection (See screenshot below for reference).
+     <img src="/images/integration-guides/dm-8.png" />
+     <img src="/images/integration-guides/dm-9.png" />
+  </Step>
+</Steps>
 
-For technical details in relation to the Telematics Guru configuration, please read Digital Matter's
-[connector guide](https://support.digitalmatter.com/integration/create-a-connector-set-up-an-integration).
+If you would like to set up a multi-connection with HTTP connection included as one of the connections, please see the steps below
+
+<Steps>
+  <Step title="Select and name the connector">
+    Navigate to the Connectors option in the side panel of the Digital Matter / Telematics Guru portal and click on New connection.
+    <img src="/images/integration-guides/dm-2.png" />
+  </Step>
+  <Step title="Set Connector Details">
+    <Steps>
+      <Step title="Name: Enter your business name (e.g., <Your Business Name> FTC Multi)." />
+      <Step title="Description: Add a description (e.g., <Fuel Tax Credit Multi>)." />
+      <Step title="Connector Type: Set the connector type to 'Multi Connector'" />
+    </Steps>
+    <img src="/images/integration-guides/dm-6.png" />
+  </Step>
+  <Step title="Select your multi-connection types">
+    To set up your multi-connection, select the HTTP connection you previously created for one of the connection types. For the other connection, select the type of your choice based on your requirements.
+    <Note>If you haven’t created an HTTP connection or need instructions, please refer to the HTTP guide above.</Note>
+  </Step>
+  <Step title="Set Client Name">
+    Enter your client name in the field below Vendor.
+    <Note>Leave all other settings as default and click OK to save.</Note>
+  </Step>
+  <Step title="Configure your devices">
+    Select devices and configure your device with the HTTP connection (See screenshot below for reference).
+     <img src="/images/integration-guides/dm-8.png" />
+     <img src="/images/integration-guides/dm-9.png" />
+  </Step>
+</Steps>
+
+For TCP, the connector must be configured to send binary-encoded data to our server using the Telematics Guru platform. You must also provide us with the serial number of each device. Please contact us on 1300 822 370 or at support@nuonic.com.au to obtain the server address and initiate a Digital Matter integration.
+
+For technical details in relation to the Telematics Guru configuration, please read Digital Matter's [connector guide](https://support.digitalmatter.com/integration/create-a-connector-set-up-an-integration).
 
 PathStack uses trips that are created by digital matter devices. See 
 [here](https://support.digitalmatter.com/tracking-gps-parameters/movement-trips-assumed-start-point-range) for details.
