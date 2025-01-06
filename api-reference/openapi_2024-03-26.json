@@ -7699,7 +7699,8 @@
           "accident",
           "total_fuel",
           "over_speeding",
-          "power_take_off_engaged"
+          "power_take_off_engaged",
+          "auxiliary_equipment_operation"
         ],
         "title": "EventTypeEnum"
       },
