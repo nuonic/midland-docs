@@ -7532,6 +7532,9 @@
               },
               {
                 "$ref": "#/components/schemas/EventOdometerValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventAuxiliaryEquipmentOperationValue"
               }
             ],
             "title": "Value"
@@ -7582,6 +7585,19 @@
           "accident"
         ],
         "title": "EventAccidentValue"
+      },
+      "EventAuxiliaryEquipmentOperationValue": {
+        "properties": {
+          "auxiliary_equipment_operation": {
+            "type": "boolean",
+            "title": "Auxiliary Equipment Operation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "auxiliary_equipment_operation"
+        ],
+        "title": "EventAuxiliaryEquipmentOperationValue"
       },
       "EventEngineSpeedValue": {
         "properties": {
