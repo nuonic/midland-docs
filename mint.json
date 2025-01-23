@@ -196,18 +196,6 @@
             "api-reference/2024-03-26/consumer/create-share-request"
           ],
           "version": "2024-03-26"
-        },
-        {
-          "group": "Jobs",
-          "pages": [
-            "api-reference/2024-03-26/jobs/get-connections",
-            "api-reference/2024-03-26/jobs/get-integrations",
-            "api-reference/2024-03-26/jobs/get-statuses",
-            "api-reference/2024-03-26/jobs/get-fetch-jobs",
-            "api-reference/2024-03-26/jobs/get-parse-jobs",
-            "api-reference/2024-03-26/jobs/rerun-jobs"
-          ],
-          "version": "2024-03-26"
         }
       ],
       "version": "2024-03-26"
@@ -319,18 +307,6 @@
           "pages": [
             "api-reference/2024-03-27/consumer/get-share-requests",
             "api-reference/2024-03-27/consumer/create-share-request"
-          ],
-          "version": "2024-03-27"
-        },
-        {
-          "group": "Jobs",
-          "pages": [
-            "api-reference/2024-03-27/jobs/get-connections",
-            "api-reference/2024-03-27/jobs/get-integrations",
-            "api-reference/2024-03-27/jobs/get-statuses",
-            "api-reference/2024-03-27/jobs/get-fetch-jobs",
-            "api-reference/2024-03-27/jobs/get-parse-jobs",
-            "api-reference/2024-03-27/jobs/rerun-jobs"
           ],
           "version": "2024-03-27"
         }
