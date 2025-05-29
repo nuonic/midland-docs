@@ -8493,7 +8493,8 @@
           "webfleet",
           "scania",
           "linxio",
-          "geoforce"
+          "geoforce",
+          "michelin_connected_fleet"
         ],
         "title": "ProviderEnum"
       },
