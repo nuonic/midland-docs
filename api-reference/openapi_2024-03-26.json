@@ -7559,6 +7559,18 @@
             "type": "string",
             "format": "uuid4",
             "title": "Device Id"
+          },
+          "trip_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trip Id"
           }
         },
         "type": "object",
