@@ -7719,6 +7719,7 @@
         "type": "string",
         "enum": [
           "ignition_status",
+          "idling",
           "odometer",
           "harsh_braking",
           "harsh_acceleration",
