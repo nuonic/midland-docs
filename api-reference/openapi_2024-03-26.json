@@ -7535,6 +7535,9 @@
               },
               {
                 "$ref": "#/components/schemas/EventAuxiliaryEquipmentOperationValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventIdlingValue"
               }
             ],
             "title": "Value"
@@ -7663,6 +7666,19 @@
         ],
         "title": "EventHarshBrakingValue"
       },
+      "EventIdlingValue": {
+        "properties": {
+          "idling": {
+            "type": "boolean",
+            "title": "Idling"
+          }
+        },
+        "type": "object",
+        "required": [
+          "idling"
+        ],
+        "title": "EventIdlingValue"
+      },
       "EventIgnitionStatusValue": {
         "properties": {
           "ignition_on": {
@@ -7719,6 +7735,7 @@
         "type": "string",
         "enum": [
           "ignition_status",
+          "idling",
           "odometer",
           "harsh_braking",
           "harsh_acceleration",
