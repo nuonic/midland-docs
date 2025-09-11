@@ -7535,6 +7535,9 @@
               },
               {
                 "$ref": "#/components/schemas/EventAuxiliaryEquipmentOperationValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventIdlingValue"
               }
             ],
             "title": "Value"
@@ -7662,6 +7665,19 @@
           "harsh_braking"
         ],
         "title": "EventHarshBrakingValue"
+      },
+      "EventIdlingValue": {
+        "properties": {
+          "idling": {
+            "type": "boolean",
+            "title": "Idling"
+          }
+        },
+        "type": "object",
+        "required": [
+          "idling"
+        ],
+        "title": "EventIdlingValue"
       },
       "EventIgnitionStatusValue": {
         "properties": {
