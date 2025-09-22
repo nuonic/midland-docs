@@ -2039,6 +2039,18 @@
             "description": "End time from when the data will be returned. Trips with end time <= specified end time will be returned"
           },
           {
+            "name": "verify_data_collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Verify data collection",
+              "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided.",
+              "default": 0
+            },
+            "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided."
+          },
+          {
             "name": "page",
             "in": "query",
             "required": false,
@@ -2488,6 +2500,18 @@
               "description": "End time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
             },
             "description": "End time from when the data will be returned. Format: yyyy-MM-ddThh:mm:ss"
+          },
+          {
+            "name": "verify_data_collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Verify data collection",
+              "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided.",
+              "default": 0
+            },
+            "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided."
           },
           {
             "name": "include_osm_road_classification",
@@ -4363,6 +4387,18 @@
               "description": "End time from when the data will be returned"
             },
             "description": "End time from when the data will be returned"
+          },
+          {
+            "name": "verify_data_collection",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Verify data collection",
+              "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided.",
+              "default": 0
+            },
+            "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided."
           },
           {
             "name": "page",
