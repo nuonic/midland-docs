@@ -8523,7 +8523,8 @@
           "scania",
           "linxio",
           "geoforce",
-          "michelin_connected_fleet"
+          "michelin_connected_fleet",
+          "navixy"
         ],
         "title": "ProviderEnum"
       },
