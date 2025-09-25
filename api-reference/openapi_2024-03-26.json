@@ -4326,6 +4326,30 @@
             "description": "Device ID of the Events to be returned"
           },
           {
+            "name": "start_time_utc",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Start time",
+              "description": "Start time from when the data will be returned"
+            },
+            "description": "Start time from when the data will be returned"
+          },
+          {
+            "name": "end_time_utc",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "End time",
+              "description": "End time from when the data will be returned"
+            },
+            "description": "End time from when the data will be returned"
+          },
+          {
             "name": "event_type",
             "in": "query",
             "required": false,
@@ -4339,30 +4363,6 @@
               "description": "Only include events of this type"
             },
             "description": "Only include events of this type"
-          },
-          {
-            "name": "start_time_utc",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "format": "date-time",
-              "title": "Start time",
-              "description": "Start time from when the data will be returned"
-            },
-            "description": "Start time from when the data will be returned"
-          },
-          {
-            "name": "end_time_utc",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "format": "date-time",
-              "title": "End time",
-              "description": "End time from when the data will be returned"
-            },
-            "description": "End time from when the data will be returned"
           },
           {
             "name": "page",
