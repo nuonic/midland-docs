@@ -2045,10 +2045,10 @@
             "schema": {
               "type": "boolean",
               "title": "Verify data collection",
-              "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided.",
+              "description": "Verify data collection status, If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running.",
               "default": 0
             },
-            "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided."
+            "description": "Verify data collection status, If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running."
           },
           {
             "name": "page",
@@ -2508,10 +2508,10 @@
             "schema": {
               "type": "boolean",
               "title": "Verify data collection",
-              "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided.",
+              "description": "Verify data collection status. If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running.",
               "default": 0
             },
-            "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided."
+            "description": "Verify data collection status. If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running."
           },
           {
             "name": "include_osm_road_classification",
@@ -4395,10 +4395,10 @@
             "schema": {
               "type": "boolean",
               "title": "Verify data collection",
-              "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided.",
+              "description": "Verify data collection status, If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running.",
               "default": 0
             },
-            "description": "Verify data collection status, if all the data collection jobs for a given time range have completed successfully. This only works if start_time_utc and end_time_utc are provided."
+            "description": "Verify data collection status, If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running."
           },
           {
             "name": "page",
