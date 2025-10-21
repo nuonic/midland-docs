@@ -9560,6 +9560,22 @@
             ],
             "title": "Auxiliary Seconds"
           },
+          "is_valid": {
+            "type": "boolean",
+            "title": "Is Valid",
+            "default": true
+          },
+          "validation_comments": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Comments"
+          },
           "id": {
             "type": "string",
             "format": "uuid4",
