@@ -2051,6 +2051,18 @@
             "description": "Verify data collection status, If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running."
           },
           {
+            "name": "check_trip_validity",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Checks the validity of a trip",
+              "description": "Pathstack determines the validity of a trip during data collection. A trip can be deemed invalid if it has incorrect or incomplete data. Pathstack sets the validity of the trip via the field is_valid along with comments on the reason in validation comments",
+              "default": true
+            },
+            "description": "Pathstack determines the validity of a trip during data collection. A trip can be deemed invalid if it has incorrect or incomplete data. Pathstack sets the validity of the trip via the field is_valid along with comments on the reason in validation comments"
+          },
+          {
             "name": "page",
             "in": "query",
             "required": false,
