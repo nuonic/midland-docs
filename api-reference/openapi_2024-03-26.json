@@ -2051,7 +2051,7 @@
             "description": "Verify data collection status, If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running."
           },
           {
-            "name": "check_trip_validity",
+            "name": "verify_trip_validity",
             "in": "query",
             "required": false,
             "schema": {
