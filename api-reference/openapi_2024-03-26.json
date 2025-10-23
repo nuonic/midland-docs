@@ -7177,6 +7177,17 @@
               }
             ],
             "title": "Collection End Time"
+          },
+          "configuration": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Configuration"
           }
         },
         "type": "object",
@@ -7189,7 +7200,8 @@
           "id",
           "tenant_id",
           "collection_start_time",
-          "collection_end_time"
+          "collection_end_time",
+          "configuration"
         ],
         "title": "ConnectionNoCredentials"
       },
