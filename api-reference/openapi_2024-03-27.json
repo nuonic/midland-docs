@@ -8514,6 +8514,21 @@
             ],
             "title": "Distance travelled between this point and the previous point calculated by GPS distance using WGS84"
           },
+          "is_valid": {
+            "type": "boolean",
+            "title": "Is Valid"
+          },
+          "validation_comments": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Validation Comments"
+          },
           "id": {
             "type": "string",
             "format": "uuid4",
@@ -8560,6 +8575,8 @@
           "odometer_kilometres",
           "odometer_distance_metres",
           "gps_distance_metres",
+          "is_valid",
+          "validation_comments",
           "id",
           "trip_id",
           "device_id"
@@ -9574,8 +9591,7 @@
           },
           "is_valid": {
             "type": "boolean",
-            "title": "Is Valid",
-            "default": true
+            "title": "Is Valid"
           },
           "validation_comments": {
             "anyOf": [
@@ -9613,6 +9629,8 @@
           "driving_seconds",
           "idling_seconds",
           "auxiliary_seconds",
+          "is_valid",
+          "validation_comments",
           "id",
           "device_id"
         ],
