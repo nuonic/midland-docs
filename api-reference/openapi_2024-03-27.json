@@ -881,6 +881,7 @@
           "Connections"
         ],
         "summary": "Connection Credentials By Id",
+        "description": "Credentials are owner-only. Shared tenants can see connection metadata through\nthe existing scoped connection endpoints, but cannot read another tenant's\nstored integration credentials.",
         "operationId": "connection_credentials_by_id_connection__connection_id__credentials_get",
         "security": [
           {
@@ -1085,6 +1086,7 @@
           "Connections"
         ],
         "summary": "Update Connection Credentials",
+        "description": "Credential updates are restricted to the owning tenant for the same reason as\ncredential reads: shares grant access to connection data, not to the owner's\nsecret integration credentials.",
         "operationId": "update_connection_credentials_connection__connection_id__credentials_patch",
         "security": [
           {
