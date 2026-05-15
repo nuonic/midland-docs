@@ -9039,7 +9039,8 @@
           "linxio",
           "geoforce",
           "michelin_connected_fleet",
-          "navixy"
+          "navixy",
+          "netcorp"
         ],
         "title": "ProviderEnum"
       },
