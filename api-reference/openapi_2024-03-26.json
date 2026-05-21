@@ -9081,7 +9081,8 @@
           "geoforce",
           "michelin_connected_fleet",
           "navixy",
-          "netcorp"
+          "netcorp",
+          "telematica"
         ],
         "title": "ProviderEnum"
       },
