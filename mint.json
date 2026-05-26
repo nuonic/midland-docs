@@ -91,6 +91,13 @@
       "group": "Endpoints",
       "pages": [
         {
+          "group": "Account",
+          "pages": [
+            "api-reference/2024-03-26/account/account-summary"
+          ],
+          "version": "2024-03-26"
+        },
+        {
           "group": "Auth",
           "pages": [
             "api-reference/2024-03-26/auth/login",
@@ -205,6 +212,13 @@
     {
       "group": "Endpoints",
       "pages": [
+        {
+          "group": "Account",
+          "pages": [
+            "api-reference/2024-03-27/account/account-summary"
+          ],
+          "version": "2024-03-27"
+        },
         {
           "group": "Auth",
           "pages": [

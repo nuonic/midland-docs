@@ -11,6 +11,58 @@
     }
   ],
   "paths": {
+    "/account/summary": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Account Summary",
+        "operationId": "account_summary_account_summary_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-27"
+              ],
+              "default": "2024-03-27",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_AccountSummary_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/token": {
       "post": {
         "tags": [
@@ -7405,6 +7457,22 @@
   },
   "components": {
     "schemas": {
+      "AccountSummary": {
+        "properties": {
+          "connections": {
+            "$ref": "#/components/schemas/ConnectionSummary"
+          },
+          "devices": {
+            "$ref": "#/components/schemas/DeviceSummary"
+          }
+        },
+        "type": "object",
+        "required": [
+          "connections",
+          "devices"
+        ],
+        "title": "AccountSummary"
+      },
       "AuthenticationResult": {
         "properties": {
           "token_type": {
@@ -7695,6 +7763,34 @@
         ],
         "title": "ConnectionNoCredentials"
       },
+      "ConnectionSummary": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "active": {
+            "type": "integer",
+            "title": "Active"
+          },
+          "inactive": {
+            "type": "integer",
+            "title": "Inactive"
+          },
+          "providers": {
+            "type": "integer",
+            "title": "Providers"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total",
+          "active",
+          "inactive",
+          "providers"
+        ],
+        "title": "ConnectionSummary"
+      },
       "ConsumerTenant": {
         "properties": {
           "id": {
@@ -7915,6 +8011,29 @@
           "connection_id"
         ],
         "title": "DeviceCreate"
+      },
+      "DeviceSummary": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "active": {
+            "type": "integer",
+            "title": "Active"
+          },
+          "tagged": {
+            "type": "integer",
+            "title": "Tagged"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total",
+          "active",
+          "tagged"
+        ],
+        "title": "DeviceSummary"
       },
       "DeviceUpdate": {
         "properties": {
@@ -9651,6 +9770,23 @@
         },
         "type": "object",
         "title": "Speed"
+      },
+      "Success_AccountSummary_": {
+        "properties": {
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccountSummary"
+              }
+            ],
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[AccountSummary]"
       },
       "Success_AuthenticationResult_": {
         "properties": {
