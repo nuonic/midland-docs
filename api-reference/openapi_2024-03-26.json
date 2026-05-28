@@ -81,12 +81,6 @@
             "in": "query",
             "required": false,
             "schema": {
-              "enum": [
-                7,
-                14,
-                30,
-                90
-              ],
               "type": "integer",
               "title": "Window (days)",
               "description": "Lookback window in days. Must be 7, 14, 30, or 90.",
