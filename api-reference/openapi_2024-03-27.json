@@ -63,6 +63,76 @@
         }
       }
     },
+    "/account/activity-summary": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Account Activity Summary",
+        "operationId": "account_activity_summary_account_activity_summary_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                7,
+                14,
+                30,
+                90
+              ],
+              "type": "integer",
+              "title": "Window (days)",
+              "description": "Lookback window in days. Must be 7, 14, 30, or 90.",
+              "default": 14
+            },
+            "description": "Lookback window in days. Must be 7, 14, 30, or 90."
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-27"
+              ],
+              "default": "2024-03-27",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_ActivitySummary_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/token": {
       "post": {
         "tags": [
@@ -7473,6 +7543,69 @@
         ],
         "title": "AccountSummary"
       },
+      "ActiveVehiclePoint": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "title": "Date"
+          },
+          "connection": {
+            "type": "string",
+            "title": "Connection"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "connection",
+          "count"
+        ],
+        "title": "ActiveVehiclePoint"
+      },
+      "ActivitySummary": {
+        "properties": {
+          "active_vehicles": {
+            "items": {
+              "$ref": "#/components/schemas/ActiveVehiclePoint"
+            },
+            "type": "array",
+            "title": "Active Vehicles"
+          },
+          "trips_by_connection": {
+            "items": {
+              "$ref": "#/components/schemas/TripsByConnection"
+            },
+            "type": "array",
+            "title": "Trips By Connection"
+          },
+          "events_by_day": {
+            "items": {
+              "$ref": "#/components/schemas/EventsByDay"
+            },
+            "type": "array",
+            "title": "Events By Day"
+          },
+          "events_by_type": {
+            "items": {
+              "$ref": "#/components/schemas/EventsByType"
+            },
+            "type": "array",
+            "title": "Events By Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "active_vehicles",
+          "trips_by_connection",
+          "events_by_day",
+          "events_by_type"
+        ],
+        "title": "ActivitySummary"
+      },
       "AuthenticationResult": {
         "properties": {
           "token_type": {
@@ -8592,6 +8725,57 @@
           "dms_yawn"
         ],
         "title": "EventTypeEnum"
+      },
+      "EventsByDay": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "title": "Date"
+          },
+          "event_key": {
+            "type": "string",
+            "title": "Event Key"
+          },
+          "event_type": {
+            "type": "string",
+            "title": "Event Type"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "event_key",
+          "event_type",
+          "count"
+        ],
+        "title": "EventsByDay"
+      },
+      "EventsByType": {
+        "properties": {
+          "event_key": {
+            "type": "string",
+            "title": "Event Key"
+          },
+          "event_type": {
+            "type": "string",
+            "title": "Event Type"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "event_key",
+          "event_type",
+          "count"
+        ],
+        "title": "EventsByType"
       },
       "HTTPValidationError": {
         "properties": {
@@ -9788,6 +9972,23 @@
         ],
         "title": "Success[AccountSummary]"
       },
+      "Success_ActivitySummary_": {
+        "properties": {
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ActivitySummary"
+              }
+            ],
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[ActivitySummary]"
+      },
       "Success_AuthenticationResult_": {
         "properties": {
           "data": {
@@ -10455,6 +10656,24 @@
           "device_id"
         ],
         "title": "Trip"
+      },
+      "TripsByConnection": {
+        "properties": {
+          "connection": {
+            "type": "string",
+            "title": "Connection"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "connection",
+          "count"
+        ],
+        "title": "TripsByConnection"
       },
       "UsernamePassword": {
         "properties": {

@@ -93,7 +93,8 @@
         {
           "group": "Account",
           "pages": [
-            "api-reference/2024-03-26/account/account-summary"
+            "api-reference/2024-03-26/account/account-summary",
+            "api-reference/2024-03-26/account/account-activity-summary"
           ],
           "version": "2024-03-26"
         },
@@ -215,7 +216,8 @@
         {
           "group": "Account",
           "pages": [
-            "api-reference/2024-03-27/account/account-summary"
+            "api-reference/2024-03-27/account/account-summary",
+            "api-reference/2024-03-27/account/account-activity-summary"
           ],
           "version": "2024-03-27"
         },
