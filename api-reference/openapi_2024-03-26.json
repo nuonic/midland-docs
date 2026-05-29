@@ -89,6 +89,20 @@
             "description": "Lookback window in days. Must be 7, 14, 30, or 90."
           },
           {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "description": "Maximum number of results for trips_by_connection and events_by_type.",
+              "default": 10
+            },
+            "description": "Maximum number of results for trips_by_connection and events_by_type."
+          },
+          {
             "name": "x-api-version",
             "in": "header",
             "required": false,
@@ -7589,6 +7603,10 @@
             },
             "type": "array",
             "title": "Events By Type"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit"
           }
         },
         "type": "object",
@@ -7596,7 +7614,8 @@
           "active_vehicles",
           "trips_by_connection",
           "events_by_day",
-          "events_by_type"
+          "events_by_type",
+          "limit"
         ],
         "title": "ActivitySummary"
       },
