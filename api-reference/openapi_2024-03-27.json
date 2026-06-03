@@ -8052,6 +8052,39 @@
               },
               {
                 "$ref": "#/components/schemas/EventIdlingValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventAdasDistanceMaintenanceValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventAdasForwardCollisionValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventAdasLaneDepartureValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventAdasPedestrianCollisionValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventDmsDistractionValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventDmsEyesClosedValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventDmsNoDriverValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventDmsPhoneCallingValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventDmsSmokingValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventDmsYawnValue"
+              },
+              {
+                "$ref": "#/components/schemas/EventGpsSignalBlockedValue"
               }
             ],
             "title": "Value"
@@ -8115,6 +8148,58 @@
         ],
         "title": "EventAccidentValue"
       },
+      "EventAdasDistanceMaintenanceValue": {
+        "properties": {
+          "adas_distance_maintenance": {
+            "type": "boolean",
+            "title": "Adas Distance Maintenance"
+          }
+        },
+        "type": "object",
+        "required": [
+          "adas_distance_maintenance"
+        ],
+        "title": "EventAdasDistanceMaintenanceValue"
+      },
+      "EventAdasForwardCollisionValue": {
+        "properties": {
+          "adas_forward_collision": {
+            "type": "boolean",
+            "title": "Adas Forward Collision"
+          }
+        },
+        "type": "object",
+        "required": [
+          "adas_forward_collision"
+        ],
+        "title": "EventAdasForwardCollisionValue"
+      },
+      "EventAdasLaneDepartureValue": {
+        "properties": {
+          "adas_lane_departure": {
+            "type": "boolean",
+            "title": "Adas Lane Departure"
+          }
+        },
+        "type": "object",
+        "required": [
+          "adas_lane_departure"
+        ],
+        "title": "EventAdasLaneDepartureValue"
+      },
+      "EventAdasPedestrianCollisionValue": {
+        "properties": {
+          "adas_pedestrian_collision": {
+            "type": "boolean",
+            "title": "Adas Pedestrian Collision"
+          }
+        },
+        "type": "object",
+        "required": [
+          "adas_pedestrian_collision"
+        ],
+        "title": "EventAdasPedestrianCollisionValue"
+      },
       "EventAuxiliaryEquipmentOperationValue": {
         "properties": {
           "auxiliary_equipment_operation": {
@@ -8128,6 +8213,84 @@
         ],
         "title": "EventAuxiliaryEquipmentOperationValue"
       },
+      "EventDmsDistractionValue": {
+        "properties": {
+          "dms_distraction": {
+            "type": "boolean",
+            "title": "Dms Distraction"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dms_distraction"
+        ],
+        "title": "EventDmsDistractionValue"
+      },
+      "EventDmsEyesClosedValue": {
+        "properties": {
+          "dms_eyes_closed": {
+            "type": "boolean",
+            "title": "Dms Eyes Closed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dms_eyes_closed"
+        ],
+        "title": "EventDmsEyesClosedValue"
+      },
+      "EventDmsNoDriverValue": {
+        "properties": {
+          "dms_no_driver": {
+            "type": "boolean",
+            "title": "Dms No Driver"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dms_no_driver"
+        ],
+        "title": "EventDmsNoDriverValue"
+      },
+      "EventDmsPhoneCallingValue": {
+        "properties": {
+          "dms_phone_calling": {
+            "type": "boolean",
+            "title": "Dms Phone Calling"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dms_phone_calling"
+        ],
+        "title": "EventDmsPhoneCallingValue"
+      },
+      "EventDmsSmokingValue": {
+        "properties": {
+          "dms_smoking": {
+            "type": "boolean",
+            "title": "Dms Smoking"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dms_smoking"
+        ],
+        "title": "EventDmsSmokingValue"
+      },
+      "EventDmsYawnValue": {
+        "properties": {
+          "dms_yawn": {
+            "type": "boolean",
+            "title": "Dms Yawn"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dms_yawn"
+        ],
+        "title": "EventDmsYawnValue"
+      },
       "EventEngineSpeedValue": {
         "properties": {
           "revolutions_per_minute": {
@@ -8140,6 +8303,19 @@
           "revolutions_per_minute"
         ],
         "title": "EventEngineSpeedValue"
+      },
+      "EventGpsSignalBlockedValue": {
+        "properties": {
+          "gps_signal_blocked": {
+            "type": "boolean",
+            "title": "Gps Signal Blocked"
+          }
+        },
+        "type": "object",
+        "required": [
+          "gps_signal_blocked"
+        ],
+        "title": "EventGpsSignalBlockedValue"
       },
       "EventHardCorneringValue": {
         "properties": {
@@ -8259,7 +8435,18 @@
           "total_fuel",
           "over_speeding",
           "power_take_off_engaged",
-          "auxiliary_equipment_operation"
+          "auxiliary_equipment_operation",
+          "gps_signal_blocked",
+          "adas_distance_maintenance",
+          "adas_forward_collision",
+          "adas_lane_departure",
+          "adas_pedestrian_collision",
+          "dms_distraction",
+          "dms_eyes_closed",
+          "dms_no_driver",
+          "dms_phone_calling",
+          "dms_smoking",
+          "dms_yawn"
         ],
         "title": "EventTypeEnum"
       },
@@ -9040,7 +9227,8 @@
           "geoforce",
           "michelin_connected_fleet",
           "navixy",
-          "netcorp"
+          "netcorp",
+          "mapon"
         ],
         "title": "ProviderEnum"
       },
