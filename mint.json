@@ -112,8 +112,10 @@
             "api-reference/2024-03-26/connections/connections",
             "api-reference/2024-03-26/connections/create-connection",
             "api-reference/2024-03-26/connections/connection-by-id",
+            "api-reference/2024-03-26/connections/update-connection",
             "api-reference/2024-03-26/connections/connection-credentials-by-id",
-            "api-reference/2024-03-26/connections/update-connection-credentials"
+            "api-reference/2024-03-26/connections/update-connection-credentials",
+            "api-reference/2024-03-26/connections/list-connection-tags"
           ],
           "version": "2024-03-26"
         },
@@ -235,8 +237,10 @@
             "api-reference/2024-03-27/connections/connections",
             "api-reference/2024-03-27/connections/create-connection",
             "api-reference/2024-03-27/connections/connection-by-id",
+            "api-reference/2024-03-27/connections/update-connection",
             "api-reference/2024-03-27/connections/connection-credentials-by-id",
-            "api-reference/2024-03-27/connections/update-connection-credentials"
+            "api-reference/2024-03-27/connections/update-connection-credentials",
+            "api-reference/2024-03-27/connections/list-connection-tags"
           ],
           "version": "2024-03-27"
         },

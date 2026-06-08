@@ -1003,6 +1003,221 @@
             "description": "Not Found"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Connections"
+        ],
+        "summary": "Update Connection",
+        "description": "Update connection metadata (active toggle, tag assignment, business_name, abn, email).\nOnly the owning tenant may update a connection.\n\n- Omitting a field leaves it unchanged.\n- Sending null for tag, business_name, abn, or email clears that field.\n- Sending null for active is not allowed (active is always a bool).",
+        "operationId": "update_connection_connection__connection_id__patch",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "connection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Connection ID",
+              "description": "Connection ID of the Connection to be updated"
+            },
+            "description": "Connection ID of the Connection to be updated"
+          },
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConnectionUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_ConnectionNoCredentials_"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 400,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid JWT format",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 401,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 404,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Connection with ID <connection_id> not found",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
       }
     },
     "/connection/{connection_id}/credentials": {
@@ -1423,6 +1638,175 @@
               }
             },
             "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/connection-tag": {
+      "get": {
+        "tags": [
+          "Connections"
+        ],
+        "summary": "List Connection Tags",
+        "description": "Returns all connection tags belonging to the authenticated tenant, ordered by name.",
+        "operationId": "list_connection_tags_connection_tag_get",
+        "security": [
+          {
+            "JWTBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-api-version",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "examples": [
+                "2024-03-26"
+              ],
+              "default": "2024-03-26",
+              "title": "X-Api-Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success_list_ConnectionTag__"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 400,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Invalid JWT format",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 401,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Authentication header is missing, or token is invalid/expired.",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 403,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "You do not have access to this resource",
+                          "title": "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer",
+                          "example": 422,
+                          "title": "Error code"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Field required",
+                          "title": "Error message"
+                        },
+                        "loc": {
+                          "items": {
+                            "anyOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "type": "array",
+                          "title": "Location"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "title": "Message"
+                        },
+                        "type": {
+                          "type": "string",
+                          "title": "Error Type"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
           }
         }
       }
@@ -7937,6 +8321,87 @@
         ],
         "title": "ConnectionSummary"
       },
+      "ConnectionTag": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "ConnectionTag"
+      },
+      "ConnectionUpdate": {
+        "properties": {
+          "active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active"
+          },
+          "tag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tag"
+          },
+          "business_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Name"
+          },
+          "abn": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abn"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          }
+        },
+        "type": "object",
+        "title": "ConnectionUpdate"
+      },
       "ConsumerTenant": {
         "properties": {
           "id": {
@@ -10260,6 +10725,23 @@
           "data"
         ],
         "title": "Success[list[ConnectionNoCredentials]]"
+      },
+      "Success_list_ConnectionTag__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ConnectionTag"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[list[ConnectionTag]]"
       },
       "Success_list_ShareRequest__": {
         "properties": {
