@@ -31,11 +31,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -109,11 +111,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -157,11 +161,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -331,11 +337,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -456,11 +464,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/ProviderEnum"
-                }
-              ],
+              "$ref": "#/components/schemas/ProviderEnum",
               "title": "Telematics Provider",
               "description": "Name of the telematics provider"
             },
@@ -473,11 +477,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -487,7 +493,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_list_ConnectionNoCredentials__"
+                  "$ref": "#/components/schemas/ConnectionsSuccessResponse"
                 }
               }
             }
@@ -640,11 +646,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -664,7 +672,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_ConnectionNoCredentials_"
+                  "$ref": "#/components/schemas/ConnectionSuccessResponse"
                 }
               }
             }
@@ -831,11 +839,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -845,7 +855,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_ConnectionNoCredentials_"
+                  "$ref": "#/components/schemas/ConnectionSuccessResponse"
                 }
               }
             }
@@ -1036,11 +1046,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -1060,7 +1072,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_ConnectionNoCredentials_"
+                  "$ref": "#/components/schemas/ConnectionSuccessResponse"
                 }
               }
             }
@@ -1253,11 +1265,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -1458,11 +1472,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -1663,11 +1679,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -1832,11 +1850,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -1845,11 +1865,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeviceCreate"
-                  }
-                ],
+                "$ref": "#/components/schemas/DeviceCreate",
                 "title": "Device",
                 "description": "Details for device"
               }
@@ -2065,11 +2081,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/ProviderEnum"
-                }
-              ],
+              "$ref": "#/components/schemas/ProviderEnum",
               "title": "Telematics Provider",
               "description": "Name of the telematics provider"
             },
@@ -2123,11 +2135,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -2304,11 +2318,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -2509,11 +2525,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -2724,11 +2742,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -2982,7 +3002,7 @@
               "type": "boolean",
               "title": "Verify data collection",
               "description": "Verify data collection status, If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running.",
-              "default": 0
+              "default": false
             },
             "description": "Verify data collection status, If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running."
           },
@@ -3018,11 +3038,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -3225,11 +3247,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -3457,7 +3481,7 @@
               "type": "boolean",
               "title": "Verify data collection",
               "description": "Verify data collection status. If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running.",
-              "default": 0
+              "default": false
             },
             "description": "Verify data collection status. If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running."
           },
@@ -3481,7 +3505,7 @@
               "type": "boolean",
               "title": "Include OpenStreetMap road classification",
               "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road.",
-              "default": 0
+              "default": false
             },
             "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road."
           },
@@ -3505,11 +3529,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -3738,7 +3764,7 @@
               "type": "boolean",
               "title": "Include OpenStreetMap road classification",
               "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road.",
-              "default": 0
+              "default": false
             },
             "description": "Return road name and distance from the road centreline for points which lie on a road. Values are null if the point is not on a road."
           },
@@ -3749,11 +3775,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -3944,11 +3972,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -4149,11 +4179,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -4278,11 +4310,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -4292,7 +4326,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaginatedSuccess_list_WebhookResponse__"
+                  "$ref": "#/components/schemas/PaginatedWebhookSuccessResponse"
                 }
               }
             }
@@ -4445,11 +4479,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -4458,11 +4494,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/WebhookCreate"
-                  }
-                ],
+                "$ref": "#/components/schemas/WebhookCreate",
                 "title": "Webhook",
                 "description": "Details for webhook"
               }
@@ -4475,7 +4507,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_WebhookResponse_"
+                  "$ref": "#/components/schemas/WebhookSuccessResponse"
                 }
               }
             }
@@ -4642,11 +4674,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -4656,7 +4690,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_WebhookResponse_"
+                  "$ref": "#/components/schemas/WebhookSuccessResponse"
                 }
               }
             }
@@ -4847,11 +4881,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -4861,7 +4897,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_WebhookResponse_"
+                  "$ref": "#/components/schemas/WebhookSuccessResponse"
                 }
               }
             }
@@ -5052,11 +5088,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -5065,11 +5103,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/WebhookUpdate"
-                  }
-                ],
+                "$ref": "#/components/schemas/WebhookUpdate",
                 "title": "Webhook",
                 "description": "Details for webhook"
               }
@@ -5082,7 +5116,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_WebhookResponse_"
+                  "$ref": "#/components/schemas/WebhookSuccessResponse"
                 }
               }
             }
@@ -5263,11 +5297,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -5350,11 +5386,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/EventTypeEnum"
-                }
-              ],
+              "$ref": "#/components/schemas/EventTypeEnum",
               "title": "Event type",
               "description": "Only include events of this type"
             },
@@ -5368,7 +5400,7 @@
               "type": "boolean",
               "title": "Verify data collection",
               "description": "Verify data collection status, If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running.",
-              "default": 0
+              "default": false
             },
             "description": "Verify data collection status, If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running."
           },
@@ -5392,11 +5424,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -5599,11 +5633,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -5794,11 +5830,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -5987,11 +6025,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -6198,11 +6238,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -6406,11 +6448,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -6573,11 +6617,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -6586,11 +6632,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MilestoneCreate"
-                  }
-                ],
+                "$ref": "#/components/schemas/MilestoneCreate",
                 "title": "Milestone",
                 "description": "Details for milestone"
               }
@@ -6770,11 +6812,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -6975,11 +7019,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -7173,11 +7219,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -7186,11 +7234,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MilestoneUpdate"
-                  }
-                ],
+                "$ref": "#/components/schemas/MilestoneUpdate",
                 "title": "Milestone",
                 "description": "Details for Milestone Update"
               }
@@ -7396,11 +7440,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -7591,11 +7637,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -7768,11 +7816,13 @@
             "schema": {
               "type": "string",
               "format": "date",
-              "examples": [
-                "2024-03-26"
-              ],
               "default": "2024-03-26",
               "title": "X-Api-Version"
+            },
+            "examples": {
+              "default": {
+                "value": "2024-03-26"
+              }
             }
           }
         ],
@@ -8062,6 +8112,7 @@
             "title": "Connection Id"
           },
           "credentials": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Credentials"
           }
@@ -8076,6 +8127,7 @@
       "ConnectionCredentialsUpdate": {
         "properties": {
           "credentials": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Credentials"
           }
@@ -8114,6 +8166,7 @@
             "$ref": "#/components/schemas/ProviderEnum"
           },
           "credentials": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Credentials"
           },
@@ -8269,6 +8322,7 @@
           "configuration": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -8292,6 +8346,18 @@
           "configuration"
         ],
         "title": "ConnectionNoCredentials"
+      },
+      "ConnectionSuccessResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ConnectionNoCredentials"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "ConnectionSuccessResponse"
       },
       "ConnectionSummary": {
         "properties": {
@@ -8402,6 +8468,22 @@
         "type": "object",
         "title": "ConnectionUpdate"
       },
+      "ConnectionsSuccessResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ConnectionNoCredentials"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "ConnectionsSuccessResponse"
+      },
       "ConsumerTenant": {
         "properties": {
           "id": {
@@ -8424,15 +8506,31 @@
       "Coordinate": {
         "properties": {
           "latitude": {
-            "type": "number",
-            "maximum": 90.0,
-            "minimum": -90.0,
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 90.0,
+                "minimum": -90.0
+              },
+              {
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+              }
+            ],
             "title": "Latitude"
           },
           "longitude": {
-            "type": "number",
-            "maximum": 180.0,
-            "minimum": -180.0,
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 180.0,
+                "minimum": -180.0
+              },
+              {
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+              }
+            ],
             "title": "Longitude"
           }
         },
@@ -8441,7 +8539,8 @@
           "latitude",
           "longitude"
         ],
-        "title": "Coordinate"
+        "title": "Coordinate",
+        "description": "Coordinate parses Latitude and Longitude.\n\nYou can use the `Coordinate` data type for storing coordinates. Coordinates can be\ndefined using one of the following formats:\n\n1. Tuple: `(Latitude, Longitude)`. For example: `(41.40338, 2.17403)` or `(Decimal('41.40338'), Decimal('2.17403'))`.\n2. `Coordinate` instance: `Coordinate(latitude=Latitude, longitude=Longitude)`.\n\n```py\nfrom decimal import Decimal\nfrom pydantic import BaseModel\n\nfrom pydantic_extra_types.coordinate import Coordinate\n\n\nclass Location(BaseModel):\n    coordinate: Coordinate\n\n\n# Using float values\nlocation1 = Location(coordinate=(41.40338, 2.17403))\n# > coordinate=Coordinate(latitude=41.40338, longitude=2.17403)\n\n# Using Decimal values\nlocation2 = Location(coordinate=(Decimal('41.40338'), Decimal('2.17403')))\n# > coordinate=Coordinate(latitude=41.40338, longitude=2.17403)\n```"
       },
       "Device": {
         "properties": {
@@ -8736,6 +8835,7 @@
                 "type": "string"
               },
               {
+                "additionalProperties": true,
                 "type": "object"
               }
             ],
@@ -8769,6 +8869,7 @@
             "title": "Time"
           },
           "raw_data": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Raw Data"
           },
@@ -9276,19 +9377,11 @@
             "title": "Device Id"
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/MilestoneStatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/MilestoneStatusEnum",
             "default": "trip_not_started"
           },
           "start_point": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Coordinate"
-              }
-            ],
+            "$ref": "#/components/schemas/Coordinate",
             "title": "Start Point"
           },
           "end_point": {
@@ -9397,11 +9490,7 @@
             "title": "Device Id"
           },
           "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/MilestoneStatusEnum"
-              }
-            ],
+            "$ref": "#/components/schemas/MilestoneStatusEnum",
             "default": "trip_not_started"
           },
           "start_point": {
@@ -9412,10 +9501,26 @@
               {
                 "prefixItems": [
                   {
-                    "type": "number"
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string",
+                        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+                      }
+                    ]
                   },
                   {
-                    "type": "number"
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string",
+                        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+                      }
+                    ]
                   }
                 ],
                 "type": "array",
@@ -9526,10 +9631,26 @@
               {
                 "prefixItems": [
                   {
-                    "type": "number"
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string",
+                        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+                      }
+                    ]
                   },
                   {
-                    "type": "number"
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string",
+                        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+                      }
+                    ]
                   }
                 ],
                 "type": "array",
@@ -9798,15 +9919,14 @@
         ],
         "title": "PaginatedSuccess[list[Trip]]"
       },
-      "PaginatedSuccess_list_WebhookResponse__": {
+      "PaginatedWebhookSuccessResponse": {
         "properties": {
           "data": {
             "items": {
               "$ref": "#/components/schemas/WebhookResponse"
             },
             "type": "array",
-            "title": "Data",
-            "description": "Successful response payload"
+            "title": "Data"
           },
           "links": {
             "$ref": "#/components/schemas/PaginationLinks"
@@ -9817,7 +9937,7 @@
           "data",
           "links"
         ],
-        "title": "PaginatedSuccess[list[WebhookResponse]]"
+        "title": "PaginatedWebhookSuccessResponse"
       },
       "PaginationLinks": {
         "properties": {
@@ -10401,6 +10521,7 @@
           "filter": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -10436,11 +10557,7 @@
       "Success_AccountSummary_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AccountSummary"
-              }
-            ],
+            "$ref": "#/components/schemas/AccountSummary",
             "description": "Successful response payload"
           }
         },
@@ -10453,11 +10570,7 @@
       "Success_ActivitySummary_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ActivitySummary"
-              }
-            ],
+            "$ref": "#/components/schemas/ActivitySummary",
             "description": "Successful response payload"
           }
         },
@@ -10470,11 +10583,7 @@
       "Success_AuthenticationResult_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AuthenticationResult"
-              }
-            ],
+            "$ref": "#/components/schemas/AuthenticationResult",
             "description": "Successful response payload"
           }
         },
@@ -10487,11 +10596,7 @@
       "Success_ConnectType_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ConnectType"
-              }
-            ],
+            "$ref": "#/components/schemas/ConnectType",
             "description": "Successful response payload"
           }
         },
@@ -10504,11 +10609,7 @@
       "Success_ConnectionCredentials_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ConnectionCredentials"
-              }
-            ],
+            "$ref": "#/components/schemas/ConnectionCredentials",
             "description": "Successful response payload"
           }
         },
@@ -10518,31 +10619,10 @@
         ],
         "title": "Success[ConnectionCredentials]"
       },
-      "Success_ConnectionNoCredentials_": {
-        "properties": {
-          "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ConnectionNoCredentials"
-              }
-            ],
-            "description": "Successful response payload"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "Success[ConnectionNoCredentials]"
-      },
       "Success_Device_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Device"
-              }
-            ],
+            "$ref": "#/components/schemas/Device",
             "description": "Successful response payload"
           }
         },
@@ -10555,11 +10635,7 @@
       "Success_Event_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Event"
-              }
-            ],
+            "$ref": "#/components/schemas/Event",
             "description": "Successful response payload"
           }
         },
@@ -10572,11 +10648,7 @@
       "Success_Milestone_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Milestone"
-              }
-            ],
+            "$ref": "#/components/schemas/Milestone",
             "description": "Successful response payload"
           }
         },
@@ -10589,11 +10661,7 @@
       "Success_RefreshResult_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RefreshResult"
-              }
-            ],
+            "$ref": "#/components/schemas/RefreshResult",
             "description": "Successful response payload"
           }
         },
@@ -10606,11 +10674,7 @@
       "Success_ShareRequest_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ShareRequest"
-              }
-            ],
+            "$ref": "#/components/schemas/ShareRequest",
             "description": "Successful response payload"
           }
         },
@@ -10623,11 +10687,7 @@
       "Success_TenantConfigurationResponse_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TenantConfigurationResponse"
-              }
-            ],
+            "$ref": "#/components/schemas/TenantConfigurationResponse",
             "description": "Successful response payload"
           }
         },
@@ -10640,11 +10700,7 @@
       "Success_TenantResponse_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TenantResponse"
-              }
-            ],
+            "$ref": "#/components/schemas/TenantResponse",
             "description": "Successful response payload"
           }
         },
@@ -10657,11 +10713,7 @@
       "Success_Trip_": {
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Trip"
-              }
-            ],
+            "$ref": "#/components/schemas/Trip",
             "description": "Successful response payload"
           }
         },
@@ -10691,40 +10743,6 @@
           "data"
         ],
         "title": "Success[Union[MilestoneValidState, MilestoneTimeoutState]]"
-      },
-      "Success_WebhookResponse_": {
-        "properties": {
-          "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookResponse"
-              }
-            ],
-            "description": "Successful response payload"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "Success[WebhookResponse]"
-      },
-      "Success_list_ConnectionNoCredentials__": {
-        "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/ConnectionNoCredentials"
-            },
-            "type": "array",
-            "title": "Data",
-            "description": "Successful response payload"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "Success[list[ConnectionNoCredentials]]"
       },
       "Success_list_ConnectionTag__": {
         "properties": {
@@ -11212,6 +11230,13 @@
           "type": {
             "type": "string",
             "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
           }
         },
         "type": "object",
@@ -11233,11 +11258,7 @@
             "title": "Enabled"
           },
           "filter": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookFilterDeprecated"
-              }
-            ]
+            "$ref": "#/components/schemas/WebhookFilterDeprecated"
           }
         },
         "type": "object",
@@ -11329,11 +11350,7 @@
             "title": "Updated At"
           },
           "filter": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookFilterDeprecated"
-              }
-            ]
+            "$ref": "#/components/schemas/WebhookFilterDeprecated"
           }
         },
         "type": "object",
@@ -11348,6 +11365,18 @@
           "updated_at"
         ],
         "title": "WebhookResponse"
+      },
+      "WebhookSuccessResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/WebhookResponse"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "WebhookSuccessResponse"
       },
       "WebhookUpdate": {
         "properties": {
@@ -11374,11 +11403,7 @@
             "title": "Enabled"
           },
           "filter": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebhookFilterDeprecated"
-              }
-            ]
+            "$ref": "#/components/schemas/WebhookFilterDeprecated"
           }
         },
         "type": "object",
