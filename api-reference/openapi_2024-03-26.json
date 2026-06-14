@@ -8230,6 +8230,17 @@
               }
             ],
             "title": "Collection End Time"
+          },
+          "tag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tag"
           }
         },
         "type": "object",
