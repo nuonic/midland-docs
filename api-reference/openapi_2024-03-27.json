@@ -1695,7 +1695,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success_list_ConnectionTag__"
+                  "$ref": "#/components/schemas/Success_list_TenantTag__"
                 }
               }
             }
@@ -8347,7 +8347,7 @@
           },
           "connection_tags": {
             "items": {
-              "$ref": "#/components/schemas/ConnectionTag"
+              "$ref": "#/components/schemas/TenantTag"
             },
             "type": "array",
             "title": "Connection Tags",
@@ -8408,25 +8408,6 @@
           "providers"
         ],
         "title": "ConnectionSummary"
-      },
-      "ConnectionTag": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid4",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "title": "ConnectionTag"
       },
       "ConnectionUpdate": {
         "properties": {
@@ -10769,23 +10750,6 @@
         ],
         "title": "Success[Union[MilestoneValidState, MilestoneTimeoutState]]"
       },
-      "Success_list_ConnectionTag__": {
-        "properties": {
-          "data": {
-            "items": {
-              "$ref": "#/components/schemas/ConnectionTag"
-            },
-            "type": "array",
-            "title": "Data",
-            "description": "Successful response payload"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "Success[list[ConnectionTag]]"
-      },
       "Success_list_ShareRequest__": {
         "properties": {
           "data": {
@@ -10802,6 +10766,23 @@
           "data"
         ],
         "title": "Success[list[ShareRequest]]"
+      },
+      "Success_list_TenantTag__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/TenantTag"
+            },
+            "type": "array",
+            "title": "Data",
+            "description": "Successful response payload"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Success[list[TenantTag]]"
       },
       "Success_list_Union_RealtimeValidState__RealtimeTimeoutState___": {
         "properties": {
@@ -10995,6 +10976,25 @@
           "connection_url"
         ],
         "title": "TenantResponse"
+      },
+      "TenantTag": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "TenantTag"
       },
       "TenantUpdate": {
         "properties": {
