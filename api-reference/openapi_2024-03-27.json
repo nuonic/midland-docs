@@ -1019,7 +1019,7 @@
           "Connections"
         ],
         "summary": "Update Connection",
-        "description": "Update connection metadata (active toggle, tag assignment, business_name, abn, email).\nOnly the owning tenant may update a connection.\n\n- Omitting a field leaves it unchanged.\n- Sending null for tag, business_name, abn, or email clears that field.\n- Sending null for active is not allowed (active is always a bool).",
+        "description": "Update connection metadata (active toggle, tag assignment, business_name, abn, email).\nOnly the owning tenant may update a connection.\n\n- Omitting a field leaves it unchanged.\n- Sending null or [] for tags clears all tag assignments.\n- Sending null for business_name, abn, or email clears that field.\n- Sending null for active is not allowed (active is always a bool).",
         "operationId": "update_connection_connection__connection_id__patch",
         "security": [
           {
@@ -8231,16 +8231,19 @@
             ],
             "title": "Collection End Time"
           },
-          "tag": {
+          "tags": {
             "anyOf": [
               {
-                "type": "string"
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Tag"
+            "title": "Tags"
           }
         },
         "type": "object",
@@ -8342,15 +8345,13 @@
             ],
             "title": "Configuration"
           },
-          "connection_tag": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ConnectionTag"
-              },
-              {
-                "type": "null"
-              }
-            ]
+          "connection_tags": {
+            "items": {
+              "$ref": "#/components/schemas/ConnectionTag"
+            },
+            "type": "array",
+            "title": "Connection Tags",
+            "default": []
           }
         },
         "type": "object",
@@ -8440,16 +8441,19 @@
             ],
             "title": "Active"
           },
-          "tag": {
+          "tags": {
             "anyOf": [
               {
-                "type": "string"
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Tag"
+            "title": "Tags"
           },
           "business_name": {
             "anyOf": [
