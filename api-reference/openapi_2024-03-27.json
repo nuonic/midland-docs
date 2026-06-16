@@ -3486,18 +3486,6 @@
             "description": "Verify data collection status. If true, checks data collection jobs for the time period and fails with a 424 status if any jobs have failed or are still running."
           },
           {
-            "name": "verify_point_validity",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "title": "Checks the validity of a point",
-              "description": "Pathstack determines the validity of a point during data collection. A point can be deemed invalid if it has incorrect data. Pathstack sets the validity of the point via the field is_valid along with comments on the reason in validation comments",
-              "default": true
-            },
-            "description": "Pathstack determines the validity of a point during data collection. A point can be deemed invalid if it has incorrect data. Pathstack sets the validity of the point via the field is_valid along with comments on the reason in validation comments"
-          },
-          {
             "name": "include_osm_road_classification",
             "in": "query",
             "required": false,
@@ -3730,18 +3718,6 @@
               "description": "Trip ID of the Positions to be returned"
             },
             "description": "Trip ID of the Positions to be returned"
-          },
-          {
-            "name": "verify_point_validity",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "title": "Checks the validity of a point",
-              "description": "Pathstack determines the validity of a point during data collection. A point can be deemed invalid if it has incorrect.Pathstack sets the validity of the point via the field is_valid along with comments on the reason in validation comments",
-              "default": true
-            },
-            "description": "Pathstack determines the validity of a point during data collection. A point can be deemed invalid if it has incorrect.Pathstack sets the validity of the point via the field is_valid along with comments on the reason in validation comments"
           },
           {
             "name": "page",
@@ -10086,21 +10062,6 @@
             ],
             "title": "Distance travelled between this point and the previous point calculated by GPS distance using WGS84"
           },
-          "is_valid": {
-            "type": "boolean",
-            "title": "Is Valid"
-          },
-          "validation_comments": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Validation Comments"
-          },
           "id": {
             "type": "string",
             "format": "uuid4",
@@ -10147,8 +10108,6 @@
           "odometer_kilometres",
           "odometer_distance_metres",
           "gps_distance_metres",
-          "is_valid",
-          "validation_comments",
           "id",
           "trip_id",
           "device_id"
