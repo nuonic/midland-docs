@@ -8530,6 +8530,17 @@
             "type": "string",
             "title": "System Device Id"
           },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
           "registration": {
             "anyOf": [
               {
@@ -8622,6 +8633,17 @@
           "system_device_id": {
             "type": "string",
             "title": "System Device Id"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
           },
           "registration": {
             "anyOf": [
@@ -8729,6 +8751,17 @@
       },
       "DeviceUpdate": {
         "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
           "registration": {
             "anyOf": [
               {
