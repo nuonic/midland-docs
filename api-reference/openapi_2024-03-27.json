@@ -8918,6 +8918,9 @@
                 "$ref": "#/components/schemas/EventOdometerValue"
               },
               {
+                "$ref": "#/components/schemas/EventOverSpeedingValue"
+              },
+              {
                 "$ref": "#/components/schemas/EventAuxiliaryEquipmentOperationValue"
               },
               {
@@ -9264,6 +9267,19 @@
           "odometer_kilometres"
         ],
         "title": "EventOdometerValue"
+      },
+      "EventOverSpeedingValue": {
+        "properties": {
+          "over_speeding": {
+            "type": "boolean",
+            "title": "Over Speeding"
+          }
+        },
+        "type": "object",
+        "required": [
+          "over_speeding"
+        ],
+        "title": "EventOverSpeedingValue"
       },
       "EventPowerTakeOffValue": {
         "properties": {
@@ -10168,7 +10184,8 @@
           "michelin_connected_fleet",
           "navixy",
           "netcorp",
-          "mapon"
+          "mapon",
+          "v_daq"
         ],
         "title": "ProviderEnum"
       },
